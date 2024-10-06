@@ -50,6 +50,7 @@ header nav ul li a {
 	text-decoration: none;
 	color: #333;
 	font-weight: 500;
+	cursor: pointer;
 }
 
 .hero {
@@ -95,6 +96,7 @@ header nav ul li a {
 	text-decoration: none;
 	font-weight: 500;
 	transition: background-color 0.3s ease;
+	cursor: pointer;
 }
 
 .hero-image {
@@ -108,18 +110,22 @@ header nav ul li a {
 	height: auto;
 }
 
-.features {
+.tool {
+	cursor: pointer;
+}
+
+.grids {
 	background: white;
 	overflow: visible;
 }
 
-.feature-grid {
+.grid-grid {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	gap: 40px;
 }
 
-.feature-item {
+.grid-item {
 	background: #f7f8fc;
 	padding: 40px 20px;
 	text-align: center;
@@ -128,33 +134,34 @@ header nav ul li a {
 	position: relative;
 }
 
-.feature-item:hover {
+.grid-item:hover {
 	transform: translateY(-10px);
 	z-index: 2;
 }
 
-.feature-item .icon {
+.grid-item .icon {
 	margin-bottom: 20px;
 	display: flex; 
 	justify-content: center;
 }
 
-.feature-item img {
+.grid-item img {
 	width: 60px;
 }
 
-.feature-item h2 {
+.grid-item h2 {
 	margin-bottom: 15px;
 	color: #333;
 }
 
-.feature-item p {
-	font-size: 0.95em;
+.grid-item p {
+	font-size: 1rem;
 	color: #777;
 }
 
-.items2 {
+.items {
 	background: #ffffff;
+	padding-bottom: 0px;
 }
 
 .intro_text {
@@ -169,7 +176,7 @@ header nav ul li a {
 }
 
 .section-subtitle {
-	font-size: 1.1rem;
+	font-size: 1rem;
 	color: #6c757d;
 }
 
@@ -194,6 +201,7 @@ header nav ul li a {
 .collapsible {
 	width: 80%;
 	background-color: white;
+	cursor: pointer;
 }
 
 h2 button {
@@ -207,6 +215,7 @@ h2 button {
 	margin-bottom: 40px;
 	align-items: center;
 	border-radius: 8px;
+	color: #6c757d;
 }
 
 button svg {
@@ -231,14 +240,14 @@ button svg {
 
 .site-footer {
 	background-color: #f7f8fc;
-	padding: 45px 0 20px;
-	font-size: 15px;
+	padding: 20px 0 20px;
+	font-size: 1rem;
 	color: #6c757d;
 }
 
 .site-footer h6 {
 	color: #c6b6fc;
-	font-size: 16px;
+	font-size: 1.2rem;
 	text-transform: uppercase;
 	letter-spacing: 2px;
 	margin-top: 5px;

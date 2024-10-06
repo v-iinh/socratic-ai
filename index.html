@@ -16,38 +16,38 @@
 				</div>
 				<nav>
 					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Features</a></li>
-						<li><a href="#">Volunteer</a></li>
-						<li><a href="#">Tools</a></li>
-						<li><a href="#">Questions</a></li>
-						<li><a href="#">Support</a></li>
+						<li><a onclick="scrollToSection('.banner'); return false;">Home</a></li>
+						<li><a onclick="scrollToSection('.intro_text'); return false;">Features</a></li>
+						<li><a onclick="scrollToSection('.volunteer'); return false;">Volunteer</a></li>
+						<li><a onclick="scrollToSection('.tools', 60); return false;">Tools</a></li>
+						<li><a onclick="scrollToSection('.collapsible_container', 60); return false;">Questions</a></li>
+						<li><a onclick="scrollToSection('.support'); return false;">Support</a></li>
 					</ul>
 				</nav>
 			</div>
 		</header>
-		<section class="hero" style="background-color: #f7f8fc;">
+		<section class="hero banner" style="background-color: #f7f8fc;">
 			<div class="container hero-content">
 				<div class="hero-text">
 					<h2>Get better grades with AI Tutor, your personal learning companion.</h2><br>
 					<p>AI Tutor is a learning tool that creates personalized support for you based on the subject and level of education that you need help with. With instant chat, practice tests, lesson plans, and reading material, AI Tutor is your answer to doing better in school!</p>
-					<a href="#" class="cta-btn">Try for Free</a>
+					<a class="cta-btn" onclick="scrollToSection('.tools', 60); return false;">Try for Free</a>
 				</div>
 				<div class="hero-image">
 					<img src="assets/banner.png" alt="AI Tutor features">
 				</div>
 			</div>
 		</section>
-		<section class="intro_text" style="padding-top: 60px;">
+		<section class="intro_text" style="padding-top: 60px; padding-bottom: 20px;">
 			<div class="container">
 				<h2 class="section-title">Unlock the benefits of AI Tutor</h2>
 				<p class="section-subtitle">Enhance your learning experience with AI Tutor and receive 24/7 homework help, test prep, and more.</p>
 			</div>
 		</section>
-		<section class="features">
+		<section class="grids">
 			<div class="container">
-				<div class="feature-grid">
-					<div class="feature-item items2">
+				<div class="grid-grid">
+					<div class="grid-item items">
 						<div class="icon">
 							<div class="icon_img">
 								<i class="fa-solid fa-lightbulb"></i>
@@ -56,7 +56,7 @@
 						<h2>AI Tutor Premium</h2>
 						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil quis explicabo ipsam labore. Praesentium dignissimos repudiandae fugit delectus in. Ullam vel ipsa vero optio laborum natus sint quam aspernatur alias.</p>
 					</div>
-					<div class="feature-item items2">
+					<div class="grid-item items">
 						<div class="icon">
 							<div class="icon_img">
 								<i class="fa-solid fa-lightbulb"></i>
@@ -65,7 +65,7 @@
 						<h2>AI Tutor Premium</h2>
 						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil quis explicabo ipsam labore. Praesentium dignissimos repudiandae fugit delectus in. Ullam vel ipsa vero optio laborum natus sint quam aspernatur alias.</p>
 					</div>
-					<div class="feature-item items2">
+					<div class="grid-item items">
 						<div class="icon">
 							<div class="icon_img">
 								<i class="fa-solid fa-lightbulb"></i>
@@ -77,7 +77,7 @@
 				</div>
 			</div>
 		</section>	
-		<section class="hero">
+		<section class="hero volunteer">
 			<div class="container hero-content">
 				<div class="hero-image">
 					<img src="assets/banner.png" alt="AI Tutor features">
@@ -88,16 +88,16 @@
 				</div>
 			</div>
 		</section>
-		<section class="intro_text">
+		<section class="intro_text tools">
 			<div class="container">
 				<h2 class="section-title">Unlock the benefits of AI Tutor</h2>
 				<p class="section-subtitle">Enhance your learning experience with AI Tutor and receive 24/7 homework help, test prep, and more.</p>
 			</div>
 		</section>
-		<section class="features">
+		<section class="grids">
 			<div class="container">
-				<div class="feature-grid">
-					<div class="feature-item">
+				<div class="grid-grid">
+					<div class="grid-item tool">
 						<div class="icon">
 							<div class="icon_img">
 								<i class="fa-solid fa-lightbulb"></i>
@@ -106,7 +106,7 @@
 						<h2>AI Tutor Premium</h2>
 						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil quis explicabo ipsam labore. Praesentium dignissimos repudiandae fugit delectus in. Ullam vel ipsa vero optio laborum natus sint quam aspernatur alias.</p>
 					</div>
-					<div class="feature-item">
+					<div class="grid-item tool">
 						<div class="icon">
 							<div class="icon_img">
 								<i class="fa-solid fa-lightbulb"></i>
@@ -115,7 +115,7 @@
 						<h2>AI Tutor Premium</h2>
 						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil quis explicabo ipsam labore. Praesentium dignissimos repudiandae fugit delectus in. Ullam vel ipsa vero optio laborum natus sint quam aspernatur alias.</p>
 					</div>
-					<div class="feature-item">
+					<div class="grid-item tool">
 						<div class="icon">
 							<div class="icon_img">
 								<i class="fa-solid fa-lightbulb"></i>
@@ -124,7 +124,16 @@
 						<h2>AI Tutor Premium</h2>
 						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil quis explicabo ipsam labore. Praesentium dignissimos repudiandae fugit delectus in. Ullam vel ipsa vero optio laborum natus sint quam aspernatur alias.</p>
 					</div>
-					<div class="feature-item">
+					<div class="grid-item tool">
+						<div class="icon">
+							<div class="icon_img">
+								<i class="fa-solid fa-lightbulb"></i>
+							</div>
+						</div>
+						<h2>AI Tutor Premium</h2>
+						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil quis explicabo ipsam labore. Praesentium dignissimos repudiandae fugit delectus in. Ullam vel ipsa vero optio laborum natus sint quam aspernatur alias.</p>
+					</div> 
+					<div class="grid-item tool">
 						<div class="icon">
 							<div class="icon_img">
 								<i class="fa-solid fa-lightbulb"></i>
@@ -133,7 +142,7 @@
 						<h2>AI Tutor Premium</h2>
 						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil quis explicabo ipsam labore. Praesentium dignissimos repudiandae fugit delectus in. Ullam vel ipsa vero optio laborum natus sint quam aspernatur alias.</p>
 					</div>
-					<div class="feature-item">
+					<div class="grid-item tool">
 						<div class="icon">
 							<div class="icon_img">
 								<i class="fa-solid fa-lightbulb"></i>
@@ -142,7 +151,7 @@
 						<h2>AI Tutor Premium</h2>
 						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil quis explicabo ipsam labore. Praesentium dignissimos repudiandae fugit delectus in. Ullam vel ipsa vero optio laborum natus sint quam aspernatur alias.</p>
 					</div>
-					<div class="feature-item">
+					<div class="grid-item tool">
 						<div class="icon">
 							<div class="icon_img">
 								<i class="fa-solid fa-lightbulb"></i>
@@ -151,7 +160,7 @@
 						<h2>AI Tutor Premium</h2>
 						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil quis explicabo ipsam labore. Praesentium dignissimos repudiandae fugit delectus in. Ullam vel ipsa vero optio laborum natus sint quam aspernatur alias.</p>
 					</div>
-					<div class="feature-item">
+					<div class="grid-item tool">
 						<div class="icon">
 							<div class="icon_img">
 								<i class="fa-solid fa-lightbulb"></i>
@@ -160,16 +169,7 @@
 						<h2>AI Tutor Premium</h2>
 						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil quis explicabo ipsam labore. Praesentium dignissimos repudiandae fugit delectus in. Ullam vel ipsa vero optio laborum natus sint quam aspernatur alias.</p>
 					</div>
-					<div class="feature-item">
-						<div class="icon">
-							<div class="icon_img">
-								<i class="fa-solid fa-lightbulb"></i>
-							</div>
-						</div>
-						<h2>AI Tutor Premium</h2>
-						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil quis explicabo ipsam labore. Praesentium dignissimos repudiandae fugit delectus in. Ullam vel ipsa vero optio laborum natus sint quam aspernatur alias.</p>
-					</div>
-					<div class="feature-item">
+					<div class="grid-item tool">
 						<div class="icon">
 							<div class="icon_img">
 								<i class="fa-solid fa-lightbulb"></i>
@@ -232,7 +232,7 @@
 				</div>
 			</div>
 		</section>
-		<section class="hero">
+		<section class="hero support" style="padding-top: 0;">
 			<div class="container hero-content">
 				<div class="hero-image">
 					<img src="assets/banner.png" alt="AI Tutor features">
@@ -243,7 +243,6 @@
 				</div>
 			</div>
 		</section>
-		<!-- Site footer -->
 		<footer class="site-footer">
 			<div class="footer-container">
 			<div class="footer-row" style="width: 50%;">
