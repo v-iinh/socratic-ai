@@ -20,7 +20,6 @@ function scrollToSection(selector, offset = 0) {
   const element = document.querySelector(selector);
   const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
   const offsetPosition = elementPosition - offset;
-
   window.scrollTo({
       top: offsetPosition,
       behavior: 'smooth'
