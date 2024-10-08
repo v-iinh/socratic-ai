@@ -68,10 +68,7 @@
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	gap: 40px;
-}
-
-.grid-grid a {
-	text-decoration: none;
+	align-items: stretch;
 }
 
 .grid-item {
@@ -81,6 +78,13 @@
 	border-radius: 15px;
 	transition: transform 0.3s ease;
 	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.grid-grid a {
+	text-decoration: none;
 }
 
 .grid-item:hover {
