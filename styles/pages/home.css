@@ -81,10 +81,12 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	height: 100%
 }
 
 .grid-grid a {
 	text-decoration: none;
+	height: 100%; 
 }
 
 .grid-item:hover {
