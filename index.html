@@ -4,7 +4,8 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Socratic</title>
-		<link rel="stylesheet" href="styles/home.css">
+		<link rel="stylesheet" href="styles/general.css">
+		<link rel="stylesheet" href="styles/pages/home.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 		<link rel="icon" href="assets/favicon.png">
 	</head>
@@ -21,7 +22,7 @@
 						<li><a onclick="scrollToSection('.volunteer'); return false;">Volunteer</a></li>
 						<li><a onclick="scrollToSection('.tools', 60); return false;">Tools</a></li>
 						<li><a onclick="scrollToSection('.collapsible_container', 60); return false;">Questions</a></li>
-						<li><a onclick="scrollToSection('.support'); return false;">Support</a></li>
+						<li><a onclick="scrollToSection('.support', 60); return false;">Support</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -97,87 +98,105 @@
 		<section class="grids">
 			<div class="container">
 				<div class="grid-grid">
-					<div class="grid-item tool">
-						<div class="icon">
-							<div class="icon_img">
-								<i class="fa-solid fa-brain"></i>
+					<a href="redirects/mentor.html">
+						<div class="grid-item tool">
+							<div class="icon">
+								<div class="icon_img">
+									<i class="fa-solid fa-brain"></i>
+								</div>
 							</div>
+							<h2>Mentor</h2>
+							<p>Guides you through problem-solving by asking insightful questions to stimulate critical thinking.</p>
 						</div>
-						<h2>Mentor</h2>
-						<p>Guides you through problem-solving by asking insightful questions to stimulate critical thinking.</p>
-					</div>
-					<div class="grid-item tool">
-						<div class="icon">
-							<div class="icon_img">
-								<i class="fa-solid fa-gavel"></i>
+					</a>
+					<a href="redirects/debate.html">
+						<div class="grid-item tool">
+							<div class="icon">
+								<div class="icon_img">
+									<i class="fa-solid fa-gavel"></i>
+								</div>
 							</div>
+							<h2>Debate</h2>
+							<p>Engages in discussions, allowing you to practice forming arguments and challenging perspectives.</p>
 						</div>
-						<h2>Debate</h2>
-						<p>Engages in discussions, allowing you to practice forming arguments and challenging perspectives.</p>
-					</div>
-					<div class="grid-item tool">
-						<div class="icon">
-							<div class="icon_img">
-								<i class="fa-solid fa-layer-group"></i>
+					</a>
+					<a href="redirects/flashcards.html">
+						<div class="grid-item tool">
+							<div class="icon">
+								<div class="icon_img">
+									<i class="fa-solid fa-layer-group"></i>
+								</div>
 							</div>
+							<h2>Flashcards</h2>
+							<p>Generates flashcards with essential terms and key concepts for quick study.</p>
 						</div>
-						<h2>Flashcards</h2>
-						<p>Generates flashcards with essential terms and key concepts for quick study.</p>
-					</div>
-					<div class="grid-item tool">
-						<div class="icon">
-							<div class="icon_img">
-								<i class="fa-solid fa-quote-left"></i>
+					</a>
+					<a href="redirects/worksheets.html">
+						<div class="grid-item tool">
+							<div class="icon">
+								<div class="icon_img">
+									<i class="fa-solid fa-circle-xmark"></i>
+								</div>
 							</div>
+							<h2>Worksheets</h2>
+							<p>Develops practice questions tailored to different subjects for deeper understanding.</p>
 						</div>
-						<h2>Problems</h2>
-						<p>Develops practice questions tailored to different subjects for deeper understanding.</p>
-					</div>
-					<div class="grid-item tool">
-						<div class="icon">
-							<div class="icon_img">
-								<i class="fa-solid fa-comment"></i>
+					</a>
+					<a href="redirects/concepts.html">
+						<div class="grid-item tool">
+							<div class="icon">
+								<div class="icon_img">
+									<i class="fa-solid fa-comment"></i>
+								</div>
 							</div>
-						</div>
-						<h2>Concepts</h2>
-						<p>Breaks down concepts or events from a variety of subjects into easy-to-understand explanations.</p>
-					</div> 
-					<div class="grid-item tool">
-						<div class="icon">
-							<div class="icon_img">
-								<i class="fa-solid fa-file-lines"></i>
+							<h2>Concepts</h2>
+							<p>Breaks down concepts or events from a variety of subjects into easy-to-understand explanations.</p>
+						</div> 
+					</a>
+					<a href="redirects/summarize.html">
+						<div class="grid-item tool">
+							<div class="icon">
+								<div class="icon_img">
+									<i class="fa-solid fa-file-lines"></i>
+								</div>
 							</div>
+							<h2>Summarize</h2>
+							<p>Reviews text or files to extract and present the key points in a concise format.</p>
 						</div>
-						<h2>Summarize</h2>
-						<p>Reviews text or files to extract and present the key points in a concise format.</p>
-					</div>
-					<div class="grid-item tool">
-						<div class="icon">
-							<div class="icon_img">
-								<i class="fa-solid fa-graduation-cap"></i>
+					</a>
+					<a href="redirects/courses.html">
+						<div class="grid-item tool">
+							<div class="icon">
+								<div class="icon_img">
+									<i class="fa-solid fa-graduation-cap"></i>
+								</div>
 							</div>
+							<h2>Courses</h2>
+							<p>Create a personalized curriculum and view a detailed roadmap of what to learn.</p>
 						</div>
-						<h2>Courses</h2>
-						<p>Create a personalized curriculum and view a detailed roadmap of what to learn.</p>
-					</div>
-					<div class="grid-item tool">
-						<div class="icon">
-							<div class="icon_img">
-								<i class="fa-solid fa-spell-check"></i>
+					</a>
+					<a href="redirects/writing.html">
+						<div class="grid-item tool">
+							<div class="icon">
+								<div class="icon_img">
+									<i class="fa-solid fa-spell-check"></i>
+								</div>
 							</div>
+							<h2>Writing</h2>
+							<p>Analyzes text to check grammar, create suggestions, and list synonyms for better clarity.</p>
 						</div>
-						<h2>Writing</h2>
-						<p>Analyzes text to check grammar, create suggestions, and list synonyms for better clarity.</p>
-					</div>
-					<div class="grid-item tool">
-						<div class="icon">
-							<div class="icon_img">
-								<i class="fa-solid fa-volume-high"></i>
+					</a>
+					<a href="redirects/conversation.html">
+						<div class="grid-item tool">
+							<div class="icon">
+								<div class="icon_img">
+									<i class="fa-solid fa-volume-high"></i>
+								</div>
 							</div>
+							<h2>Conversation</h2>
+							<p>Engages you in real-time conversations in a foreign language to improve fluency.</p>
 						</div>
-						<h2>Conversation</h2>
-						<p>Engages you in real-time conversations in a foreign language to improve fluency.</p>
-					</div>
+					</a>
 				</div>
 			</div>
 		</section>
@@ -261,6 +280,6 @@
 			</div>
 			</div>
 		</footer>
-		<script src="scripts/general.js"></script>
+		<script src="scripts/pages/home.js"></script>
 	</body>
 </html>
