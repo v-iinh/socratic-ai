@@ -53,64 +53,6 @@ header nav ul li a {
 	cursor: pointer;
 }
 
-textarea::placeholder, textarea {
-    color: #6c757d;
-    font-size: 1rem;
-    font-family: 'Poppins', sans-serif;
-}
-
-.ai_tool_container {
-	display: flex;
-	justify-content: space-evenly;
-	height: calc(100vh - 100.8px);
-	align-items: center;
-}
-
-.user {
-	width: calc(50vw - 90px);
-	height: calc(100vh - 100.8px - 120px);
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-}
-
-.submitBtn {
-	display: flex;
-	background-color: #c6b6fc;
-	color: white;
-	padding: 12px 24px;
-	border-radius: 8px;
-	text-decoration: none;
-	font-weight: 500;
-	justify-content: center;
-	transition: background-color 0.3s ease;
-	cursor: pointer;
-}
-
-.ai {
-	width: calc(50vw - 90px);
-	height: calc(100vh - 100.8px - 120px);
-	border-radius: 8px;
-	background-color: #f7f8fc;
-	border: 1px solid #c6b6fc;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.preInput {
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	display: none;
-}
-
-.ai img {
-	height: auto;
-	width: 30%;
-}
-
 .site-footer {
 	background-color: #f7f8fc;
 	padding: 20px 0 20px;
