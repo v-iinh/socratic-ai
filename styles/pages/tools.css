@@ -11,7 +11,7 @@ textarea::placeholder, textarea {
 	align-items: center;
 }
 
-.user {
+.user_input {
 	width: calc(50vw - 90px);
 	height: calc(100vh - 100.8px - 120px);
 	display: flex;
@@ -32,28 +32,44 @@ textarea::placeholder, textarea {
 	cursor: pointer;
 }
 
-.ai {
+.chat_history {
 	width: calc(50vw - 90px);
 	height: calc(100vh - 100.8px - 120px);
 	border-radius: 8px;
 	background-color: #f7f8fc;
 	border: 1px solid #c6b6fc;
 	display: flex;
-	justify-content: center;
-	align-items: center;
+	justify-content: start;
+	flex-direction: column;
+	overflow-y: auto;
+	padding-top: 25px;
 }
 
-.preInput {
+.loadingImage {
 	width: 100%;
+	height: calc(100% - 25px);
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	display: none;
+	font-size: 100px;
+	color: #ded7fc;
 }
 
-.ai img {
-	height: auto;
-	width: 30%;
+.message, .ai, .user {
+	display: flex; 
+	width: 100%; 
+	padding: 0px 25px 25px 25px;
+}
+
+.pfp {
+	display: flex;
+	justify-content: center;
+	margin-right: 25px;
+	width: 50px;
+}
+
+.pfp i {
+	color: #c6b6fc;
 }
 
 .smallInput {
@@ -61,13 +77,15 @@ textarea::placeholder, textarea {
     background-color: #f7f8fc;
     border-radius: 8px;
     border: none;
-    max-height: 49.6px;
-    resize: none;
-    padding: 25px; 
-    box-sizing: border-box; 
+    height: 49.6px;
+    padding: 0 25px;
+    box-sizing: border-box;
     color: #6c757d;
     font-size: 1rem;
     border: 1px solid #c6b6fc;
+    -webkit-appearance: none; 
+    -moz-appearance: none;
+    appearance: none;
 }
 
 .largeInput {
@@ -86,4 +104,11 @@ textarea::placeholder, textarea {
 
 .smallInput:focus, .largeInput:focus {
     outline: none !important;
+}
+
+.inputLabel {
+    color: #6c757d;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 5px;
 }
