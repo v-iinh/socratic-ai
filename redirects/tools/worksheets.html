@@ -4,24 +4,31 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Socratic</title>
-		<link rel="stylesheet" href="../styles/general.css">
-		<link rel="stylesheet" href="../styles/pages/tools.css">
+		<link rel="stylesheet" href="../../styles/general.css">
+		<link rel="stylesheet" href="../../styles/tools.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-		<link rel="icon" href="../assets/favicon.png">
+		<link rel="icon" href="../../assets/favicon.png">
 	</head>
 	<body>
 		<header>
 			<div class="nav_container">
-				<a href="../index.html">
+				<a href="../../index.html">
 					<div class="logo">
-						<img src="../assets/logo.png">
+						<img src="../../assets/logo.png">
 					</div>
 				</a>
 			</div>
 		</header>
         <section class="ai_tool_container">
             <div class="user_input">
-                <input class="smallInput" placeholder="Topic"></input>
+				<select class="smallInput">
+					<option value="" disabled selected hidden>Choose Subject</option>
+					<option value="math">Math</option>
+					<option value="english">English</option>
+					<option value="science">Science</option>
+					<option value="history">History</option>
+					<option value="language">Foreign Language</option>
+				</select>
 				<select class="smallInput">
 					<option value="" disabled selected hidden>Choose Level</option>
 					<option value="elementary">Elementary School</option>
@@ -37,7 +44,7 @@
 			<div class="chat_history">
 				<div class="loadingImage" style="display: flex; flex-direction: column;">
 					<i class="fas fa-user-gear" style="margin-bottom: 15px;"></i>
-					<div style="font-size: 1rem; color: #b1b6bc50;">Your generated content will appear here.</div>
+					<div style="font-size: 1rem; color: #b1b6bc;">Your generated content will appear here.</div>
 				</div>
 			</div>
         </section>
@@ -61,7 +68,7 @@
 			</div>
 			</div>
 		</footer>
-		<script src="../scripts/general.js"></script>
-		<script src="../scripts/pages/debate.js"></script>
+		<script src="../../scripts/general.js"></script>
+		<script src="../../scripts/tools/worksheets.js"></script>
 	</body>
 </html>
