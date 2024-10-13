@@ -56,20 +56,27 @@ textarea::placeholder, textarea {
 }
 
 .message, .ai, .user {
-	display: flex; 
-	width: 100%; 
+	display: flex;
+	width: 100%;
 	padding: 0px 25px 25px 25px;
+	align-items: flex-start;
 }
 
 .pfp {
 	display: flex;
-	justify-content: center;
 	margin-right: 25px;
-	width: 50px;
+	width: 25.6px; 
+	height: 25.6px;
+	align-items: center;
+	justify-content: center;
 }
 
 .pfp i {
 	color: #c6b6fc;
+}
+
+.messageText {
+	flex: 1;
 }
 
 .smallInput {
