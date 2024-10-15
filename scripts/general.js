@@ -8,7 +8,7 @@ const firebaseConfig = {
     appId: "1:761008333826:web:8541310b0222e27ce4f31b",
     measurementId: "G-P7JHCCD216"
 };
+firebase.initializeApp(firebaseConfig);
 
-const app = initializeApp(firebaseConfig);
-const ref = app.database().ref();
-const users = ref.child('users');
+const database = firebase.database();
+const users = database.ref('users');
