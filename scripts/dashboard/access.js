@@ -32,12 +32,13 @@ function registerUser(){
                     eamil: emailInput,
                     password: passwordInput,
                     age: ageInput,
-                    admin: false
+                    admin: false,
+                    staff: false
                 });
-
-                window.location = "../../redirects/dashboard/staff.html"
+                sessionStorage.setItem('username', usernameInput);
+                window.location = "../../redirects/dashboard/staff.html";
             } else {
-                authText(register, "Invalid", "Register")
+                authText(register, "Invalid", "Register");
             }
         }
     })
@@ -54,6 +55,7 @@ function loginUser(){
             snapshot.forEach(childSnapshot => {
                 const userData = childSnapshot.val();
                 if(userData.password === passwordInput){
+                    sessionStorage.setItem('username', usernameInput)
                     if(userData.admin == false){
                         window.location = "../../redirects/dashboard/staff.html"
                     } else {
