@@ -1,35 +1,60 @@
-const register = document.getElementById('register')
-const login = document.getElementById('login')
+const register = document.getElementById('register');
+const login = document.getElementById('login');
+const submit = document.getElementById('submit');
 
-const age = document.getElementById('age')
-const username = document.getElementById('username')
-const email = document.getElementById('email')
-const password = document.getElementById('password')
+const age = document.getElementById('age');
+const username = document.getElementById('username');
+const email = document.getElementById('email');
+const password = document.getElementById('password');
+
+let active = "login";
 
 register.addEventListener('click', function(event) {
     event.preventDefault();
-    registerUser()
+
+    register.style.backgroundColor = "#c6b6fc"
+    register.style.color = "white"
+
+    login.style.backgroundColor = "#f7f8fc";
+    login.style.color = "#6c757d";
+
+    active = "register";
 });
 
 login.addEventListener('click', function(event) {
     event.preventDefault();
-    loginUser()
+
+    login.style.backgroundColor = "#c6b6fc"
+    login.style.color = "white"
+
+    register.style.backgroundColor = "#f7f8fc";
+    register.style.color = "#6c757d";
+
+    active = "login";
 });
 
+submit.addEventListener('click', function(){
+    if(active === "login"){
+        loginUser();
+    } else {
+        registerUser();
+    }
+})
+
 function registerUser(){
-    const ageInput = age.value
+    const ageInput = age.value;
     const usernameInput = username.value.toLowerCase();
     const emailInput = email.value.toLowerCase();
     const passwordInput = password.value.toLowerCase(); 
 
     users.orderByChild('username').equalTo(usernameInput).once('value', snapshot => {
         if(snapshot.exists()){
-            authText(register, "Invalid", "Register")
+            authText();
         } else {
             if (authRegister(ageInput, usernameInput, emailInput, passwordInput)) {
                 users.push({
                     username: usernameInput,
-                    eamil: emailInput,
+                    email: emailInput, 
                     password: passwordInput,
                     age: ageInput,
                     admin: false,
@@ -38,46 +63,46 @@ function registerUser(){
                 sessionStorage.setItem('username', usernameInput);
                 window.location = "../../redirects/dashboard/staff.html";
             } else {
-                authText(register, "Invalid", "Register");
+                authText();
             }
         }
-    })
+    });
 }
 
 function loginUser(){
-    const ageInput = age.value
+    const ageInput = age.value;
     const usernameInput = username.value.toLowerCase();
     const emailInput = email.value.toLowerCase();
     const passwordInput = password.value.toLowerCase(); 
     
     users.orderByChild('username').equalTo(usernameInput).once('value', snapshot => {
-        if(snapshot.exists() && authRegister(ageInput, usernameInput, emailInput, passwordInput)){
+        if(snapshot.exists()){
             snapshot.forEach(childSnapshot => {
                 const userData = childSnapshot.val();
-                if(userData.password === passwordInput){
-                    sessionStorage.setItem('username', usernameInput)
+                if(userData.password === passwordInput && authRegister(ageInput, usernameInput, emailInput, passwordInput)){
+                    sessionStorage.setItem('username', usernameInput);
                     if(userData.admin == false){
-                        window.location = "../../redirects/dashboard/staff.html"
+                        window.location = "../../redirects/dashboard/staff.html";
                     } else {
-                        window.location = "../../redirects/dashboard/admin.html"
+                        window.location = "../../redirects/dashboard/admin.html";
                     }
                 } else {
-                    authText(login, "Invalid", "Login")
+                    authText();
                 }
-            })
+            });
         } else {
-            authText(login, "Invalid", "Login")
+            authText();
         }
-    })
+    });
 }
 
-function authText(btn, msg, reset){
-    btn.innerHTML = msg;
+function authText(){
+    submit.innerHTML = "Invalid";
     setTimeout(() => {
-        btn.innerHTML = reset;
+        submit.innerHTML = "Submit";
     }, 1000);
 }
 
-function authRegister(age, username, email, password){
-    return ((age !== "" && age <= 17) && username !== "" && email !== "" && password !== "");
+function authRegister(ageInput, usernameInput, emailInput, passwordInput){
+    return (ageInput !== "" && ageInput <= 17 && usernameInput !== "" && emailInput !== "" && passwordInput !== "");
 }

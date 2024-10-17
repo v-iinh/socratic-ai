@@ -4,50 +4,6 @@ textarea::placeholder, textarea {
     font-family: 'Poppins', sans-serif;
 }
 
-.user_input {
-	width: calc(50vw - 90px);
-	height: calc(100vh - 100.8px - 120px);
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-}
-
-.submitBtn {
-	display: flex;
-	background-color: #c6b6fc;
-	color: white;
-	padding: 12px 24px;
-	border-radius: 8px;
-	text-decoration: none;
-	font-weight: 500;
-	justify-content: center;
-	transition: background-color 0.3s ease;
-	cursor: pointer;
-}
-
-.chat_history {
-	width: calc(50vw - 90px);
-	height: calc(100vh - 100.8px - 120px);
-	border-radius: 8px;
-	background-color: #f7f8fc;
-	border: 1px solid #c6b6fc;
-	display: flex;
-	justify-content: start;
-	flex-direction: column;
-	overflow-y: auto;
-	padding-top: 25px;
-}
-
-.loadingImage {
-	width: 100%;
-	height: calc(100% - 25px);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-size: 100px;
-	color: #ded7fc;
-}
-
 .message, .ai, .user {
 	display: flex;
 	width: 100%;
