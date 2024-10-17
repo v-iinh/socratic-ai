@@ -4,13 +4,6 @@ textarea::placeholder, textarea {
     font-family: 'Poppins', sans-serif;
 }
 
-.ai_tool_container {
-	display: flex;
-	justify-content: space-evenly;
-	height: calc(100vh - 100.8px);
-	align-items: center;
-}
-
 .user_input {
 	width: calc(50vw - 90px);
 	height: calc(100vh - 100.8px - 120px);

@@ -10,6 +10,13 @@ body {
 	line-height: 1.6;
 }
 
+.page_section {
+	display: flex;
+	justify-content: space-evenly;
+	height: calc(100vh - 100.8px);
+	align-items: center;
+}
+
 .container, .nav_container {
 	width: 85%;
 	margin: auto;
