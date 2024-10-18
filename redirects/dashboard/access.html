@@ -20,15 +20,20 @@
 			</div>
 		</header>
         <section class="page_section">
-            <form class="input_space" style="max-height: 550px;">
+            <form class="input_space">
 				<div class="accessBtn">
                     <div id="login">Login</div>
                     <div id="register" style="background-color: #f7f8fc; color: #6c757d;">Register</div>
                 </div>
-				<input id="age" type="text" placeholder="Age">
-                <input id="username" type="text" placeholder="Full Name">
-                <input id="email" type="text" placeholder="Email">
-                <input id="password" type="text" placeholder="Password">
+				<div style="display: flex;">
+					<input id="username" type="text" placeholder="Full Name" style="width: 50%; gap: 0;">
+					<input id="password" type="text" placeholder="Password" style="width: 50%; gap: 0; border-left: 0;">
+				</div>
+				<div style="display: flex;">
+					<input id="email" type="text" placeholder="Email" style="width: calc(100% - 80px); gap: 0;">
+					<input id="age" type="text" placeholder="Age" style="width: 80px; gap: 0; border-left: 0;">
+				</div>
+				<textarea placeholder="Additional Comments"></textarea>
 				<div id="submit" class="submitBtn">Submit</div>
             </form>
             <div class="filler">

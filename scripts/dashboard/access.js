@@ -79,7 +79,7 @@ function loginUser(){
         if(snapshot.exists()){
             snapshot.forEach(childSnapshot => {
                 const userData = childSnapshot.val();
-                if(userData.password === passwordInput && authRegister(ageInput, usernameInput, emailInput, passwordInput)){
+                if(userData.password === passwordInput){
                     sessionStorage.setItem('username', usernameInput);
                     if(userData.admin == false){
                         window.location = "../../redirects/dashboard/staff.html";
@@ -103,6 +103,12 @@ function authText(){
     }, 1000);
 }
 
-function authRegister(ageInput, usernameInput, emailInput, passwordInput){
-    return (ageInput !== "" && ageInput <= 17 && usernameInput !== "" && emailInput !== "" && passwordInput !== "");
+function authRegister(ageInput, usernameInput, emailInput, passwordInput) {
+    return (
+        ageInput !== "" &&
+        ageInput <= 17 &&
+        usernameInput !== "" &&
+        emailInput !== "" &&
+        passwordInput !== ""
+    );
 }
