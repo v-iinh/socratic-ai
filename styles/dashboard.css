@@ -51,7 +51,7 @@ textarea {
     border: none;
     height: calc(100% - 400px);
     resize: none;
-    padding: 0 25px;
+    padding: 25px;
     box-sizing: border-box; 
     color: #6c757d;
     font-size: 1rem;
