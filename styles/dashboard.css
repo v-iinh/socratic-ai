@@ -58,6 +58,7 @@ textarea {
     border: 1px solid #c6b6fc;
     overflow: auto;
     font-family: 'Poppins', sans-serif;
+    min-height: 70px;
 }
 
 textarea:focus {
