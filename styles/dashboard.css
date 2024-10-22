@@ -44,6 +44,10 @@ input:focus {
     border-bottom-left-radius: 0;
 }
 
+.strike::placeholder {
+    text-decoration: line-through;
+}
+
 textarea {
     min-width: 100%;
     background-color: #f7f8fc;
@@ -58,7 +62,7 @@ textarea {
     border: 1px solid #c6b6fc;
     overflow: auto;
     font-family: 'Poppins', sans-serif;
-    min-height: 70px;
+    min-height: 71px;
 }
 
 textarea:focus {

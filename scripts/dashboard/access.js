@@ -6,8 +6,13 @@ const age = document.getElementById('age');
 const username = document.getElementById('username');
 const email = document.getElementById('email');
 const password = document.getElementById('password');
+const comment = document.getElementById("additionalComments")
 
 let active = "login";
+
+document.addEventListener("DOMContentLoaded", function(){
+    inputStyles()
+})
 
 register.addEventListener('click', function(event) {
     event.preventDefault();
@@ -19,6 +24,7 @@ register.addEventListener('click', function(event) {
     login.style.color = "#6c757d";
 
     active = "register";
+    inputStyles()
 });
 
 login.addEventListener('click', function(event) {
@@ -31,6 +37,7 @@ login.addEventListener('click', function(event) {
     register.style.color = "#6c757d";
 
     active = "login";
+    inputStyles()
 });
 
 submit.addEventListener('click', function(){
@@ -46,6 +53,7 @@ function registerUser(){
     const usernameInput = username.value.toLowerCase();
     const emailInput = email.value.toLowerCase();
     const passwordInput = password.value.toLowerCase(); 
+    const commentInput = comment.value
 
     users.orderByChild('username').equalTo(usernameInput).once('value', snapshot => {
         if(snapshot.exists()){
@@ -57,6 +65,7 @@ function registerUser(){
                     email: emailInput, 
                     password: passwordInput,
                     age: ageInput,
+                    comment: commentInput,
                     admin: false,
                     staff: false
                 });
@@ -70,9 +79,7 @@ function registerUser(){
 }
 
 function loginUser(){
-    const ageInput = age.value;
     const usernameInput = username.value.toLowerCase();
-    const emailInput = email.value.toLowerCase();
     const passwordInput = password.value.toLowerCase(); 
     
     users.orderByChild('username').equalTo(usernameInput).once('value', snapshot => {
@@ -82,7 +89,11 @@ function loginUser(){
                 if(userData.password === passwordInput){
                     sessionStorage.setItem('username', usernameInput);
                     if(userData.admin == false){
-                        window.location = "../../redirects/dashboard/staff.html";
+                        if(userData.staff == false){
+                            window.location = "../../redirects/dashboard/waiting.html";
+                        } else {
+                            window.location = "../../redirects/dashboard/staff.html";
+                        }
                     } else {
                         window.location = "../../redirects/dashboard/admin.html";
                     }
@@ -111,4 +122,28 @@ function authRegister(ageInput, usernameInput, emailInput, passwordInput) {
         emailInput !== "" &&
         passwordInput !== ""
     );
+}
+
+function inputStyles() {
+    if (active === "login") {
+        age.style.pointerEvents = "none";
+        email.style.pointerEvents = "none";
+        comment.style.pointerEvents = "none";
+        
+        age.classList.add("strike");
+        email.classList.add("strike");
+        comment.classList.add("strike");
+
+        submit.innerHTML = "Enter"
+    } else {
+        age.style.pointerEvents = "";
+        email.style.pointerEvents = "";
+        comment.style.pointerEvents = "";
+        
+        age.classList.remove("strike");
+        email.classList.remove("strike");
+        comment.classList.remove("strike");
+
+        submit.innerHTML = "I Agree to Community Guidelines"
+    }
 }
