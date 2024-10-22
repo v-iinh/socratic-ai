@@ -110,7 +110,7 @@ function loginUser(){
 function authText(){
     submit.innerHTML = "Invalid";
     setTimeout(() => {
-        submit.innerHTML = "Submit";
+        submit.innerHTML = "I Agree to Community Guidelines";
     }, 1000);
 }
 
