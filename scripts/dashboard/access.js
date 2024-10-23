@@ -70,7 +70,7 @@ function registerUser(){
                     staff: false
                 });
                 sessionStorage.setItem('username', usernameInput);
-                window.location = "../../redirects/dashboard/staff.html";
+                window.location = "../../redirects/dashboard/pending.html";
             } else {
                 authText();
             }
@@ -90,7 +90,7 @@ function loginUser(){
                     sessionStorage.setItem('username', usernameInput);
                     if(userData.admin == false){
                         if(userData.staff == false){
-                            window.location = "../../redirects/dashboard/waiting.html";
+                            window.location = "../../redirects/dashboard/pending.html";
                         } else {
                             window.location = "../../redirects/dashboard/staff.html";
                         }
