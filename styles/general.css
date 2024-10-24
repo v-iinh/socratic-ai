@@ -49,7 +49,7 @@ body {
 	color: #ded7fc;
 }
 
-.submitBtn, #register, #login {
+.submitBtn, .adminLabel, #register, #login {
 	display: flex;
 	background-color: #c6b6fc;
 	color: white;
