@@ -1,18 +1,18 @@
-document.addEventListener('DOMContentLoaded', function(){
+const pending = document.querySelector(".pending");
+
+document.addEventListener('DOMContentLoaded', function() {
     checkSession();
     generate_requests();
-})
+});
 
-function checkSession(){
-    const currSession = sessionStorage.getItem('username')
-    if(currSession === null){
-        window.location = "../../index.html"
+function checkSession() {
+    const currSession = sessionStorage.getItem('username');
+    if (currSession === null) {
+        window.location = "../../index.html";
     }
 }
 
 function generate_requests() {
-    const filler = document.querySelector(".pending");
-    
     users.on('value', (snapshot) => {
         const users = [];
 
@@ -57,7 +57,17 @@ function generate_requests() {
                 </div>
             </div>`;
             
-            filler.insertAdjacentHTML('beforeend', request);
+            pending.insertAdjacentHTML('beforeend', request);
         });
+
+        deny_request();
+    });
+}
+
+function deny_request() {
+    const requests = document.querySelectorAll(".request");
+    
+    requests.forEach(element => {
+        const deny_btn = element.querySelector()
     });
 }

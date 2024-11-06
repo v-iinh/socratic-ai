@@ -123,3 +123,11 @@ hr {
     padding-bottom: 10px; 
     background-color: white;
 }
+
+.fa-thumbs-up, .fa-thumbs-down, .fa-ban {
+    cursor: pointer;
+}
+
+.fa-thumbs-up:hover, .fa-thumbs-down:hover, .fa-ban:hover {
+    color: #c6b6fc;
+}
