@@ -18,46 +18,52 @@ function generate_requests() {
 
         snapshot.forEach((childSnapshot) => {
             const userData = childSnapshot.val();
+            const userKey = childSnapshot.key;
             if (!userData.staff) {
                 users.push({
-                    name: userData.username || 'Unknown',
-                    age: userData.age || 'Unknown',
-                    email: userData.email || 'Not provided',
-                    comment: userData.comment || 'No comment available'
+                    key: userKey,
+                    admin: userData.admin,
+                    staff: userData.staff,
+                    name: userData.username,
+                    age: userData.age,
+                    email: userData.email,
+                    comment: userData.comment
                 });
             }
         });
         
         users.forEach(user => {
-            const request = `
-            <div class="request">
-                <div class="row">
-                    <div class="label">Name:</div>
-                    <div class="text">${user.name}</div>
-                </div><hr>
-                <div class="row">
-                    <div class="label">Age:</div>
-                    <div class="text">${user.age}</div>
-                </div><hr>
-                <div class="row">
-                    <div class="label">Email:</div>
-                    <div class="text">${user.email}</div>
-                </div><hr>
-                <div class="row">
-                    <div class="label">Comment:</div>
-                    <div class="text">${user.comment}</div>
-                </div><hr>
-                <div class="row judge">
-                    <div class="label approve">
-                        <i class="fa-regular fa-thumbs-up"></i>
+            if(!user.staff || !user.admin){
+                const request = `
+                <div class="request" data-key="${user.key}">
+                    <div class="row">
+                        <div class="label">Name:</div>
+                        <div class="text">${user.name}</div>
+                    </div><hr>
+                    <div class="row">
+                        <div class="label">Age:</div>
+                        <div class="text">${user.age}</div>
+                    </div><hr>
+                    <div class="row">
+                        <div class="label">Email:</div>
+                        <div class="text">${user.email}</div>
+                    </div><hr>
+                    <div class="row">
+                        <div class="label">Comment:</div>
+                        <div class="text">${user.comment}</div>
+                    </div><hr>
+                    <div class="row judge">
+                        <div class="label approve">
+                            <i class="fa-regular fa-thumbs-up"></i>
+                        </div>
+                        <div class="label reject">
+                            <i class="fa-regular fa-thumbs-down"></i>
+                        </div>
                     </div>
-                    <div class="label reject">
-                        <i class="fa-regular fa-thumbs-down"></i>
-                    </div>
-                </div>
-            </div>`;
-            
-            pending.insertAdjacentHTML('beforeend', request);
+                </div>`;
+
+                pending.insertAdjacentHTML('beforeend', request);
+            }
         });
 
         deny_request();
@@ -68,6 +74,31 @@ function deny_request() {
     const requests = document.querySelectorAll(".request");
     
     requests.forEach(element => {
-        const deny_btn = element.querySelector()
+        const deny_btn = element.querySelector(".fa-thumbs-down");
+        
+        deny_btn.addEventListener('click', function() {
+            const userKey = element.getAttribute('data-key');
+            if (userKey) {
+                database.ref('users/' + userKey).remove() 
+                .then(() => {
+                    element.remove(); 
+                    console.log("User request denied and removed from database.");
+                })
+                .catch(error => {
+                    console.error("Error removing user: ", error);
+                });
+            }
+        });
+    });
+}
+
+function approve_request() {
+    const requests = document.querySelectorAll(".request");
+    
+    requests.forEach(element => {
+        const approve_btn = element.querySelector(".fa-thumbs-up");
+        
+        deny_btn.addEventListener('click', function() {
+        });
     });
 }
