@@ -1,8 +1,10 @@
 const pending = document.querySelector(".pending");
+const board = document.querySelector(".board");
 
 document.addEventListener('DOMContentLoaded', function() {
     checkSession();
     generate_requests();
+    generate_board();
 });
 
 function checkSession() {
@@ -14,43 +16,31 @@ function checkSession() {
 
 function generate_requests() {
     users.on('value', (snapshot) => {
-        const users = [];
-
         snapshot.forEach((childSnapshot) => {
+
             const userData = childSnapshot.val();
             const userKey = childSnapshot.key;
-            if (!userData.staff) {
-                users.push({
-                    key: userKey,
-                    admin: userData.admin,
-                    staff: userData.staff,
-                    name: userData.username,
-                    age: userData.age,
-                    email: userData.email,
-                    comment: userData.comment
-                });
-            }
-        });
-        
-        users.forEach(user => {
-            if(!user.staff || !user.admin){
-                const request = `
-                <div class="request" data-key="${user.key}">
+
+            if (!userData.staff && !userData.admin) {
+                const request = document.createElement('div');
+                request.classList.add('request');
+                request.setAttribute('data-key', userKey);
+                request.innerHTML = `
                     <div class="row">
                         <div class="label">Name:</div>
-                        <div class="text">${user.name}</div>
+                        <div class="text">${userData.username}</div>
                     </div><hr>
                     <div class="row">
                         <div class="label">Age:</div>
-                        <div class="text">${user.age}</div>
+                        <div class="text">${userData.age}</div>
                     </div><hr>
                     <div class="row">
                         <div class="label">Email:</div>
-                        <div class="text">${user.email}</div>
+                        <div class="text">${userData.email}</div>
                     </div><hr>
                     <div class="row">
                         <div class="label">Comment:</div>
-                        <div class="text">${user.comment}</div>
+                        <div class="text">${userData.comment || "No Comment"}</div>
                     </div><hr>
                     <div class="row judge">
                         <div class="label approve">
@@ -59,46 +49,86 @@ function generate_requests() {
                         <div class="label reject">
                             <i class="fa-regular fa-thumbs-down"></i>
                         </div>
-                    </div>
-                </div>`;
+                    </div>`;
 
-                pending.insertAdjacentHTML('beforeend', request);
-            }
-        });
+                pending.appendChild(request);
 
-        deny_request();
-    });
-}
+                const approve_btn = request.querySelector(".fa-thumbs-up");
+                const deny_btn = request.querySelector(".fa-thumbs-down");
 
-function deny_request() {
-    const requests = document.querySelectorAll(".request");
-    
-    requests.forEach(element => {
-        const deny_btn = element.querySelector(".fa-thumbs-down");
-        
-        deny_btn.addEventListener('click', function() {
-            const userKey = element.getAttribute('data-key');
-            if (userKey) {
-                database.ref('users/' + userKey).remove() 
-                .then(() => {
-                    element.remove(); 
-                    console.log("User request denied and removed from database.");
-                })
-                .catch(error => {
-                    console.error("Error removing user: ", error);
+                approve_btn.addEventListener('click', function() {
+                    database.ref('users/' + userKey).update({
+                        staff: true
+                    })
+                    .then(() => {
+                        request.remove();
+                        console.log("User request approved and removed from the interface.");
+                    })
+                    .catch(error => {
+                        console.error("Error approving user request: ", error);
+                    });
+                });
+
+                deny_btn.addEventListener('click', function() {
+                    database.ref('users/' + userKey).remove()
+                    .then(() => {
+                        request.remove();
+                        console.log("User request denied and removed from database.");
+                    })
+                    .catch(error => {
+                        console.error("Error removing user: ", error);
+                    });
                 });
             }
         });
     });
 }
 
-function approve_request() {
-    const requests = document.querySelectorAll(".request");
-    
-    requests.forEach(element => {
-        const approve_btn = element.querySelector(".fa-thumbs-up");
-        
-        deny_btn.addEventListener('click', function() {
+function generate_board() {
+    users.on('value', (snapshot) => {
+        snapshot.forEach((childSnapshot) => {
+
+            const userData = childSnapshot.val();
+            const userKey = childSnapshot.key;
+
+            if (userData.staff && !userData.admin) {
+                const member = document.createElement('div');
+                member.classList.add('staff_member');
+                member.setAttribute('data-key', userKey);
+                member.innerHTML = `
+                    <div class="row">
+                        <div class="label">Name:</div>
+                        <div class="text">${userData.username}</div>
+                    </div><hr>
+                    <div class="row">
+                        <div class="label">Age:</div>
+                        <div class="text">${userData.age}</div>
+                    </div><hr>
+                    <div class="row">
+                        <div class="label">Email:</div>
+                        <div class="text">${userData.email}</div>
+                    </div><hr>
+                    <div class="row judge">
+                        <div class="label kick">
+                            <i class="fa-solid fa-ban"></i>
+                        </div>
+                    </div>`;
+
+                board.appendChild(member);
+
+                const remove_btn = board.querySelector(".fa-ban");
+
+                remove_btn.addEventListener('click', function() {
+                    database.ref('users/' + userKey).remove()
+                    .then(() => {
+                        member.remove();
+                        console.log("User kicked from staff.");
+                    })
+                    .catch(error => {
+                        console.error("Error removing user: ", error);
+                    });
+                });
+            }
         });
     });
 }

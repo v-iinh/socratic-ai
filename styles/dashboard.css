@@ -113,7 +113,7 @@ hr {
     margin: 10px 0;
 }
 
-.request {
+.request, .staff_member {
     border: 1px solid #c6b6fc; 
     padding: 25px; 
     border-radius: 6px; 
