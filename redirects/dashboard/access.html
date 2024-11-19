@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Socratic</title>
 		<link rel="stylesheet" href="../../styles/general.css">
-		<link rel="stylesheet" href="../../styles/dashboard.css">
+		<link rel="stylesheet" href="../../styles/dashboard/access.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 		<link rel="icon" href="../../assets/favicon.png">
 	</head>
@@ -20,7 +20,7 @@
 			</div>
 		</header>
         <section class="page_section">
-            <form class="input_space">
+            <!-- <form class="input_space">
 				<div class="accessBtn">
                     <div id="login">Login</div>
                     <div id="register" style="background-color: #f7f8fc; color: #6c757d;">Register</div>
@@ -41,7 +41,54 @@
 					<i class="fa-solid fa-people-group"></i>
 					<div style="font-size: 1rem; color: #b1b6bc;">Staff Dashboard</div>
 				</div>
-            </div>
+            </div> -->
+			<div class="container" id="container">
+				<div class="form-container sign-up-container">
+					<form>
+						<input type="text" placeholder="Full Name" />
+						<input type="text" placeholder="Password" />
+						<div style="display: flex;">
+							<input type="email" id="signUpEmail"placeholder="Email" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-right: 0.5px solid #c6b6fc;" />
+							<input type="number" id="signUpEmail"placeholder="Age" style="width: 80px; border-bottom-left-radius: 0px; border-top-left-radius: 0px; border-left: 0.5px solid #c6b6fc;" />
+						</div>
+						<input type="password" placeholder="Comments" />
+						<div style="display: flex; width: 100%; justify-content: space-between;">
+							<button type="submit" style="width: calc(100% - 68px)">Register</button>
+							<div class="icon" style="width: 20px;" onClick="openSignIn()">
+								<div class="icon_img">
+									<i class="fa-solid fa-right-to-bracket"></i>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				
+				<div class="form-container sign-in-container">
+					<form onSubmit={this.handleSubmitLogin}>
+						<input type="email" id="signInEmail" placeholder="Full Name" />
+						<input type="password" placeholder="Password" />
+						<div style="display: flex; width: 100%; justify-content: space-between;">
+							<button type="submit" style="width: calc(100% - 68px)">Enter</button>
+							<div class="icon" style="width: 20px;" onClick="openSignUp()">
+								<div class="icon_img">
+									<i class="fa-solid fa-pen-to-square"></i>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				
+				<div class="overlay-container">
+					<div class="overlay">
+						<div class="overlay-panel overlay-left">
+							test
+						</div>
+						<div class="overlay-panel overlay-right">
+							test
+						</div>
+					</div>
+				</div>
+			</div>
         </section>
 		<footer class="site-footer">
 			<div class="footer-container">
@@ -62,6 +109,25 @@
 			</div>
 			</div>
 		</footer>
+		<script>
+			const container = document.getElementById('container');
+			const signInEmail =  document.getElementById('signInEmail');
+			const signUpEmail =  document.getElementById('signUpEmail');
+
+			function openSignIn(){
+				container.classList.remove("right-panel-active");
+				if(signUpEmail.value !== ""){
+				signInEmail.value = signUpEmail.value;
+				}
+			}
+
+			function openSignUp(){
+				container.classList.add("right-panel-active");
+				if(signInEmail.value !== ""){
+				signUpEmail.value = signInEmail.value;
+				}
+			}
+		</script>
 		<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>		
 		<script src="../../scripts/general.js"></script>
