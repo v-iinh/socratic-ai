@@ -20,8 +20,9 @@ function checkSession() {
 
 function generate_requests() {
     users.on('value', (snapshot) => {
-        snapshot.forEach((childSnapshot) => {
+        Array.from(pending.querySelectorAll('.request')).forEach(child => child.remove());
 
+        snapshot.forEach((childSnapshot) => {
             const userData = childSnapshot.val();
             const userKey = childSnapshot.key;
 
@@ -81,7 +82,6 @@ function generate_requests() {
                         request.remove();
                         console.log("User request denied and removed from database.");
                         checkFiller();
-                        window.location.reload();
                     })
                     .catch(error => {
                         console.error("Error removing user: ", error);
@@ -89,13 +89,16 @@ function generate_requests() {
                 });
             }
         });
+
+        checkFiller();
     });
 }
 
 function generate_board() {
     users.on('value', (snapshot) => {
-        snapshot.forEach((childSnapshot) => {
+        Array.from(board.querySelectorAll('.staff_member')).forEach(child => child.remove());
 
+        snapshot.forEach((childSnapshot) => {
             const userData = childSnapshot.val();
             const userKey = childSnapshot.key;
 
@@ -125,7 +128,7 @@ function generate_board() {
                 board.appendChild(member);
                 checkFiller();
 
-                const remove_btn = board.querySelector(".fa-ban");
+                const remove_btn = member.querySelector(".fa-ban");
 
                 remove_btn.addEventListener('click', function() {
                     database.ref('users/' + userKey).remove()
@@ -133,7 +136,6 @@ function generate_board() {
                         member.remove();
                         console.log("User kicked from staff.");
                         checkFiller();
-                        window.location.reload();
                     })
                     .catch(error => {
                         console.error("Error removing user: ", error);
@@ -141,6 +143,8 @@ function generate_board() {
                 });
             }
         });
+
+        checkFiller();
     });
 }
 
