@@ -1,68 +1,50 @@
-const register = document.getElementById('register');
-const login = document.getElementById('login');
-const submit = document.getElementById('submit');
+const signUpSubmit = document.getElementById('signUpSubmit');
+const signInSubmit = document.getElementById('signInSubmit');
 
-const age = document.getElementById('age');
-const username = document.getElementById('username');
-const email = document.getElementById('email');
-const password = document.getElementById('password');
-const comment = document.getElementById("additionalComments")
+const age = document.getElementById('signUpAge');
+const username = document.getElementById('signUpUsername');
+const email = document.getElementById('signUpEmail');
+const password = document.getElementById('signUpPassword');
+const comment = document.getElementById('additionalComments');
+
+const signInUsername = document.getElementById('signInUsername');
+const signInPassword = document.getElementById('signInPassword');
 
 let active = "login";
 
-document.addEventListener("DOMContentLoaded", function(){
-    inputStyles()
-})
-
-register.addEventListener('click', function(event) {
-    event.preventDefault();
-
-    register.style.backgroundColor = "#c6b6fc"
-    register.style.color = "white"
-
-    login.style.backgroundColor = "#f7f8fc";
-    login.style.color = "#6c757d";
-
-    active = "register";
-    inputStyles()
-});
-
-login.addEventListener('click', function(event) {
-    event.preventDefault();
-
-    login.style.backgroundColor = "#c6b6fc"
-    login.style.color = "white"
-
-    register.style.backgroundColor = "#f7f8fc";
-    register.style.color = "#6c757d";
-
+function openSignIn() {
+    container.classList.remove("right-panel-active");
     active = "login";
-    inputStyles()
+}
+
+function openSignUp() {
+    container.classList.add("right-panel-active");
+    active = "register";
+}
+
+signUpSubmit.addEventListener('click', function () {
+    registerUser();
 });
 
-submit.addEventListener('click', function(){
-    if(active === "login"){
-        loginUser();
-    } else {
-        registerUser();
-    }
-})
+signInSubmit.addEventListener('click', function () {
+    loginUser();
+});
 
-function registerUser(){
+function registerUser() {
     const ageInput = age.value;
     const usernameInput = username.value.toLowerCase();
     const emailInput = email.value.toLowerCase();
-    const passwordInput = password.value.toLowerCase(); 
-    const commentInput = comment.value
+    const passwordInput = password.value.toLowerCase();
+    const commentInput = comment.value;
 
     users.orderByChild('username').equalTo(usernameInput).once('value', snapshot => {
-        if(snapshot.exists()){
-            authText();
+        if (snapshot.exists()) {
+            authText(signUpSubmit, "Register");
         } else {
             if (authRegister(ageInput, usernameInput, emailInput, passwordInput)) {
                 users.push({
                     username: usernameInput,
-                    email: emailInput, 
+                    email: emailInput,
                     password: passwordInput,
                     age: ageInput,
                     comment: commentInput,
@@ -72,24 +54,24 @@ function registerUser(){
                 sessionStorage.setItem('username', usernameInput);
                 window.location = "../../redirects/dashboard/pending.html";
             } else {
-                authText();
+                authText(signUpSubmit, "Register");
             }
         }
     });
 }
 
-function loginUser(){
-    const usernameInput = username.value.toLowerCase();
-    const passwordInput = password.value.toLowerCase(); 
-    
+function loginUser() {
+    const usernameInput = signInUsername.value.toLowerCase();
+    const passwordInput = signInPassword.value.toLowerCase();
+
     users.orderByChild('username').equalTo(usernameInput).once('value', snapshot => {
-        if(snapshot.exists()){
+        if (snapshot.exists()) {
             snapshot.forEach(childSnapshot => {
                 const userData = childSnapshot.val();
-                if(userData.password === passwordInput){
+                if (userData.password === passwordInput) {
                     sessionStorage.setItem('username', usernameInput);
-                    if(userData.admin == false){
-                        if(userData.staff == false){
+                    if (userData.admin === false) {
+                        if (userData.staff === false) {
                             window.location = "../../redirects/dashboard/pending.html";
                         } else {
                             window.location = "../../redirects/dashboard/staff.html";
@@ -98,19 +80,19 @@ function loginUser(){
                         window.location = "../../redirects/dashboard/admin.html";
                     }
                 } else {
-                    authText();
+                    authText(signInSubmit, "Enter");
                 }
             });
         } else {
-            authText();
+            authText(signInSubmit, "Enter");
         }
     });
 }
 
-function authText(){
-    submit.innerHTML = "Invalid";
+function authText(buttonElement, defaultText) {
+    buttonElement.innerHTML = "Invalid";
     setTimeout(() => {
-        submit.innerHTML = "I Agree to Community Guidelines";
+        buttonElement.innerHTML = defaultText;
     }, 1000);
 }
 
@@ -122,28 +104,4 @@ function authRegister(ageInput, usernameInput, emailInput, passwordInput) {
         emailInput !== "" &&
         passwordInput !== ""
     );
-}
-
-function inputStyles() {
-    if (active === "login") {
-        age.style.pointerEvents = "none";
-        email.style.pointerEvents = "none";
-        comment.style.pointerEvents = "none";
-        
-        age.classList.add("strike");
-        email.classList.add("strike");
-        comment.classList.add("strike");
-
-        submit.innerHTML = "Enter"
-    } else {
-        age.style.pointerEvents = "";
-        email.style.pointerEvents = "";
-        comment.style.pointerEvents = "";
-        
-        age.classList.remove("strike");
-        email.classList.remove("strike");
-        comment.classList.remove("strike");
-
-        submit.innerHTML = "I Agree to Community Guidelines"
-    }
 }

@@ -20,41 +20,19 @@
 			</div>
 		</header>
         <section class="page_section">
-            <!-- <form class="input_space">
-				<div class="accessBtn">
-                    <div id="login">Login</div>
-                    <div id="register" style="background-color: #f7f8fc; color: #6c757d;">Register</div>
-                </div>
-				<div style="display: flex;">
-					<input id="username" type="text" placeholder="Full Name" style="width: 50%; gap: 0;">
-					<input id="password" type="password" placeholder="Password" style="width: 50%; gap: 0; border-left: 0;">
-				</div>
-				<div style="display: flex;">
-					<input id="email" type="email" placeholder="Email" style="width: calc(100% - 80px); gap: 0;">
-					<input id="age" type="number" placeholder="Age" style="width: 100px; gap: 0; border-left: 0;">
-				</div>
-				<textarea id="additionalComments" placeholder="Additional Comments"></textarea>
-				<div id="submit" class="submitBtn">Enter</div>
-            </form>
-            <div class="filler">
-				<div class="filler_content" style="display: flex; flex-direction: column;">
-					<i class="fa-solid fa-people-group"></i>
-					<div style="font-size: 1rem; color: #b1b6bc;">Staff Dashboard</div>
-				</div>
-            </div> -->
 			<div class="container" id="container">
 				<div class="form-container sign-up-container">
 					<form>
-						<input type="text" placeholder="Full Name" />
-						<input type="text" placeholder="Password" />
+						<input type="text" placeholder="Full Name" id="signUpUsername" />
+						<input type="text" placeholder="Password" id="signUpPassword" />
 						<div style="display: flex;">
-							<input type="email" id="signUpEmail"placeholder="Email" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-right: 0.5px solid #c6b6fc;" />
-							<input type="number" id="signUpEmail"placeholder="Age" style="width: 80px; border-bottom-left-radius: 0px; border-top-left-radius: 0px; border-left: 0.5px solid #c6b6fc;" />
+							<input type="email" id="signUpEmail" placeholder="Email" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-right: 0px solid #c6b6fc;" />
+							<input type="number" id="signUpAge" placeholder="Age" style="width: 80px; border-bottom-left-radius: 0px; border-top-left-radius: 0px; border-left: 0.5px solid #c6b6fc;" />
 						</div>
-						<input type="password" placeholder="Comments" />
+						<input type="text" placeholder="Comments" id="additionalComments" />
 						<div style="display: flex; width: 100%; justify-content: space-between;">
-							<button type="submit" style="width: calc(100% - 68px)">Register</button>
-							<div class="icon" style="width: 20px;" onClick="openSignIn()">
+							<button type="button" class="submit-btn" id="signUpSubmit" style="width: calc(100% - 68px)">Register</button>
+							<div class="icon" style="width: 20px;" onClick="openSignIn()" id="register">
 								<div class="icon_img">
 									<i class="fa-solid fa-right-to-bracket"></i>
 								</div>
@@ -62,29 +40,29 @@
 						</div>
 					</form>
 				</div>
-				
 				<div class="form-container sign-in-container">
-					<form onSubmit={this.handleSubmitLogin}>
-						<input type="email" id="signInEmail" placeholder="Full Name" />
-						<input type="password" placeholder="Password" />
+					<form>
+						<input type="text" id="signInUsername" placeholder="Full Name" />
+						<input type="password" id="signInPassword" placeholder="Password" />
 						<div style="display: flex; width: 100%; justify-content: space-between;">
-							<button type="submit" style="width: calc(100% - 68px)">Enter</button>
-							<div class="icon" style="width: 20px;" onClick="openSignUp()">
+							<button type="button" class="submit-btn" id="signInSubmit" style="width: calc(100% - 68px)">Enter</button>
+							<div class="icon" style="width: 20px;" onClick="openSignUp()" id="login">
 								<div class="icon_img">
 									<i class="fa-solid fa-pen-to-square"></i>
 								</div>
 							</div>
 						</div>
 					</form>
-				</div>
-				
+				</div>				
 				<div class="overlay-container">
 					<div class="overlay">
 						<div class="overlay-panel overlay-left">
-							test
+							<img src="../../assets/join_us.png">
+							<div class="fas fa-handshake" style="font-size: 100px; color: #bcc0c6;"></div>
 						</div>
 						<div class="overlay-panel overlay-right">
-							test
+							<img src="../../assets/welcome_back.png" style="margin-bottom: 20px;">
+							<div class="fas fa-hand-peace" style="font-size: 100px; color: #bcc0c6;"></div>
 						</div>
 					</div>
 				</div>
@@ -109,25 +87,6 @@
 			</div>
 			</div>
 		</footer>
-		<script>
-			const container = document.getElementById('container');
-			const signInEmail =  document.getElementById('signInEmail');
-			const signUpEmail =  document.getElementById('signUpEmail');
-
-			function openSignIn(){
-				container.classList.remove("right-panel-active");
-				if(signUpEmail.value !== ""){
-				signInEmail.value = signUpEmail.value;
-				}
-			}
-
-			function openSignUp(){
-				container.classList.add("right-panel-active");
-				if(signInEmail.value !== ""){
-				signUpEmail.value = signInEmail.value;
-				}
-			}
-		</script>
 		<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>		
 		<script src="../../scripts/general.js"></script>
