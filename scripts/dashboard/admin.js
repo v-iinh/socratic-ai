@@ -1,8 +1,12 @@
 const pending = document.querySelector(".pending");
 const board = document.querySelector(".board");
 
+const all_set = document.getElementById('all_set')
+const none_yet = document.getElementById('none_yet')
+
 document.addEventListener('DOMContentLoaded', function() {
     checkSession();
+    checkFiller();
     generate_requests();
     generate_board();
 });
@@ -52,6 +56,7 @@ function generate_requests() {
                     </div>`;
 
                 pending.appendChild(request);
+                checkFiller();
 
                 const approve_btn = request.querySelector(".fa-thumbs-up");
                 const deny_btn = request.querySelector(".fa-thumbs-down");
@@ -63,6 +68,7 @@ function generate_requests() {
                     .then(() => {
                         request.remove();
                         console.log("User request approved and removed from the interface.");
+                        checkFiller();
                     })
                     .catch(error => {
                         console.error("Error approving user request: ", error);
@@ -74,6 +80,8 @@ function generate_requests() {
                     .then(() => {
                         request.remove();
                         console.log("User request denied and removed from database.");
+                        checkFiller();
+                        window.location.reload();
                     })
                     .catch(error => {
                         console.error("Error removing user: ", error);
@@ -115,6 +123,7 @@ function generate_board() {
                     </div>`;
 
                 board.appendChild(member);
+                checkFiller();
 
                 const remove_btn = board.querySelector(".fa-ban");
 
@@ -123,6 +132,8 @@ function generate_board() {
                     .then(() => {
                         member.remove();
                         console.log("User kicked from staff.");
+                        checkFiller();
+                        window.location.reload();
                     })
                     .catch(error => {
                         console.error("Error removing user: ", error);
@@ -131,4 +142,21 @@ function generate_board() {
             }
         });
     });
+}
+
+function checkFiller() {
+    const requests = document.querySelectorAll('.request');
+    const staffMembers = document.querySelectorAll('.staff_member');
+
+    if (requests.length > 0) {
+        all_set.style.display = 'none'; 
+    } else {
+        all_set.style.display = 'flex'; 
+    }
+
+    if (staffMembers.length > 0) {
+        none_yet.style.display = 'none';
+    } else {
+        none_yet.style.display = 'flex';
+    }
 }
