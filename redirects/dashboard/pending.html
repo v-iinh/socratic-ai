@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Socratic</title>
 		<link rel="stylesheet" href="../../styles/general.css">
-		<link rel="stylesheet" href="../../styles/dashboard/pending.css">
+		<link rel="stylesheet" href="../../styles/dashboard/waiting.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 		<link rel="icon" href="../../assets/favicon.png">
 	</head>
@@ -22,7 +22,7 @@
 		<section class="page_section">
             <div class="filler">
 				<div class="filler_content" style="color: #bcc0c6;">
-					<img src="../../assets/application_pending.png">
+					<div class="cursive_text">Application Pending</div>
 					<div class="fa-solid fa-list-check"></div>
 				</div>
             </div>
@@ -49,6 +49,10 @@
 		<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>		
 		<script src="../../scripts/general.js"></script>
-		<script src="../../scripts/dashboard/pending.js"></script>
+		<script>
+			document.addEventListener('DOMContentLoaded', function(){
+				checkSession();
+			})
+		</script>
 	</body>
 </html>

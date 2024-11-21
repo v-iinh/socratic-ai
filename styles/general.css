@@ -1,3 +1,14 @@
+@font-face {
+    font-family: 'jacob-cursive'; 
+    src: url('../assets/JacobCursive.ttf');
+}
+
+.cursive_text{
+	font-family: 'jacob-cursive';
+	font-size: 2rem;
+	color: #bcc0c6;
+}
+
 * {
 	margin: 0;
 	padding: 0;

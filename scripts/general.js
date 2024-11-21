@@ -1,3 +1,10 @@
+function checkSession() {
+    const currSession = sessionStorage.getItem('username');
+    if (currSession === null) {
+        window.location = "../../index.html";
+    }
+}
+
 const firebaseConfig = {
     apiKey: "AIzaSyCttweynNbJH96yEZUS7RTmRMeOfj_vZuk",
     authDomain: "socratic-6bc6d.firebaseapp.com",

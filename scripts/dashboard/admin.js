@@ -11,13 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
     generate_board();
 });
 
-function checkSession() {
-    const currSession = sessionStorage.getItem('username');
-    if (currSession === null) {
-        window.location = "../../index.html";
-    }
-}
-
 function generate_requests() {
     users.on('value', (snapshot) => {
         Array.from(pending.querySelectorAll('.request')).forEach(child => child.remove());

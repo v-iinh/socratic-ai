@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Socratic</title>
 		<link rel="stylesheet" href="../../styles/general.css">
-		<link rel="stylesheet" href="../../styles/dashboard/admin.css">
+		<link rel="stylesheet" href="../../styles/dashboard/waiting.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 		<link rel="icon" href="../../assets/favicon.png">
 	</head>
@@ -20,18 +20,10 @@
 			</div>
 		</header>
 		<section class="page_section">
-            <div class="filler adminFiller pending">
-				<div class="adminLabel">Pending Requests</div>
-				<div class="filler_content" id="all_set">
-					<div class="cursive_text">All Set</div>
-					<i class="fa-solid fa-spinner"></i>
-				</div>
-            </div>
-            <div class="filler adminFiller board">
-				<div class="adminLabel">Current Staff Board</div>
-				<div class="filler_content" id="none_yet">
-					<div class="cursive_text">None Yet</div>
-					<i class="fa-solid fa-user-large-slash"></i>
+            <div class="filler">
+				<div class="filler_content" style="color: #bcc0c6;">
+                    <div class="cursive_text">Finding Tutor</div>
+					<div class="fa-regular fa-address-book"></div>
 				</div>
             </div>
 		</section>
@@ -57,6 +49,6 @@
 		<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>		
 		<script src="../../scripts/general.js"></script>
-		<script src="../../scripts/dashboard/admin.js"></script>
+		<script src="../../scripts/dashboard/lobby.js"></script>
 	</body>
 </html>
