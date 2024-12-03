@@ -3,7 +3,6 @@
 	height: calc(100vh - 100.8px - 120px);
 	border-radius: 8px;
 	background-color: #f7f8fc;
-	border: 1px solid #c6b6fc;
 	display: flex;
 	justify-content: start;
 	flex-direction: column;
