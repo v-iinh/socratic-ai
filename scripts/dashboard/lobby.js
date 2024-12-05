@@ -22,7 +22,8 @@ function studentWaiting() {
             sessionStorage.setItem('position', newPosition);
 
             const positionRef = sessions.push({
-                position: newPosition
+                position: newPosition,
+                active: false
             });
 
             positionRef.onDisconnect().remove();

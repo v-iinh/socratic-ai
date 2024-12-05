@@ -61,11 +61,10 @@ function generate_requests() {
                     })
                     .then(() => {
                         request.remove();
-                        console.log("User request approved and removed from the interface.");
                         checkFiller();
                     })
                     .catch(error => {
-                        console.error("Error approving user request: ", error);
+                        console.error(error);
                     });
                 });
 
@@ -73,11 +72,10 @@ function generate_requests() {
                     database.ref('users/' + userKey).remove()
                     .then(() => {
                         request.remove();
-                        console.log("User request denied and removed from database.");
                         checkFiller();
                     })
                     .catch(error => {
-                        console.error("Error removing user: ", error);
+                        console.error(error);
                     });
                 });
             }
@@ -127,11 +125,10 @@ function generate_board() {
                     database.ref('users/' + userKey).remove()
                     .then(() => {
                         member.remove();
-                        console.log("User kicked from staff.");
                         checkFiller();
                     })
                     .catch(error => {
-                        console.error("Error removing user: ", error);
+                        console.error(error);
                     });
                 });
             }

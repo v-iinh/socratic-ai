@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function(){
 })
 
 available.addEventListener('click', function(){
-    connectRedirect();
+    acceptSession();
 })
 
 function staffWaiting(){
@@ -33,20 +33,26 @@ function findingStudent(){
     finding.style.display = "flex"
 }
 
-function connectRedirect() {
+function acceptSession() {
     sessions.once('value', (snapshot) => {
 
         const child = snapshot.val(); 
         const sessionKey = Object.keys(child)[0];
-        const sessionData = child[sessionKey]; 
+        const sessionData = child[sessionKey].position; 
 
-        database.ref('sessions/' + sessionKey).remove()
+        database.ref('sessions/' + sessionKey).update({
+            actove: true
+        })
         .then(() => {
-            console.log('First session removed:', sessionData.position);
+            connectSession(sessionData)
         })
         .catch(error => {
-            console.error("Error removing first session:", error);
+            console.error(error);
         });
 
     });
+}
+
+function connectSession(sessionData){
+    sessionStorage.setItem('position', sessionData)
 }
