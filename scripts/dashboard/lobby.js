@@ -36,7 +36,7 @@ function studentWaiting() {
 }
 
 function checkConnection() {
-    const position = sessionStorage.getItem('position'); 
+    const position = parseInt(sessionStorage.getItem('position')); 
     sessions.orderByChild('position').equalTo(position).once('value', snapshot => {
         if (snapshot.exists()) {
             snapshot.forEach(childSnapshot => {
@@ -52,5 +52,8 @@ function checkConnection() {
 function studentConnected() {
     text.innerHTML = "Tutor Found"
     icon.classList.replace('fa-address-book', 'fa-check');
-    window.location = 'chatroom.html';
+    icon.classList.replace('fa-regular', 'fa-solid');
+    setTimeout(() => {
+        window.location = 'chatroom.html';
+    }, 1000);
 }
