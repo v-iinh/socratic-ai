@@ -1,5 +1,9 @@
+const text = document.getElementsByClassName('cursive_text')[0]
+const icon = document.getElementsByClassName('fa-address-book')[0]
+
 document.addEventListener("DOMContentLoaded", function() {
     studentWaiting();
+    setInterval(checkConnection, 1000);
 });
 
 function studentWaiting() {
@@ -29,4 +33,24 @@ function studentWaiting() {
             positionRef.onDisconnect().remove();
         });
     }
+}
+
+function checkConnection() {
+    const position = sessionStorage.getItem('position'); 
+    sessions.orderByChild('position').equalTo(position).once('value', snapshot => {
+        if (snapshot.exists()) {
+            snapshot.forEach(childSnapshot => {
+                const sessionData = childSnapshot.val();
+                if (sessionData.position === parseInt(position) && sessionData.active === true) {  
+                    studentConnected();
+                }
+            });
+        }
+    });
+}
+
+function studentConnected() {
+    text.innerHTML = "Tutor Found"
+    icon.classList.replace('fa-address-book', 'fa-check');
+    window.location = 'chatroom.html';
 }

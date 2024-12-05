@@ -22,7 +22,7 @@ function staffWaiting(){
 }
 
 function studentAvailable(){
-    text.innerHTML = "Student Available"
+    text.innerHTML = "Student Found"
     finding.style.display = "none"
     available.style.display = "flex"
 }
@@ -41,7 +41,7 @@ function acceptSession() {
         const sessionData = child[sessionKey].position; 
 
         database.ref('sessions/' + sessionKey).update({
-            actove: true
+            active: true
         })
         .then(() => {
             connectSession(sessionData)
@@ -55,4 +55,5 @@ function acceptSession() {
 
 function connectSession(sessionData){
     sessionStorage.setItem('position', sessionData)
+    window.location = 'chatroom.html'
 }
