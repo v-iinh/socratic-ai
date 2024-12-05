@@ -3,7 +3,7 @@ const finding = document.getElementsByClassName('fa-address-book')[0]
 const available = document.getElementsByClassName('fa-comments')[0]
 
 document.addEventListener('DOMContentLoaded', function(){
-    setInterval(staffWaiting, 1000)
+    setInterval(staffWaiting, 1000);
 })
 
 available.addEventListener('click', function(){
@@ -33,6 +33,20 @@ function findingStudent(){
     finding.style.display = "flex"
 }
 
-function connectRedirect(){
-    // Continue Here
+function connectRedirect() {
+    sessions.once('value', (snapshot) => {
+
+        const child = snapshot.val(); 
+        const sessionKey = Object.keys(child)[0];
+        const sessionData = child[sessionKey]; 
+
+        database.ref('sessions/' + sessionKey).remove()
+        .then(() => {
+            console.log('First session removed:', sessionData.position);
+        })
+        .catch(error => {
+            console.error("Error removing first session:", error);
+        });
+
+    });
 }
