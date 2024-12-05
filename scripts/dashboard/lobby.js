@@ -3,10 +3,10 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function studentWaiting() {
-    if (sessionStorage.getItem('waiting') !== 'true') {
+    if (sessionStorage.getItem('position') == null) {
         sessions.once('value', (snapshot) => {
             const count = snapshot.numChildren() + 1;
-            sessionStorage.setItem('count', count);
+            sessionStorage.setItem('position', count);
 
             const newSessionRef = sessions.push({
                 position: count
@@ -14,5 +14,4 @@ function studentWaiting() {
             newSessionRef.onDisconnect().remove()
         });
     }
-    sessionStorage.setItem('waiting', 'true');
 }
