@@ -1,0 +1,1 @@
+const userSession = database.ref(sessionStorage.getItem('position'));

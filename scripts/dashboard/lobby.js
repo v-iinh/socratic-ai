@@ -41,7 +41,7 @@ function checkConnection() {
         if (snapshot.exists()) {
             snapshot.forEach(childSnapshot => {
                 const sessionData = childSnapshot.val();
-                if (sessionData.position === parseInt(position) && sessionData.active === true) {  
+                if (sessionData.position === position && sessionData.active === true) {  
                     studentConnected();
                 }
             });
@@ -51,8 +51,8 @@ function checkConnection() {
 
 function studentConnected() {
     text.innerHTML = "Tutor Found"
-    icon.classList.replace('fa-address-book', 'fa-check');
-    icon.classList.replace('fa-regular', 'fa-solid');
+    icon.classList.remove('fa-address-book', 'fa-regular');
+    icon.classList.add('fa-check', 'fa-solid');    
     setTimeout(() => {
         window.location = 'chatroom.html';
     }, 1000);
