@@ -1,50 +1,30 @@
 const text = document.getElementsByClassName('cursive_text')[0]
-const finding = document.getElementsByClassName('fa-address-book')[0]
-const available = document.getElementsByClassName('fa-comments')[0]
+const icon = document.getElementsByClassName('fa-address-book')[0]
 
 document.addEventListener('DOMContentLoaded', function(){
+    checkSession();
     setInterval(staffWaiting, 1000);
-})
-
-available.addEventListener('click', function(){
-    acceptSession();
 })
 
 function staffWaiting(){
     sessions.once('value', (snapshot) => {
         const count = snapshot.numChildren();
         if(count > 0){
-            studentAvailable();
-        } else {
-            findingStudent();
+            checkConnection();
         }
     });
 }
 
-function studentAvailable(){
-    text.innerHTML = "Student Found"
-    finding.style.display = "none"
-    available.style.display = "flex"
-}
-
-function findingStudent(){
-    text.innerHTML = "Finding Student"
-    available.style.display = "none"
-    finding.style.display = "flex"
-}
-
-function acceptSession() {
+function checkConnection() {
     sessions.once('value', (snapshot) => {
-
         const child = snapshot.val(); 
         const sessionKey = Object.keys(child)[0];
         const sessionData = child[sessionKey].position; 
-
         database.ref('sessions/' + sessionKey).update({
             active: true
         })
         .then(() => {
-            connectSession(sessionData)
+            connectionAccepted(sessionData);
         })
         .catch(error => {
             console.error(error);
@@ -53,7 +33,12 @@ function acceptSession() {
     });
 }
 
-function connectSession(sessionData){
+function connectionAccepted(sessionData){
+    text.innerHTML = "Student Found"
+    icon.classList.remove('fa-address-book', 'fa-regular');
+    icon.classList.add('fa-check', 'fa-solid');
     sessionStorage.setItem('position', sessionData)
-    window.location = 'chatroom.html'
+    setTimeout(() => {
+        window.location = 'chatroom.html'
+    }, 1000);
 }

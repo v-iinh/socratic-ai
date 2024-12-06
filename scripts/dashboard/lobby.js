@@ -42,17 +42,17 @@ function checkConnection() {
             snapshot.forEach(childSnapshot => {
                 const sessionData = childSnapshot.val();
                 if (sessionData.position === position && sessionData.active === true) {  
-                    studentConnected();
+                    connectionAccepted();
                 }
             });
         }
     });
 }
 
-function studentConnected() {
+function connectionAccepted(){
     text.innerHTML = "Tutor Found"
     icon.classList.remove('fa-address-book', 'fa-regular');
-    icon.classList.add('fa-check', 'fa-solid');    
+    icon.classList.add('fa-check', 'fa-solid');
     setTimeout(() => {
         window.location = 'chatroom.html';
     }, 1000);
