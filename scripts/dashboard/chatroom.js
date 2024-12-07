@@ -79,6 +79,7 @@ function sessionEnd() {
 }
 
 function redirectUsers(){
+    text.innerHTML= 'Session Ended'
     icon.classList.remove('fa-hands-clapping');
     icon.classList.add('fa-check');
 
