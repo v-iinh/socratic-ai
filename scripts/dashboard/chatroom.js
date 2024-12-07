@@ -86,7 +86,9 @@ function redirectUsers(){
     messages.style.display = "none"
     filler.style.display = "flex"
 
-    userSession.remove()
+    if (userSession) {
+        userSession.remove()
+    }
 
     setTimeout(() => {
         window.location = '../../index.html'
