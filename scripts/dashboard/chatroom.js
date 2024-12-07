@@ -5,6 +5,10 @@ const messages = document.getElementsByClassName('messages')[0];
 const input = document.getElementById('input')
 const is_tutor = sessionStorage.getItem('username') !== null;
 
+document.addEventListener('DOMContentLoaded', function(){
+    console.log(is_tutor)
+})
+
 input.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
         sendMessage();
@@ -36,10 +40,10 @@ function addMessage(text, role) {
 
     if (is_tutor && role === "tutor") {
         message.classList.add('message', 'you'); 
-    } else if (!is_tutor && role === "tutor") {
-        message.classList.add('message', 'them'); 
-    } else {
+    } else if (!is_tutor && role === "student") {
         message.classList.add('message', 'you'); 
+    } else {
+        message.classList.add('message', 'them'); 
     }
 
     messages.appendChild(message);
