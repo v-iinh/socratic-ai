@@ -16,9 +16,9 @@ document.addEventListener('DOMContentLoaded', function(){
     });
     userSession.onDisconnect().update({
         active: false
-    }).then(() => {
-        sessionEnd();
     })
+
+    setInterval(sessionEnd, 1000)
 })
 
 input.addEventListener('keydown', (event) => {
@@ -72,7 +72,7 @@ function addMessage(text, role) {
 function sessionEnd() {
     userSession.once('value').then(snapshot => {
         const sessionData = snapshot.val();
-        if (sessionData && !sessionData.active) {
+        if (!sessionData.active) {
             redirectUsers();
         }
     })
