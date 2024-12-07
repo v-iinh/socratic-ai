@@ -62,10 +62,25 @@ function addMessage(text, role) {
     input.value = ''
 }
 
-function sessionEnd(){
+function sessionEnd() {
+    userSession.once('value').then(snapshot => {
+        const sessionData = snapshot.val();
+        if (sessionData && !sessionData.active) {
+            userSession.remove().then(() => {
+                redirectUsers();
+            }).catch(error => {
+                console.error(error);
+            });
+        }
+    }).catch(error => {
+        console.error(error);
+    });
+}
+
+function redirectUsers(){
     messages.style.display = "none"
     filler.style.display = "flex"
-    userSession.onDisconnect().remove().then(() => {
+    setTimeout(() => {
         window.location = '../../index.html'
-    })
+    }, 1000);
 }
