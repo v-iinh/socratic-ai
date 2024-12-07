@@ -27,6 +27,10 @@ input, .message {
     font-size: 1rem;
 }
 
+input {
+    padding-right: 55px;
+}
+
 .message {
     display: inline-block;
     max-width: 70%;
@@ -75,4 +79,11 @@ input, .message {
 
 .input-container input:focus {
     outline: none;
+}
+
+.filler_content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
