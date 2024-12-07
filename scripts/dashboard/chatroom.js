@@ -1,5 +1,6 @@
 const userSession = database.ref(sessionStorage.getItem('position'));
 const text = document.getElementsByClassName('cursive_text')[0];
+const icon = document.getElementsByClassName('fa-hands-clapping')[0];
 const filler = document.getElementsByClassName('filler_content')[0];
 const messages = document.getElementsByClassName('messages')[0];
 const input = document.getElementById('input')
@@ -26,9 +27,14 @@ input.addEventListener('keydown', (event) => {
 })
 
 userSession.on('child_added', (snapshot) => {
+    if (snapshot.key === "active") {
+        return;
+    }
+
     const data = snapshot.val();
-    filler.style.display = "none"
-    messages.style.display = "flex"
+    filler.style.display = "none";
+    messages.style.display = "flex";
+
     if (data) {
         addMessage(data.message, data.role);
     }
@@ -78,6 +84,9 @@ function sessionEnd() {
 }
 
 function redirectUsers(){
+    userSession.remove()
+    icon.classList.remove('fa-hands-clapping');
+    icon.classList.add('fa-check');
     messages.style.display = "none"
     filler.style.display = "flex"
     setTimeout(() => {
