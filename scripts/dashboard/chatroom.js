@@ -73,6 +73,7 @@ function sessionEnd() {
     userSession.once('value').then(snapshot => {
         const sessionData = snapshot.val();
         if (!sessionData.active) {
+            userSession.onDisconnect().remove();
             redirectUsers();
         }
     })
@@ -85,10 +86,6 @@ function redirectUsers(){
 
     messages.style.display = "none"
     filler.style.display = "flex"
-
-    if (userSession) {
-        userSession.remove()
-    }
 
     setTimeout(() => {
         window.location = '../../index.html'
