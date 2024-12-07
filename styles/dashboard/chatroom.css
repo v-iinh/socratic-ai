@@ -49,14 +49,14 @@ input {
 }
 
 .you {
-    align-self: flex-end;
-    background-color: #c6b6fc;
-    color: white;
+    align-self: flex-start;
+    background-color: #f7f8fc;
 }
 
 .them {
-    align-self: flex-start;
-    background-color: #f7f8fc;
+    align-self: flex-end;
+    background-color: #c6b6fc;
+    color: white;
 }
 
 .message.you, .message.them {
