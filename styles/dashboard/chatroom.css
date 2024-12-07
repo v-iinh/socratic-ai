@@ -49,12 +49,12 @@ input {
 }
 
 .you {
-    align-self: flex-start;
+    align-self: flex-end;
     background-color: #f7f8fc;
 }
 
 .them {
-    align-self: flex-end;
+    align-self: flex-start;
     background-color: #c6b6fc;
     color: white;
 }
