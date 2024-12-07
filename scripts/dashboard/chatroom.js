@@ -16,8 +16,9 @@ document.addEventListener('DOMContentLoaded', function(){
     });
     userSession.onDisconnect().update({
         active: false
+    }).then(() => {
+        sessionEnd();
     })
-    setInterval(sessionEnd, 1000)
 })
 
 input.addEventListener('keydown', (event) => {
@@ -72,23 +73,20 @@ function sessionEnd() {
     userSession.once('value').then(snapshot => {
         const sessionData = snapshot.val();
         if (sessionData && !sessionData.active) {
-            userSession.remove().then(() => {
-                redirectUsers();
-            }).catch(error => {
-                console.error(error);
-            });
+            redirectUsers();
         }
-    }).catch(error => {
-        console.error(error);
-    });
+    })
 }
 
 function redirectUsers(){
-    userSession.remove()
     icon.classList.remove('fa-hands-clapping');
     icon.classList.add('fa-check');
+
     messages.style.display = "none"
     filler.style.display = "flex"
+
+    userSession.remove()
+
     setTimeout(() => {
         window.location = '../../index.html'
     }, 1000);
