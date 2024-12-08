@@ -1,6 +1,22 @@
 document.addEventListener('DOMContentLoaded', function(){
-    expandElements()
+    clearFirebase();
+    expandElements();
 })
+
+function clearFirebase() {
+    const databaseRef = firebase.database().ref();
+    databaseRef.once('value', (snapshot) => {
+        snapshot.forEach((childSnapshot) => {
+            const childKey = childSnapshot.key;
+            childSnapshot.forEach((subChildSnapshot) => {
+                if (subChildSnapshot.key === 'active' && subChildSnapshot.val() === false) {
+                    databaseRef.child(childKey).remove()
+                }
+            });
+        });
+    });
+    sessionStorage.clear()
+}
 
 function scrollToBottom() {
     const aiContainer = document.querySelector('.chat_history');

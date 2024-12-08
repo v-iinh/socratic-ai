@@ -8,30 +8,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function studentWaiting() {
     if (sessionStorage.getItem('position') == null) {
-        sessions.once('value', (snapshot) => {
+        const newPosition = guidGenerator()
+        sessionStorage.setItem('position', newPosition);
 
-            if (snapshot.numChildren() === 0) {
-                var newPosition = 1;
-            } else {
-                let maxPosition = 0;
-                snapshot.forEach((childSnapshot) => {
-                    const position = childSnapshot.val().position;
-                    if (position > maxPosition) {
-                        maxPosition = position;
-                    }
-                });
-                newPosition = maxPosition + 1;
-            }
-
-            sessionStorage.setItem('position', newPosition);
-
-            const positionRef = sessions.push({
-                position: newPosition,
-                active: false
-            });
-
-            positionRef.onDisconnect().remove();
+        const positionRef = sessions.push({
+            position: newPosition,
+            active: false
         });
+
+        positionRef.onDisconnect().remove();
     }
 }
 
@@ -56,4 +41,11 @@ function connectionAccepted(){
     setTimeout(() => {
         window.location = 'chatroom.html';
     }, 1000);
+}
+
+function guidGenerator() {
+    var S4 = function() {
+       return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+    };
+    return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
 }
