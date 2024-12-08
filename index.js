@@ -1,6 +1,25 @@
 document.addEventListener('DOMContentLoaded', function(){
-    expandElements()
+    clearFirebase();
+    expandElements();
 })
+
+function clearFirebase() {
+    const ref = database.ref(); 
+
+    ref.once('value', (snapshot) => {
+        snapshot.forEach((childSnapshot) => {
+            const childKey = childSnapshot.key;
+
+            childSnapshot.forEach((subChildSnapshot) => {
+                if (subChildSnapshot.key === 'active' && subChildSnapshot.val() === false) {
+
+                    ref.child(childKey).remove();
+                }
+            });
+        });
+    });
+}
+
 
 function scrollToBottom() {
     const aiContainer = document.querySelector('.chat_history');
