@@ -8,7 +8,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function studentWaiting() {
     if (sessionStorage.getItem('position') == null) {
-        const newPosition = guidGenerator()
+        const newPosition = uniqueID();
+
         sessionStorage.setItem('position', newPosition);
 
         const positionRef = sessions.push({
@@ -43,9 +44,6 @@ function connectionAccepted(){
     }, 1000);
 }
 
-function guidGenerator() {
-    var S4 = function() {
-       return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
-    };
-    return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+function uniqueID() {
+    return Math.floor(Math.random() * Date.now())
 }
