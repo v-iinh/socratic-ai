@@ -1,1 +1,66 @@
-/* Start Here */
+.page_section{
+    padding: 60px;
+}
+
+.card_container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cards {
+    height: calc(100% - 100px);
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 200px;
+    gap: 10px;
+}
+
+@media only screen and (max-width: 1000px) {
+    .cards{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.card {
+    background-color: #f7f8fc;
+    border-radius: 8px;
+    padding: 12px 15px;
+    color: #6c757d;
+    height: 200px;
+}
+
+input {
+    border: none;
+    padding: 12px 15px;
+    width: 100%;
+    background-color: #f7f8fc;
+    border-radius: 8px;
+    height: 49.6px;
+    font-size: 1rem;
+}
+
+input {
+    padding-right: 55px;
+}
+
+.input-container {
+    position: relative;
+    width: 100%;
+}
+
+.input-container i {
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+    pointer-events: none;
+}
+
+.input-container input:focus {
+    outline: none;
+}
