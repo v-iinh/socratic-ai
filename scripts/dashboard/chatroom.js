@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function(){
 })
 
 input.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' && input.value !== '') {
         sendMessage();
     }
 })

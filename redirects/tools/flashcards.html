@@ -22,20 +22,14 @@
         <section class="page_section">
 			<div class="card_container">
 				<div class="cards">
-					<div class="add">
+					<div class="add" onclick="addCard()">
 						<div class="fa-solid fa-plus"></div>
-					</div>
-					<div class="card" onclick="toggle(this, event)">
-						<div class="front"></div>
-						<div class="back"></div>
-						<div class="icons">
-							<div class="fa-solid fa-pencil" onclick="enableEdit(this, event)"></div>
-							<div class="fa-solid fa-trash"></div>
-						</div>
 					</div>							
 				</div>
-				<div class="input-container">
-					<input type="text" placeholder="Send Message" id="input">
+				<div class="input-container" style="display: flex; justify-content: space-between;">
+					<input type="text" placeholder="Type" style="width: 25%;">
+					<input type="number" placeholder="Quanity" style="width: 25%;">
+					<input type="text" placeholder="Subject" style="width: calc(50% - 16px);">
 					<i class="fa-solid fa-paper-plane"></i>
 				</div>				
 			</div>
@@ -59,7 +53,8 @@
 			</div>
 			</div>
 		</footer>
-		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>	
 		<script src="../../scripts/general.js"></script>
 		<script src="../../scripts/tools/flashcards.js"></script>
 	</body>

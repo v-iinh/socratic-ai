@@ -1,5 +1,11 @@
 let isEditing = false;
 
+document.addEventListener('click', function (event) {
+    if (!event.target.closest('.card')) {
+        resetEditable();
+    }
+});
+
 function enableEdit(icon, event) {
     event.stopPropagation();
     const card = icon.closest('.card');
@@ -36,11 +42,31 @@ function resetEditable() {
     isEditing = false;
 }
 
-document.addEventListener('click', function (event) {
-    if (!event.target.closest('.card')) {
-        resetEditable();
+function removeCard(element, event) {
+    event.stopPropagation();
+    const card = element.closest('.card');
+    if (card) {
+        card.remove();
     }
-});
+}
+
+function addCard() {
+    const addButton = document.querySelector('.add');
+    const newCard = document.createElement('div');
+
+    newCard.classList.add('card');
+    newCard.setAttribute('onclick', 'toggle(this, event)');
+    newCard.innerHTML = `
+        <div class="front"></div>
+        <div class="back"></div>
+        <div class="icons">
+            <div class="fa-solid fa-pencil" onclick="enableEdit(this, event)"></div>
+            <div class="fa-solid fa-trash" onclick="removeCard(this, event)"></div>
+        </div>
+    `;
+
+    addButton.insertAdjacentElement('afterend', newCard);
+}
 
 function toggle(card, event) {
     if (isEditing) {
