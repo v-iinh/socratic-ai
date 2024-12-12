@@ -1,0 +1,51 @@
+.box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    mix-blend-mode: screen;
+}
+.visualizer {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: #c6b6fc;
+    transition: .5s;
+    transform: rotateZ(180deg);
+}
+.play {
+    position: absolute;
+    top: calc(50% + 50px);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+    height: 250px;
+    background: #fff;
+    border-radius: 50%;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-play {
+    font-size: 3rem; 
+    color: #c6b6fc;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.btn-play:hover {
+    transform: scale(1.1);
+}
+.element {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-top: 40px solid #c6b6fc;
+    border-right: 20px solid transparent;
+    border-left: 20px solid transparent;
+    transform-origin: top left;
+    transition: .25s;
+}
