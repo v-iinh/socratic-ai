@@ -7,6 +7,10 @@ let stream = null;
 let bufferLength, dataArray, elements = [];
 let animationId = null;
 
+let recognition; 
+let recordedMessage = ""; 
+let recognitionLanguage = "en-US"; 
+
 const initializeVisualizer = () => {
     if (!ctx) {
         ctx = new AudioContext();
@@ -26,15 +30,43 @@ const initializeVisualizer = () => {
 };
 
 const startVoiceVisualizer = async () => {
-    stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    const source = ctx.createMediaStreamSource(stream);
-    source.connect(analyser);
-    updateVisualizer();
-    recordUser();
+    try {
+
+        stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        const source = ctx.createMediaStreamSource(stream);
+        source.connect(analyser);
+        updateVisualizer();
+        recordUser();
+    } catch (error) {
+        console.error(error);
+    }
 };
 
-function recordUser(){
-    // Keep a record of what the user is saying.
+function setRecognitionLanguage(language) {
+    recognitionLanguage = language;
+}
+
+function recordUser() {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+        console.error("SpeechRecognition is not supported in this browser.");
+        return;
+    }
+
+    recognition = new SpeechRecognition();
+    recognition.lang = recognitionLanguage; 
+    recognition.continuous = true;
+    recognition.interimResults = false; 
+
+    recordedMessage = ""; 
+    recognition.onresult = (event) => {
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+            const transcript = event.results[i][0].transcript.trim();
+            recordedMessage += transcript + " ";
+        }
+    };
+
+    recognition.start();
 }
 
 const stopVoiceVisualizer = () => {
@@ -53,10 +85,27 @@ const stopVoiceVisualizer = () => {
     enterPrompt();
 };
 
-function enterPrompt(){
-    // Stop recording.
-    // Whatever the user recorded, input it into chatgpt api. 
-    // User cannot click button until the ai is finished speaking its part. 
+function enterPrompt() {
+    if (recognition) {
+        recognition.stop();
+        recognition.onend = () => {
+            console.log(recordedMessage.trim());
+        };
+    }
+
+    if (animationId) {
+        cancelAnimationFrame(animationId);
+        animationId = null;
+    }
+
+    if (stream) {
+        stream.getTracks().forEach((track) => track.stop());
+        stream = null;
+    }
+
+    elements.forEach((element) => {
+        element.style.transform = "translate(-50%, 100px)";
+    });
 }
 
 const updateVisualizer = () => {
