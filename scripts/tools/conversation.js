@@ -1,3 +1,8 @@
+import Groq from "https://cdn.skypack.dev/groq-sdk";
+
+const llama_key = "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";
+const groq = new Groq({ apiKey: llama_key, dangerouslyAllowBrowser: true });
+
 const visualizer = document.querySelector('.visualizer');
 const btn = document.querySelector('.btn');
 
@@ -10,6 +15,45 @@ let animationId = null;
 let recognition; 
 let recordedMessage = ""; 
 let recognitionLanguage = "en-US"; 
+
+async function callLlama(input) {
+    const completion = await groq.chat.completions.create({
+        messages: [
+            {
+                role: "user",
+                content: `In no more than 3 sentences, pretend to be a friendly language teacher, respond to the student. Their message to you is ${input}`
+            },
+        ],
+        model: "llama3-8b-8192",
+    });
+
+    let response = completion.choices[0].message.content;
+    llamaSpeaks(response);
+}
+
+function llamaSpeaks(response) {
+    const play = document.querySelector('.play');
+
+    if (response !== '') {
+        play.style.pointerEvents = 'none';
+
+        if (!stream) {  
+            startVoiceVisualizer();  
+        }
+
+        const utterance = new SpeechSynthesisUtterance(response);
+
+        utterance.volume = 1;
+        utterance.rate = 1;
+        utterance.pitch = 1;
+        utterance.onend = function() {
+            play.style.pointerEvents = 'auto';  
+            stopVoiceVisualizer(); 
+        };
+
+        window.speechSynthesis.speak(utterance);
+    }
+}
 
 const initializeVisualizer = () => {
     if (!ctx) {
@@ -41,10 +85,6 @@ const startVoiceVisualizer = async () => {
         console.error(error);
     }
 };
-
-function setRecognitionLanguage(language) {
-    recognitionLanguage = language;
-}
 
 function recordUser() {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -89,7 +129,7 @@ function enterPrompt() {
     if (recognition) {
         recognition.stop();
         recognition.onend = () => {
-            console.log(recordedMessage.trim());
+            callLlama(recordedMessage.trim());
         };
     }
 
