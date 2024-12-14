@@ -99,16 +99,24 @@
     color: #c6b6fc;
 }
 
-input {
+input, select {
     border: none;
     padding: 12px 15px;
     background-color: #f7f8fc;
     border-radius: 8px;
     height: 49.6px;
     font-size: 1rem;
+    color:#6c757d
 }
 
-input {
+select {
+    -webkit-appearance: none;  
+    -moz-appearance: none;
+    appearance: none;   
+    background-image: none;    
+}
+
+input, select {
     padding-right: 55px;
 }
 
@@ -126,6 +134,6 @@ input {
     pointer-events: none;
 }
 
-.input-container input:focus {
+.input-container input:focus, select:focus {
     outline: none;
 }

@@ -24,10 +24,14 @@
 				<div class="cards">
 					<div class="add" onclick="addCard()">
 						<div class="fa-solid fa-plus"></div>
-					</div>							
+					</div>
 				</div>
 				<div class="input-container" style="display: flex; justify-content: space-between;">
-					<input type="text" placeholder="Type" style="width: 25%; padding-right: 12px;">
+					<select style="width: 25%; padding-right: 12px;">
+						<option value="" disabled selected>Type</option>
+						<option value="question">Question</option>
+						<option value="vocabulary">Vocabulary</option>
+					</select>									
 					<input type="number" placeholder="Quanity" style="width: 25%; padding-right: 12px;">
 					<input type="text" placeholder="Subject" style="width: calc(50% - 16px);">
 					<i class="fa-solid fa-paper-plane"></i>

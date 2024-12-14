@@ -3,15 +3,19 @@ import Groq from "https://cdn.skypack.dev/groq-sdk";
 const llama_key = "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";
 const groq = new Groq({ apiKey: llama_key, dangerouslyAllowBrowser: true });
 
-async function callLlama(subject, type) {
+const typeInput = document.getElementsByTagName('select')[0];
+const quantityInput = document.getElementsByTagName('input')[0];
+const subjectInput = document.getElementsByTagName('input')[1];
+
+async function callLlama(type, quantity, subject) {
     const completion = await groq.chat.completions.create({
         messages: [
             {
                 role: "user",
-                content: `Create a flashcard in strict JSON format. 
+                content: `Create ${quantity} flashcard/s in a strict JSON array format, e.g the array is enclosed in brackets [] and each flashcard object is enclosed in curly brackets {}. 
                 The JSON object should have two properties:
-                1. "front": The text for the front of the flashcard, based on "${subject}" and "${type}".
-                2. "back": The text for the back of the flashcard, providing the answer or explanation.
+                    1. "front": The text for the front of the flashcard, create a "${type} based on "${subject}".
+                    2. "back": The text for the back of the flashcard, providing the answer or explanation.
                 Return only the JSON object and nothing else.`
             },
         ],
@@ -19,24 +23,28 @@ async function callLlama(subject, type) {
     });
 
     let response = completion.choices[0].message.content;
+    let flashcards = JSON.parse(response);
 
-    const flashcard = JSON.parse(response);
-    const { front, back } = flashcard;
-
-    generateCards(front, back);
+    flashcards.forEach(flashcard => {
+        const { front, back } = flashcard;
+        generateCards(front, back);
+    });
 }
 
 document.addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
-        const type = document.getElementsByTagName('input')[0].value;
-        const quantity = document.getElementsByTagName('input')[1].value;
-        const subject = document.getElementsByTagName('input')[2].value;        
 
-        if(type !== null && quantity !== null && subject !== null){
-            for(let i=0; i<parseInt(quantity); i++){
-                callLlama(subject, type);
-            }
+        const type = typeInput.value;
+        const quantity = quantityInput.value;
+        const subject = subjectInput.value;
+
+        if (type !== "" && (quantity !== "" && (quantity >= 1 && quantity <= 5)) && subject !== "") {
+            callLlama(type, quantity, subject);
         }
+
+        typeInput.value = "";
+        quantityInput.value = "";
+        subjectInput.value = "";
     }
 });
 
