@@ -6,6 +6,7 @@
 		<title>Socratic</title>
 		<link rel="stylesheet" href="../../styles/general.css">
 		<link rel="stylesheet" href="../../styles/dashboard/waiting.css">
+		<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 		<link rel="icon" href="../../assets/favicon.png">
 	</head>
@@ -20,12 +21,15 @@
 			</div>
 		</header>
 		<section class="page_section">
-            <div class="filler">
-				<div class="filler_content" style="color: #bcc0c6;">
-                    <div class="cursive_text">Finding Student</div>
-					<div class="fa-regular fa-address-book"></div>
+			<div class="container hero-content">
+				<div class="hero-icon" data-aos="fade-right">
+					<div class="fa-solid fa-spinner" style="color: #bcc0c6; font-size: 100px;"></div>
 				</div>
-            </div>
+				<div class="hero-text" data-aos="fade-left">
+					<h2>Waiting for Student Requests</h2><br>
+					<p style="margin-bottom: 0;">Thank you for being available! We deeply appreciate your dedication and service in helping students achieve their learning goals. Your support makes a significant difference.</p>
+				</div>				
+			</div>
 		</section>
 		<footer class="site-footer">
 			<div class="footer-container">
@@ -48,6 +52,7 @@
 		</footer>
 		<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>	
+		<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 		<script src="../../scripts/general.js"></script>
 		<script src="../../scripts/dashboard/staff.js"></script>
 	</body>

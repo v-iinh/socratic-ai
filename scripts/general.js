@@ -1,3 +1,7 @@
+AOS.init({
+    duration: 1000
+});
+
 function checkSession() {
     const currSession = sessionStorage.getItem('username');
     if (currSession === null) {

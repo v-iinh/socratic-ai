@@ -6,6 +6,7 @@
 		<title>Socratic</title>
 		<link rel="stylesheet" href="../../styles/general.css">
 		<link rel="stylesheet" href="../../styles/dashboard/admin.css">
+		<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 		<link rel="icon" href="../../assets/favicon.png">
 	</head>
@@ -23,15 +24,13 @@
             <div class="filler adminFiller pending">
 				<div class="adminLabel">Pending Requests</div>
 				<div class="filler_content" id="all_set" style="margin-top: -25px;">
-					<div class="cursive_text">All Set</div>
 					<i class="fa-solid fa-spinner"></i>
 				</div>
             </div>
             <div class="filler adminFiller board">
 				<div class="adminLabel">Current Staff Board</div>
 				<div class="filler_content" id="none_yet" style="margin-top: -25px;">
-					<div class="cursive_text">None Yet</div>
-					<i class="fa-solid fa-user-large-slash"></i>
+					<i class="fa-solid fa-spinner"></i>
 				</div>
             </div>
 		</section>
@@ -56,6 +55,7 @@
 		</footer>
 		<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>	
+		<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 		<script src="../../scripts/general.js"></script>
 		<script src="../../scripts/dashboard/admin.js"></script>
 	</body>

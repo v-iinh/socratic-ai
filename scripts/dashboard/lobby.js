@@ -1,5 +1,4 @@
-const text = document.getElementsByClassName('cursive_text')[0]
-const icon = document.getElementsByClassName('fa-address-book')[0]
+const icon = document.getElementsByClassName('fa-spinner')[0]
 
 document.addEventListener("DOMContentLoaded", function() {
     studentWaiting();
@@ -36,9 +35,8 @@ function checkConnection() {
 }
 
 function connectionAccepted(){
-    text.innerHTML = "Tutor Found"
-    icon.classList.remove('fa-address-book', 'fa-regular');
-    icon.classList.add('fa-check', 'fa-solid');
+    icon.classList.remove('fa-spinner');
+    icon.classList.add('fa-check');
     setTimeout(() => {
         window.location = 'chatroom.html';
     }, 1000);

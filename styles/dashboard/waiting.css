@@ -1,21 +1,29 @@
-.filler {
-	width: calc(50vw - 90px);
-	height: calc(100vh - 100.8px - 120px);
-	border-radius: 8px;
-	background-color: #f7f8fc;
+.hero {
+	background-color: white;
+	padding: 60px 0;
 	display: flex;
-	justify-content: start;
-	flex-direction: column;
-	overflow-y: auto;
-    font-size: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	align-items: center;
+	justify-content: center;
 }
 
-.filler_content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+.hero-text {
+	flex: 1;
+	padding-left: 60px;
+}
+
+.hero-content {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	max-width: 1200px;
+	margin: auto;
+}
+
+.hero-icon div {
+	max-width: 100%;
+	height: auto;
+}
+
+.container {
+    width: 50%;
 }
