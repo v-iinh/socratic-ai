@@ -21,10 +21,10 @@ async function callLlama(input) {
         messages: [
             {
                 role: "user",
-                content: `In no more than 3 sentences, pretend to be a friendly language teacher, respond to the student. Their message to you is ${input}`
+                content: `You are a teacher. The student wants to have a conversation with you. Respond to their message in a friendly manner and keep the conversation going. Respond in no more than 3 sentencess. Their message to you is ${input}`
             },
         ],
-        model: "llama3-8b-8192",
+        model: "llama3-70b-8192",
     });
 
     let response = completion.choices[0].message.content;
@@ -32,13 +32,9 @@ async function callLlama(input) {
 }
 
 function llamaSpeaks(response) {
-    const play = document.querySelector('.play');
-
     if (response !== '') {
-        play.style.pointerEvents = 'none';
-
         if (!stream) {  
-            startVoiceVisualizer();  
+            startVoiceVisualizer(false);  
         }
 
         const utterance = new SpeechSynthesisUtterance(response);
@@ -46,11 +42,9 @@ function llamaSpeaks(response) {
         utterance.volume = 1;
         utterance.rate = 1;
         utterance.pitch = 1;
-        utterance.onend = function() {
-            play.style.pointerEvents = 'auto';  
+        utterance.onend = function() { 
             stopVoiceVisualizer(); 
         };
-
         window.speechSynthesis.speak(utterance);
     }
 }
@@ -73,14 +67,16 @@ const initializeVisualizer = () => {
     }
 };
 
-const startVoiceVisualizer = async () => {
+const startVoiceVisualizer = async (is_record) => {
     try {
 
         stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         const source = ctx.createMediaStreamSource(stream);
         source.connect(analyser);
         updateVisualizer();
-        recordUser();
+        if(is_record){
+            recordUser();
+        }
     } catch (error) {
         console.error(error);
     }
@@ -174,11 +170,13 @@ btn.addEventListener('click', async () => {
         await ctx.resume();
     }
 
-    if (stream) {
+    if (btn.classList.contains('fa-microphone')) {
         stopVoiceVisualizer();
         btn.classList.replace('fa-microphone', 'fa-microphone-slash');
     } else {
-        await startVoiceVisualizer();
+        stopVoiceVisualizer();
+        await startVoiceVisualizer(true);
+        window.speechSynthesis.cancel();
         btn.classList.replace('fa-microphone-slash', 'fa-microphone');
     }
 });
