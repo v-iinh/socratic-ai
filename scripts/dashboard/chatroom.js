@@ -1,5 +1,6 @@
 const userSession = database.ref(sessionStorage.getItem('position'));
-const text = document.getElementsByClassName('cursive_text')[0];
+const text = document.getElementsByTagName('h2')[0];
+const subText = document.getElementsByTagName('p')[0];
 const icon = document.getElementsByClassName('fa-hands-clapping')[0];
 const filler = document.getElementsByClassName('filler_content')[0];
 const messages = document.getElementsByClassName('messages')[0];
@@ -80,7 +81,8 @@ function sessionEnd() {
 }
 
 function redirectUsers(){
-    text.innerHTML= 'Session Ended'
+    text.innerHTML= 'Session Has Ended'
+    subText.innerHTML = 'Thank you for using Socratic! You will be redirected momentarily.'
     icon.classList.remove('fa-hands-clapping');
     icon.classList.add('fa-check');
 

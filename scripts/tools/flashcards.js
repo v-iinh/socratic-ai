@@ -29,10 +29,15 @@ async function callLlama(type, quantity, subject) {
     let response = completion.choices[0].message.content;
     let flashcards = JSON.parse(response);
 
-    flashcards.forEach(flashcard => {
-        const { front, back } = flashcard;
+    for (let i = 0; i < flashcards.length; i++) {
+        const { front, back } = flashcards[i];
         generateCards(front, back);
-    });
+        await delay(500);
+    }
+}
+
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 document.addEventListener('keypress', function (e) {
@@ -75,31 +80,47 @@ function generateCards(front, back) {
 document.addEventListener('click', function (event) {
     if (event.target.classList.contains('fa-pencil')) {
         enableEdit(event.target, event);
-    }
-    if (event.target.classList.contains('fa-trash')) {
+    } else if (event.target.classList.contains('fa-trash')) {
         removeCard(event.target, event);
-    }
-    if (!event.target.closest('.card')) {
+    } else if (event.target.classList.contains('fa-times')) {
+        disableEdit(event.target, event);
+    } else if (!event.target.closest('.card')) {
         resetEditable();
     }
 });
+
+function disableEdit(icon, event) {
+    event.stopPropagation();
+    const card = icon.closest('.card');
+    const front = card.querySelector('.front');
+    const back = card.querySelector('.back');
+
+    front.contentEditable = "false";
+    back.contentEditable = "false";
+
+    icon.classList.remove('editing');
+    icon.classList.remove('fa-times');
+    icon.classList.add('fa-pencil');
+
+    isEditing = false;
+}
 
 function enableEdit(icon, event) {
     event.stopPropagation();
     const card = icon.closest('.card');
     const front = card.querySelector('.front');
     const back = card.querySelector('.back');
-    
+
     if (!isEditing) {
         front.contentEditable = "true";
         back.contentEditable = "true";
-        front.focus(); 
+        front.focus();
+
         icon.classList.add('editing');
         icon.classList.remove('fa-pencil');
         icon.classList.add('fa-times');
+
         isEditing = true;
-    } else {
-        resetEditable(); 
     }
 }
 
@@ -111,12 +132,14 @@ function resetEditable() {
         front.contentEditable = "false";
         back.contentEditable = "false";
     });
-    const editingIcons = document.querySelectorAll('.fa-pencil.editing, .fa-times.editing');
+
+    const editingIcons = document.querySelectorAll('.fa-times.editing');
     editingIcons.forEach(icon => {
         icon.classList.remove('editing');
-        icon.classList.add('fa-pencil');
         icon.classList.remove('fa-times');
+        icon.classList.add('fa-pencil');
     });
+
     isEditing = false;
 }
 

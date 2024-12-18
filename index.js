@@ -36,16 +36,35 @@ function scrollToSection(selector, offset = 0) {
     });
 }
 
-function expandElements(){
+function expandElements() {
     const headings = document.querySelectorAll('h2');
-    Array.prototype.forEach.call(headings, h => {
-    let btn = h.querySelector('button');
-    if (!btn) return; 
-    let target = h.nextElementSibling;
-    btn.onclick = () => {
-        let expanded = btn.getAttribute('aria-expanded') === 'true';
-        btn.setAttribute('aria-expanded', !expanded);
-        target.hidden = expanded;
-    };
+
+    headings.forEach(h => {
+        const btn = h.querySelector('button');
+        if (!btn) return;
+
+        const target = h.nextElementSibling;
+        btn.onclick = () => {
+            const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+
+            btn.setAttribute('aria-expanded', !isExpanded);
+
+            if (isExpanded) {
+                target.style.maxHeight = null;
+                target.classList.remove('open');
+            } else {
+                target.style.maxHeight = `${target.scrollHeight}px`;
+                target.classList.add('open');
+                target.addEventListener(
+                    'transitionend',
+                    () => {
+                        if (target.classList.contains('open')) {
+                            target.style.maxHeight = '1000px';
+                        }
+                    },
+                    { once: true }
+                );
+            }
+        };
     });
 }

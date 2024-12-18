@@ -11,7 +11,7 @@
 		<link rel="icon" href="../../assets/favicon.png">
 	</head>
 	<body>
-		<header>
+		<header data-aos="fade-down">
 			<div class="nav_container">
 				<a href="../../index.html">
 					<div class="logo">
@@ -41,7 +41,7 @@
 						</div>
 					</form>
 				</div>
-				<div class="form-container sign-in-container">
+				<div class="form-container sign-in-container" data-aos="fade-right">
 					<form>
 						<input type="text" id="signInUsername" placeholder="Full Name" />
 						<input type="password" id="signInPassword" placeholder="Password" />
@@ -58,16 +58,32 @@
 				<div class="overlay-container">
 					<div class="overlay">
 						<div class="overlay-panel overlay-left">
-							<div class="fas fa-user-plus" style="font-size: 100px; color: #bcc0c6;"></div>
+							<div class="grid-item tool" style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+								<div class="icon" style="width: 50px; margin-bottom: 20px; pointer-events: none;">
+									<div class="icon_img">
+										<i class="fa-solid fa-users"></i>
+									</div>
+								</div>
+								<h2 style="margin-bottom: 15px;">Join Our Team</h2>
+								<p>By joining, you agree to our terms and conditions as followed by the community guidelines.</p>
+							</div>
 						</div>
-						<div class="overlay-panel overlay-right">
-							<div class="fas fa-fingerprint" style="font-size: 100px; color: #bcc0c6;"></div>
+						<div class="overlay-panel overlay-right" data-aos="fade-left">
+							<div class="grid-item tool" style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+								<div class="icon" style="width: 50px; margin-bottom: 20px; pointer-events: none;">
+									<div class="icon_img">
+										<i class="fa-solid fa-location-crosshairs"></i>
+									</div>
+								</div>
+								<h2 style="margin-bottom: 15px;">Welcome Back</h2>
+								<p>Glad to see you back! The growth of our community begins with you.</p>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
         </section>
-		<footer class="site-footer">
+		<footer class="site-footer" data-aos="fade-up">
 			<div class="footer-container">
 			<div class="footer-row" style="width: 50%;">
 				<div class="footer-column">

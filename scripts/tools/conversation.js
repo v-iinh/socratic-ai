@@ -21,8 +21,7 @@ async function callLlama(input) {
         messages: [
             {
                 role: "user",
-                content: `You are a teacher. The student wants to have a conversation with you. Respond to their message in a friendly manner and keep the conversation going. Respond in no more than 3 sentencess. Their message to you is ${input}`
-            },
+                content: `You are a friendly and engaging teacher. The user (me) wants to have a conversation with you. Respond to my message in a friendly manner and keep the conversation going. Your response should be conversational, informative, and encouraging. Keep your replies to no more than 3 sentences. The message I sent you is: ${input}`            },
         ],
         model: "llama3-70b-8192",
     });

@@ -191,3 +191,15 @@ button svg {
 [aria-expanded] rect {
 	fill: currentColor;
 }
+
+.animate-drop {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.animate-drop.open {
+    max-height: 1000px;
+    opacity: 1;
+}

@@ -31,6 +31,15 @@ input {
     padding-right: 55px;
 }
 
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 .message {
     display: inline-block;
     max-width: 70%;
@@ -38,6 +47,7 @@ input {
     color: #6c757d;
     margin: 5px 0;
     height: auto;
+    animation: fadeIn 0.5s ease-in-out;
 }
 
 .message:first-child {
