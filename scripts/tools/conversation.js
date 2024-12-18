@@ -179,3 +179,31 @@ btn.addEventListener('click', async () => {
         btn.classList.replace('fa-microphone-slash', 'fa-microphone');
     }
 });
+
+function cleanupAudioResources() {
+    if (animationId) {
+        cancelAnimationFrame(animationId);
+        animationId = null;
+    }
+
+    if (stream) {
+        stream.getTracks().forEach(track => track.stop());
+        stream = null;
+    }
+
+    if (recognition) {
+        recognition.stop();
+        recognition = null;
+    }
+
+    if (window.speechSynthesis.speaking) {
+        window.speechSynthesis.cancel();
+    }
+
+    if (elements) {
+        elements.forEach(element => {
+            element.style.transform = 'translate(-50%, 100px)';
+        });
+    }
+}
+window.addEventListener('beforeunload', cleanupAudioResources);
