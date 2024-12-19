@@ -11,7 +11,7 @@ let conversationHistory = [];
 
 input.addEventListener('keydown', (event) => {
     if (event.key === 'Enter' && input.value !== '') {
-        redirectUsers();
+        hideFIller();
         addMessage(input.value, 'user');
     }
 })
@@ -56,7 +56,7 @@ function addMessage(text, role) {
     input.value = '';
 }
 
-function redirectUsers(){
+function hideFIller(){
     messages.style.display = "flex"
     filler.style.display = "none"
 }
