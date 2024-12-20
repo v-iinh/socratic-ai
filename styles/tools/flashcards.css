@@ -107,6 +107,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    pointer-events: none;
+}
+
+.add .fa-plus {
+    pointer-events: auto;
     cursor: pointer;
 }
 

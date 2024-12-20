@@ -7,7 +7,12 @@ const filler = document.getElementsByClassName('filler_content')[0];
 const messages = document.getElementsByClassName('messages')[0];
 const input = document.getElementById('input');
 
-let conversationHistory = [];
+let conversationHistory = [
+    {
+        role: "system",
+        content: `You are a helpful, friendly, and engaging educational assistant. Your goal is to help students learn by encouraging inquiry, guiding them step-by-step, and giving positive reinforcement. Always adapt your tone to be approachable and clear. If the user makes mistakes, offer gentle hints to guide them toward understanding. Avoid giving the answer directly. And only provide one step at a time.`,
+    },
+];
 
 input.addEventListener('keydown', (event) => {
     if (event.key === 'Enter' && input.value !== '') {
@@ -34,7 +39,7 @@ async function callLlama(text) {
         content: response,
     });
 
-    addMessage(response, 'bot');
+    addMessage(response, 'assistant');
 }
 
 function addMessage(text, role) {
