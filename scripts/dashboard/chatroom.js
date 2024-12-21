@@ -23,10 +23,30 @@ document.addEventListener('DOMContentLoaded', function(){
 })
 
 input.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter' && input.value !== '') {
+    if (event.key === 'Enter' && !event.shiftKey && input.value !== '') {
+        event.preventDefault();
+        
+        input.style.height = '49.6px';
+        const inputPosition = input.getBoundingClientRect();
+        window.scrollTo({
+            top: inputPosition.bottom + window.scrollY - window.innerHeight + 60
+        });
+
         sendMessage();
     }
 })
+
+input.addEventListener('input', () => {
+    input.style.height = '1.6rem';
+    const newHeight = Math.min(input.scrollHeight, parseInt(getComputedStyle(input).maxHeight));
+    input.style.height = Math.max(newHeight, parseInt(getComputedStyle(input).minHeight)) + 'px';
+    input.scrollTop = input.scrollHeight;
+
+    const inputPosition = input.getBoundingClientRect();
+    window.scrollTo({
+        top: inputPosition.bottom + window.scrollY - window.innerHeight + 60
+    });
+});
 
 userSession.on('child_added', (snapshot) => {
     if (snapshot.key === "active") {

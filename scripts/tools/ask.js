@@ -6,6 +6,7 @@ const groq = new Groq({ apiKey: llama_key, dangerouslyAllowBrowser: true });
 const filler = document.getElementsByClassName('filler_content')[0];
 const messages = document.getElementsByClassName('messages')[0];
 const input = document.getElementById('input');
+const footer = document.querySelector('footer');
 
 let conversationHistory = [
     {
@@ -15,11 +16,31 @@ let conversationHistory = [
 ];
 
 input.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter' && input.value !== '') {
-        hideFIller();
+    if (event.key === 'Enter' && !event.shiftKey && input.value !== '') {
+        event.preventDefault();
+
+        input.style.height = '49.6px';
+        const inputPosition = input.getBoundingClientRect();
+        window.scrollTo({
+            top: inputPosition.bottom + window.scrollY - window.innerHeight + 60
+        });
+        
+        hideFiller();
         addMessage(input.value, 'user');
     }
 })
+
+input.addEventListener('input', () => {
+    input.style.height = '1.6rem';
+    const newHeight = Math.min(input.scrollHeight, parseInt(getComputedStyle(input).maxHeight));
+    input.style.height = Math.max(newHeight, parseInt(getComputedStyle(input).minHeight)) + 'px';
+    input.scrollTop = input.scrollHeight;
+
+    const inputPosition = input.getBoundingClientRect();
+    window.scrollTo({
+        top: inputPosition.bottom + window.scrollY - window.innerHeight + 60
+    });
+});
 
 async function callLlama(text) {
     conversationHistory.push({
@@ -61,7 +82,7 @@ function addMessage(text, role) {
     input.value = '';
 }
 
-function hideFIller(){
+function hideFiller(){
     messages.style.display = "flex"
     filler.style.display = "none"
 }

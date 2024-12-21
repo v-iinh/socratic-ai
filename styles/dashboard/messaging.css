@@ -1,5 +1,6 @@
 .page_section{
     padding: 60px;
+    height: auto;
 }
 
 .message_container{
@@ -11,13 +12,13 @@
 }
 
 .messages {
-    height: calc(100% - 100px);
     overflow-y: auto;
     display: flex;
     flex-direction: column;
+    height: calc(100vh - 330px);
 }
 
-input, .message {
+textarea, .message {
     border: none;
     padding: 12px 15px;
     width: 100%;
@@ -27,8 +28,16 @@ input, .message {
     font-size: 1rem;
 }
 
-input {
-    padding-right: 55px;
+textarea {
+    font-family: 'Poppins', sans-serif;
+    padding: 12px 15px;
+    padding-right: 45px;
+    resize: none; 
+    line-height: 1.6rem;
+    word-wrap: break-word;
+    min-height: 1.6rem; 
+    max-height: calc(1.6rem * 7); 
+    box-sizing: border-box; 
 }
 
 @keyframes fadeIn {
@@ -76,18 +85,18 @@ input {
 .input-container {
     position: relative;
     width: 100%;
+    display: flex;
 }
 
 .input-container i {
     position: absolute;
-    right: 25px;
-    top: 50%;
-    transform: translateY(-50%);
+    bottom: 15px;
+    right: 15px;
     color: #6c757d;
     pointer-events: none;
 }
 
-.input-container input:focus {
+.input-container textarea:focus {
     outline: none;
 }
 
