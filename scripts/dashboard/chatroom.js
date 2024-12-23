@@ -110,6 +110,6 @@ function redirectUsers(){
     filler.style.display = "flex"
 
     setTimeout(() => {
-        window.location = '../../index.html'
+        window.location = 'https://socratic.help/'
     }, 1000);
 }
