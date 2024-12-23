@@ -31,7 +31,7 @@ textarea, .message {
 textarea {
     font-family: 'Poppins', sans-serif;
     padding: 12px 15px;
-    padding-right: 45px;
+    padding-right: 36px;
     resize: none; 
     line-height: 1.6rem;
     word-wrap: break-word;

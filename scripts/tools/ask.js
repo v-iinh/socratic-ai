@@ -6,7 +6,6 @@ const groq = new Groq({ apiKey: llama_key, dangerouslyAllowBrowser: true });
 const filler = document.getElementsByClassName('filler_content')[0];
 const messages = document.getElementsByClassName('messages')[0];
 const input = document.getElementById('input');
-const footer = document.querySelector('footer');
 
 let conversationHistory = [
     {

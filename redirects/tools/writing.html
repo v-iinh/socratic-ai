@@ -5,8 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Socratic</title>
 		<link rel="stylesheet" href="../../styles/general.css">
-		<link rel="stylesheet" href="../../styles/tools.css">
-		<link rel="stylesheet" href="../../styles/dashboard/waiting.css">
+		<link rel="stylesheet" href="../../styles/tools/writing.css">
 		<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 		<link rel="icon" href="../../assets/favicon.png">
@@ -22,15 +21,73 @@
 			</div>
 		</header>
         <section class="page_section">
-			<div class="container hero-content">
-				<div class="hero-icon" data-aos="fade-right">
-					<div class="fa-solid fa-spinner" style="color: #bcc0c6; font-size: 100px;"></div>
+			<textarea class="filler" id="input" data-aos="fade-right" style="padding: 0px; background-color: white;" placeholder="Type or paste (CTRL + V) your document here."></textarea>
+			<div class="filler" data-aos="fade-left">
+				<div class="toggle" style="display: flex; justify-content: space-between;">
+					<div class="statistics active box">Statistics</div>	
+					<div class="suggestions inactive box">Suggestions</div>				
 				</div>
-				<div class="hero-text" data-aos="fade-left">
-					<h2>Sorry for the Inconvenience</h2><br>
-					<p style="margin-bottom: 0;">Socratic is still early in its development, and this tool is currently unavailable. Please come back at another time. We expect to complete this tool by Janurary.</p>
-				</div>				
-			</div>
+				<div id="statistics_container" style="display: block;">
+					<div class="statistic">
+						<div class="row">
+							<div class="label">Characters</div>
+							<div class="text">The Number of Characters in Passage</div>
+						</div><hr>
+						<div class="row">
+							<div class="label">Words</div>
+							<div class="text">The Number of Words in Passage</div>
+						</div><hr>
+						<div class="row">
+							<div class="label">Sentences</div>
+							<div class="text">The Number of Sentences in Passage</div>
+						</div>
+					</div>
+					<div class="statistic">
+						<div class="row">
+							<div class="label">Reading Ease</div>
+							<div class="text">A numerical value indicating the readability of the passage.</div>
+						</div><hr>
+						<div class="row">
+							<div class="label">Grade Level</div>
+							<div class="text">A score indicating the grade level at which the text is likely to be understood.</div>
+						</div><hr>
+						<div class="row">
+							<div class="label">Interpretation</div>
+							<div class="text">A qualitative interpretation of the Flesch Reading Ease score.</div>
+						</div>
+					</div>
+					<div class="statistic">
+						<div class="row">
+							<div class="label">Gunning Fog Index</div>
+							<div class="text">Estimates the years of formal education needed to understand the text on first reading.</div>
+						</div><hr>
+						<div class="row">
+							<div class="label">Coleman–Liau Index</div>
+							<div class="text">A readability test based on the number of letters per word and sentences in the text.</div>
+						</div><hr>
+						<div class="row">
+							<div class="label">SMOG</div>
+							<div class="text">Measures readability by counting the number of words with three or more syllables.</div>
+						</div>
+					</div>
+				</div>
+				<div id="suggestion_container" style="display: none;">
+					<div class="suggestion">
+						<div class="row">
+							<div class="label">Type</div>
+							<div class="text">Errors Will Be Shown Here</div>
+						</div><hr>
+						<div class="row">
+							<div class="label">Phrase</div>
+							<div class="text">The Part of the Passage That Has Error</div>
+						</div><hr>
+						<div class="row">
+							<div class="label">Suggestions</div>
+							<div class="text">Possible Fixes For the Potential Error</div>
+						</div>
+					</div>
+				</div>
+            </div>
         </section>
 		<footer class="site-footer">
 			<div class="footer-container">
@@ -55,6 +112,6 @@
 		<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>	
 		<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 		<script src="../../scripts/general.js"></script>
-		<script src="../../scripts/tools/writing.js"></script>
+		<script src="../../scripts/tools/writing.js" type="module"></script>
 	</body>
 </html>
