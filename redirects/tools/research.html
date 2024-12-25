@@ -5,8 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Socratic</title>
 		<link rel="stylesheet" href="../../styles/general.css">
-		<link rel="stylesheet" href="../../styles/tools/summarize.css">
-		<link rel="stylesheet" href="../../styles/dashboard/waiting.css">
+		<link rel="stylesheet" href="../../styles/tools/research.css">
 		<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 		<link rel="icon" href="../../assets/favicon.png">
@@ -22,15 +21,32 @@
 			</div>
 		</header>
 		<section class="page_section">
-			<div class="container hero-content">
-				<div class="hero-icon" data-aos="fade-right">
-					<div class="fa-solid fa-spinner" style="color: #bcc0c6; font-size: 100px;"></div>
+			<div class="sources_container">
+				<div class="input-container" style="display: flex; justify-content: center" data-aos="fade-down">								
+					<input type="text" placeholder="Topic" style="width: 60%" id="input">
+					<i class="fa-solid fa-paper-plane"></i>
+				</div>	
+				<div class="subContainer" data-aos="fade-up">
+					<div class="box" style="width: 60%;">
+						<div class="grid-item tool" style="width: 50%; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+							<div class="icon" style="height: 50px; border-radius: 8px; color: white; display: flex; justify-content: center; align-items: center; width: 50px; margin-bottom: 20px; pointer-events: none; background-color: #c6b6fc;">
+								<div class="icon_img">
+									<i class="fa-solid fa-file-circle-question"></i>
+								</div>
+							</div>
+							<h2 style="margin-bottom: 15px;">Find Research Papers</h2>
+							<p style="text-align: center;">By inputting a prompt, Socratic will scrape public databases for relevant sources.</p>
+						</div>
+					</div>
+					<div class="filler" style="display: none;">
+						<div class="toggle">
+							<div class="fa-solid fa-arrow-left left"></div>
+							<div id="curPage" style="pointer-events: none;">1</div>
+							<div class="fa-solid fa-arrow-right right"></div>				
+						</div>
+						<div class="papers_container"></div>
+					</div>
 				</div>
-				<div class="hero-text" data-aos="fade-left">
-					<h2>Sorry for the Inconvenience</h2><br>
-					<p style="margin-bottom: 0;">Socratic is still early in its development, and this tool is currently unavailable. Please come back at another time. We expect to complete this tool by Janurary.</p>
-				</div>				
-			</div>
 		</section>
 		<footer class="site-footer">
 			<div class="footer-container">
@@ -55,6 +71,6 @@
 		<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
 		<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>	
 		<script src="../../scripts/general.js"></script>
-		<script src="../../scripts/tools/summarize.js" type="module"></script>
+		<script src="../../scripts/tools/research.js"></script>
 	</body>
 </html>
