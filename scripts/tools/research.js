@@ -8,12 +8,14 @@ const left = document.querySelector('.left');
 const right = document.querySelector('.right');
 
 let arxivPage = 0; 
+let corePage = 0;
 let doajPage = 1; 
 let openAIREPage = 1;
 
 document.addEventListener('keydown', (event) => {
     if (event.key === 'Enter' && input.value !== '') {
         arxivPage = 0; 
+        corePage = 0;
         doajPage = 1;  
         openAIREPage = 1;
 
@@ -22,6 +24,7 @@ document.addEventListener('keydown', (event) => {
         fetchOpenAIREPapers(input.value);
         fetchArxivPapers(input.value);
         fetchDOAJPapers(input.value);
+        fetchCorePapers(input.value);
 
         displaySources();
     }
@@ -33,13 +36,17 @@ left.addEventListener('click', function() {
     curPage.innerText = currentPage;
 
     if (arxivPage > 0) arxivPage -= 10; 
+    if (corePage > 0) corePage -= 10; 
     if (doajPage > 1) doajPage -= 1;
     if (openAIREPage > 1) openAIREPage -= 1;
 
     if(arxivPage != 0 || doajPage != 1 || openAIREPage != 1){
         papers_container.innerHTML = ``;
+        
+        fetchOpenAIREPapers(input.value);
         fetchArxivPapers(input.value);
         fetchDOAJPapers(input.value);
+        fetchCorePapers(input.value);
     }
 });
 
@@ -49,13 +56,16 @@ right.addEventListener('click', function() {
     curPage.innerText = currentPage;
 
     arxivPage += 10; 
+    corePage += 10;
     doajPage += 1;  
     openAIREPage += 1
 
     papers_container.innerHTML = ``;
 
+    fetchOpenAIREPapers(input.value);
     fetchArxivPapers(input.value);
     fetchDOAJPapers(input.value);
+    fetchCorePapers(input.value);
 });
 
 function displaySources() {
@@ -149,6 +159,31 @@ async function fetchOpenAIREPapers(topic) {
         displayPapers(papers);
     } catch (error) {
         console.log(error);
+    }
+}
+
+async function fetchCorePapers(topic) {
+    const url = 'https://api.core.ac.uk/v3/search/works/';
+    const apiKey = 'kzUnEaLtS35oMQ0lw2xmKYNuHZscJe4C';
+
+    const headers = {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json'
+    };
+
+    const params = new URLSearchParams({ q: topic, offset });
+
+    try {
+        const response = await fetch(`${url}?${params.toString()}`, { headers });
+
+        if (!response.ok) {
+            throw new Error(`${response.status}`);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        return { error: error.message };
     }
 }
 
