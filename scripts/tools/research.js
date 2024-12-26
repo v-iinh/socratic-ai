@@ -21,11 +21,7 @@ document.addEventListener('keydown', (event) => {
 
         papers_container.innerHTML = ``;
 
-        fetchOpenAIREPapers(input.value);
-        fetchArxivPapers(input.value);
-        fetchDOAJPapers(input.value);
-        fetchCorePapers(input.value);
-
+        callSources(input.value);
         displaySources();
     }
 });
@@ -43,10 +39,7 @@ left.addEventListener('click', function() {
     if(arxivPage != 0 || doajPage != 1 || openAIREPage != 1){
         papers_container.innerHTML = ``;
         
-        fetchOpenAIREPapers(input.value);
-        fetchArxivPapers(input.value);
-        fetchDOAJPapers(input.value);
-        fetchCorePapers(input.value);
+        callSources(input.value);
     }
 });
 
@@ -62,11 +55,15 @@ right.addEventListener('click', function() {
 
     papers_container.innerHTML = ``;
 
-    fetchOpenAIREPapers(input.value);
-    fetchArxivPapers(input.value);
-    fetchDOAJPapers(input.value);
-    fetchCorePapers(input.value);
+    callSources(input.value);
 });
+
+function callSources(value){
+    fetchOpenAIREPapers(value);
+    fetchArxivPapers(value);
+    fetchDOAJPapers(value);
+    fetchCorePapers(value);
+}
 
 function displaySources() {
     box.style.display = 'none';
@@ -171,7 +168,7 @@ async function fetchCorePapers(topic) {
         'Content-Type': 'application/json'
     };
 
-    const params = new URLSearchParams({ q: topic, offset });
+    const params = new URLSearchParams({ q: topic, corePage });
 
     try {
         const response = await fetch(`${url}?${params.toString()}`, { headers });
