@@ -1,6 +1,6 @@
 import Groq from "https://cdn.skypack.dev/groq-sdk";
 
-const llama_key = "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";
+const llama_key = "";
 const groq = new Groq({ apiKey: llama_key, dangerouslyAllowBrowser: true });
 
 const visualizer = document.querySelector('.visualizer');
