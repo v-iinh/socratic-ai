@@ -14,6 +14,7 @@ let openAIREPage = 1;
 
 document.addEventListener('keydown', (event) => {
     if (event.key === 'Enter' && input.value !== '') {
+
         arxivPage = 0; 
         corePage = 0;
         doajPage = 1;  
@@ -35,7 +36,6 @@ left.addEventListener('click', function() {
     if (corePage > 0) corePage -= 10; 
     if (doajPage > 1) doajPage -= 1;
     if (openAIREPage > 1) openAIREPage -= 1;
-
     if(arxivPage != 0 || doajPage != 1 || openAIREPage != 1){
         papers_container.innerHTML = ``;
         
