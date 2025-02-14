@@ -11,14 +11,14 @@ function checkSession() {
 }
 
 const firebaseConfig = {
-    apiKey: "",
-    authDomain: "",
-    databaseURL: "",
-    projectId: "",
-    storageBucket: "",
-    messagingSenderId: "",
-    appId: "",
-    measurementId: ""
+    apiKey: `${settings.firebase.apiKey}`,
+    authDomain: `${settings.firebase.authDomain}`,
+    databaseURL: `${settings.firebase.databaseURL}`,
+    projectId: `${settings.firebase.projectId}`,
+    storageBucket: `${settings.firebase.storageBucket}`,
+    messagingSenderId: `${settings.firebase.messagingSenderId}`,
+    appId: `${settings.firebase.appId}`,
+    measurementId: `${settings.firebase.measurementId}`    
 };
 firebase.initializeApp(firebaseConfig);
 

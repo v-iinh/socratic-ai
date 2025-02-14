@@ -38,7 +38,7 @@ boxes.forEach((box) => {
 });
 
 async function callTextGear(text) {
-    const apiKey = '';
+    const apiKey = `${settings.textGear.apiKey}`;
     const url = `https://api.textgears.com/analyze?key=${apiKey}&text=${encodeURIComponent(text)}&language=en-GB`;
 
     try {

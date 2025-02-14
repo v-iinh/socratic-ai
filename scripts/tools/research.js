@@ -109,7 +109,7 @@ function parseArxivXMLResponse(data) {
 
 async function fetchDOAJPapers(topic) {
     const baseURL = 'https://doaj.org/api/v2/search/articles/';
-    const apiKey = '';
+    const apiKey = `${settings.doaj.apiKey}`;
 
     try {
         const response = await fetch(`${baseURL}${topic}?api_key=${apiKey}&pageSize=10&page=${doajPage}`);
@@ -161,7 +161,7 @@ async function fetchOpenAIREPapers(topic) {
 
 async function fetchCorePapers(topic) {
     const url = 'https://api.core.ac.uk/v3/search/works/';
-    const apiKey = '';
+    const apiKey = `${settings.core.apiKey}`;
 
     const headers = {
         'Authorization': `Bearer ${apiKey}`,
