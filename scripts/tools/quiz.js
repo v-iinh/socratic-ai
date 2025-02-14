@@ -37,7 +37,7 @@ async function callLlama(subject, quantity) {
                 Return only the JSON object and nothing else.`
             },
         ],
-        model: "llama3-8b-8192",
+        model: "llama-3.3-70b-versatile",
     });
 
     let response = completion.choices[0].message.content;

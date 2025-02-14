@@ -1,4 +1,3 @@
-
 # Socratic AI
 
 Socratic AI provides powerful AI tools and direct connections to tutors, offering students the support they need to excel. Whether it's accessing personalized resources, or engaging in real-time conversations, Socratic AI is here to help you succeed in your studies.

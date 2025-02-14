@@ -14,7 +14,6 @@ let openAIREPage = 1;
 
 document.addEventListener('keydown', (event) => {
     if (event.key === 'Enter' && input.value !== '') {
-
         arxivPage = 0; 
         corePage = 0;
         doajPage = 1;  
@@ -36,6 +35,7 @@ left.addEventListener('click', function() {
     if (corePage > 0) corePage -= 10; 
     if (doajPage > 1) doajPage -= 1;
     if (openAIREPage > 1) openAIREPage -= 1;
+
     if(arxivPage != 0 || doajPage != 1 || openAIREPage != 1){
         papers_container.innerHTML = ``;
         
@@ -109,7 +109,7 @@ function parseArxivXMLResponse(data) {
 
 async function fetchDOAJPapers(topic) {
     const baseURL = 'https://doaj.org/api/v2/search/articles/';
-    const apiKey = 'a77fb2eec24f4e03b55aa7f1e954c757';
+    const apiKey = '';
 
     try {
         const response = await fetch(`${baseURL}${topic}?api_key=${apiKey}&pageSize=10&page=${doajPage}`);
@@ -161,7 +161,7 @@ async function fetchOpenAIREPapers(topic) {
 
 async function fetchCorePapers(topic) {
     const url = 'https://api.core.ac.uk/v3/search/works/';
-    const apiKey = 'kzUnEaLtS35oMQ0lw2xmKYNuHZscJe4C';
+    const apiKey = '';
 
     const headers = {
         'Authorization': `Bearer ${apiKey}`,

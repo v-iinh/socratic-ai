@@ -3,7 +3,6 @@ import Groq from "https://cdn.skypack.dev/groq-sdk";
 const llama_key = "";
 const groq = new Groq({ apiKey: llama_key, dangerouslyAllowBrowser: true });
 
-const typeInput = document.getElementsByTagName('select')[0];
 const quantityInput = document.getElementsByTagName('input')[0];
 const subjectInput = document.getElementsByTagName('input')[1];
 
@@ -11,19 +10,19 @@ const addButton = document.querySelector('.add');
 
 let isEditing = false;
 
-async function callLlama(type, quantity, subject) {
+async function callLlama(quantity, subject) {
     const completion = await groq.chat.completions.create({
         messages: [
             {
                 role: "user",
                 content: `Create ${quantity} flashcard/s in a strict JSON array format, e.g the array is enclosed in brackets [] and each flashcard object is enclosed in curly brackets {}. 
                 The JSON object should have two properties:
-                    1. "front": The text for the front of the flashcard, create a "${type} based on "${subject}".
+                    1. "front": The text for the front of the flashcard, create a question or vocabulary word based on "${subject}".
                     2. "back": The text for the back of the flashcard, providing the answer or explanation.
                 Return only the JSON object and nothing else.`
             },
         ],
-        model: "llama3-8b-8192",
+        model: "llama-3.3-70b-versatile",
     });
 
     let response = completion.choices[0].message.content;
@@ -42,15 +41,13 @@ function delay(ms) {
 
 document.addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
-        const type = typeInput.value;
         const quantity = quantityInput.value;
         const subject = subjectInput.value;
 
-        if (type !== "" && (quantity !== "" && (quantity >= 1 && quantity <= 5)) && subject !== "") {
-            callLlama(type, quantity, subject);
+        if ((quantity !== "" && (quantity >= 1 && quantity <= 5)) && subject !== "") {
+            callLlama(quantity, subject);
         }
 
-        typeInput.value = "";
         quantityInput.value = "";
         subjectInput.value = "";
     }
