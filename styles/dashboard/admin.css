@@ -1,5 +1,5 @@
 .filler {
-	width: calc(50vw - 90px);
+	width: calc(75vw - 180px);
 	height: calc(100vh - 100.8px - 120px);
 	border-radius: 8px;
 	background-color: #f7f8fc;
@@ -21,11 +21,34 @@
     font-size: 100px;
 }
 
-.adminLabel {
+.adminMenu {
+    background-color: #f7f8fc; 
+    width: 25%; 
+    height: calc(100vh - 100.8px - 120px);
+    border-radius: 8px; 
+    padding: 25px;
+}
+
+.adminMenu .active {
 	display: flex;
 	background-color: #c6b6fc;
 	color: white;
 	padding: 12px 24px;
+    margin-bottom: 25px;
+	border-radius: 8px;
+	text-decoration: none;
+	font-weight: 500;
+	justify-content: center;
+	transition: background-color 0.3s ease;
+	cursor: pointer;
+}
+
+.adminLabel {
+	display: flex;
+    background-color: white;
+	color: #b1b6bc;
+	padding: 12px 24px;
+    margin-bottom: 25px;
 	border-radius: 8px;
 	text-decoration: none;
 	font-weight: 500;
@@ -37,11 +60,6 @@
 .adminFiller {
     padding-right: 25px; 
     padding-left: 25px;
-}
-
-.adminLabel {
-    pointer-events: none; 
-    margin-bottom: 25px;
 }
 
 .row {

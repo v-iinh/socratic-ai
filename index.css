@@ -44,6 +44,11 @@
 	cursor: pointer;
 }
 
+li {
+	display: flex;
+	align-items: center;
+}
+
 .hero-image {
 	flex: 1;
 	display: flex;

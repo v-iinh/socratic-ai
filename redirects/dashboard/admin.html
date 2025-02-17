@@ -21,15 +21,23 @@
 			</div>
 		</header>
 		<section class="page_section">
-            <div class="filler adminFiller pending" data-aos="fade-right">
-				<div class="adminLabel">Pending Requests</div>
-				<div class="filler_content" id="all_set" style="margin-top: -25px;">
+			<div class="adminMenu">
+				<div class="adminLabel active">Current Staff Board</div>
+				<div class="adminLabel">Student Applications</div>
+				<div class="adminLabel">Completed Sessions</div>
+			</div>
+			<div class="filler adminFiller board" data-aos="fade-left">
+				<div class="filler_content" id="none_yet">
 					<i class="fa-solid fa-spinner"></i>
 				</div>
             </div>
-            <div class="filler adminFiller board" data-aos="fade-left">
-				<div class="adminLabel">Current Staff Board</div>
-				<div class="filler_content" id="none_yet" style="margin-top: -25px;">
+            <div class="filler adminFiller pending" data-aos="fade-right" style="display: none;">
+				<div class="filler_content" id="all_set">
+					<i class="fa-solid fa-spinner"></i>
+				</div>
+            </div>
+			<div class="filler adminFiller summary" data-aos="fade-right" style="display: none;">
+				<div class="filler_content" id="there_now">
 					<i class="fa-solid fa-spinner"></i>
 				</div>
             </div>

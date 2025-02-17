@@ -20,7 +20,6 @@ function clearFirebase() {
     });
 }
 
-
 function scrollToBottom() {
     const aiContainer = document.querySelector('.chat_history');
     aiContainer.scrollTop = aiContainer.scrollHeight;

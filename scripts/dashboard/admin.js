@@ -1,3 +1,6 @@
+const menuItems = document.querySelectorAll(".adminLabel");
+const fillers = document.querySelectorAll(".adminFiller");
+
 const pending = document.querySelector(".pending");
 const board = document.querySelector(".board");
 
@@ -7,11 +10,22 @@ const none_yet = document.getElementById('none_yet')
 document.addEventListener('DOMContentLoaded', function() {
     checkSession();
     checkFiller();
-    generate_requests();
-    generate_board();
+    generateApplicants();
+    generateStaffMembers();
+
+    menuItems.forEach((item, index) => {
+        item.addEventListener("click", function () {
+            menuItems.forEach(menu => menu.classList.remove("active"));
+            item.classList.add("active");
+
+            fillers.forEach(filler => filler.style.display = "none");
+            fillers[index].style.display = "flex";
+        });
+    });
 });
 
-function generate_requests() {
+
+function generateApplicants() {
     users.on('value', (snapshot) => {
         Array.from(pending.querySelectorAll('.request')).forEach(child => child.remove());
 
@@ -85,7 +99,7 @@ function generate_requests() {
     });
 }
 
-function generate_board() {
+function generateStaffMembers() {
     users.on('value', (snapshot) => {
         Array.from(board.querySelectorAll('.staff_member')).forEach(child => child.remove());
 

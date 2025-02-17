@@ -17,7 +17,7 @@ Socratic AI provides powerful AI tools and direct connections to tutors, offerin
 Clone the project
 
 ```bash
-  git clone https://github.com/v-iinh/self-driving-car.git
+  git clone https://github.com/v-iinh/socratic-ai.git
 ```
 
 Go to the Project Directory
