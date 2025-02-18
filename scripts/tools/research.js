@@ -76,35 +76,30 @@ async function fetchArxivPapers(topic) {
             `https://export.arxiv.org/api/query?search_query=title:${topic}&start=${arxivPage}&max_results=10&sortBy=relevance`
         );
         const data = await response.text();
-        const papers = parseArxivXMLResponse(data);
-        displayPapers(papers);
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(data, "application/xml");
+        const entries = xmlDoc.getElementsByTagName("entry");
+        const papers = [];
+    
+        Array.from(entries).forEach(entry => {
+            const doi = entry.getElementsByTagName("id")[0].textContent.split('/').pop();
+            const title = entry.getElementsByTagName("title")[0].textContent;
+            const authors = Array.from(entry.getElementsByTagName("author"))
+                .map(author => author.getElementsByTagName("name")[0].textContent)
+                .join(", ");
+            const summary = entry.getElementsByTagName("summary")[0]?.textContent.trim() || "No Description";
+            const publishedDate = entry.getElementsByTagName("published")[0].textContent;
+            const year = new Date(publishedDate).getFullYear();
+            
+            const link = doi.includes("/") ? `https://doi.org/${doi}` : `https://arxiv.org/abs/${doi}`;
+    
+            papers.push({ title, authors, doi, year, summary, link });
+        });
+
+        displayPapers(papers)
     } catch (error) {
         console.log(error);
     }
-}
-
-function parseArxivXMLResponse(data) {
-    const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(data, "application/xml");
-    const entries = xmlDoc.getElementsByTagName("entry");
-    const papers = [];
-
-    Array.from(entries).forEach(entry => {
-        const doi = entry.getElementsByTagName("id")[0].textContent.split('/').pop();
-        const title = entry.getElementsByTagName("title")[0].textContent;
-        const authors = Array.from(entry.getElementsByTagName("author"))
-            .map(author => author.getElementsByTagName("name")[0].textContent)
-            .join(", ");
-        const summary = entry.getElementsByTagName("summary")[0]?.textContent.trim() || "No Description";
-        const publishedDate = entry.getElementsByTagName("published")[0].textContent;
-        const year = new Date(publishedDate).getFullYear();
-        
-        const link = doi.includes("/") ? `https://doi.org/${doi}` : `https://arxiv.org/abs/${doi}`;
-
-        papers.push({ title, authors, doi, year, summary, link });
-    });
-
-    return papers;
 }
 
 async function fetchDOAJPapers(topic) {
@@ -119,7 +114,7 @@ async function fetchDOAJPapers(topic) {
             authors: result.bibjson.author.map(element => element.name).join(", "),
             link: result.bibjson.link[0].url,
             year: result.bibjson.year,
-            summary: result.bibjson.abstract,
+            summary: result.bibjson.abstract || "No Description Available",
         }));
         displayPapers(papers);
     } catch (error) {
@@ -178,23 +173,36 @@ async function fetchCorePapers(topic) {
         }
 
         const data = await response.json();
-        return data;
+        results = data.results;
     } catch (error) {
         return { error: error.message };
     }
+
+    const papers = [];
+    results.forEach((result) => {
+        const authors = result.authors.map(author => author.name.replace(/,/g, '')).join(", ");
+        papers.push({
+            title: result.title,
+            authors: authors,
+            link: result.links[1],
+            year: result.yearPublished,
+            summary: result.abstract || "No Description Available"
+        });
+    });    
+
+    displayPapers(papers)
 }
 
 function displayPapers(papers) {
     papers.forEach(paper => {
-        const source = `
-        <div id="source">
+        const source = document.createElement("div");
+        source.classList.add("source");
+        source.innerHTML = `
             <div class="source_info">
                 <div class="row">
                     <div class="label">Title</div>
                     <div class="text">
-                        <a href="${paper.link}" target="_blank">
-                            ${paper.title}
-                        </a>
+                        <a href="${paper.link}" target="_blank">${paper.title}</a>
                     </div>
                 </div><hr>
                 <div class="row">
@@ -210,7 +218,12 @@ function displayPapers(papers) {
                     <div class="text">${paper.summary}</div>
                 </div>
             </div>
-        </div>`;
-        papers_container.insertAdjacentHTML('beforeend', source);
+        `;
+
+        source.style.opacity = "0";
+        papers_container.appendChild(source);
+        setTimeout(() => {
+            source.style.opacity = "1";
+        }, 500);
     });
 }

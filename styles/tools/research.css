@@ -37,7 +37,7 @@
 }
 
 .filler {
-    width: calc(60%);
+    width: 100%;
     height: calc(100vh - 100.8px - 180px - 50px);
     border-radius: 8px;
     background-color: #f7f8fc;
@@ -92,8 +92,9 @@ hr {
 	justify-content: center;
 	transition: background-color 0.3s ease;
 	cursor: pointer;
-    margin-bottom: 25px;
-    width: calc(50% - 12.5px);
+    width: 100%;
+    opacity: 0;
+    animation: fadeIn 0.5s ease-in-out forwards;
 }
 
 .source_info {
@@ -149,7 +150,7 @@ input, select {
 
 .input-container i {
     position: absolute;
-    right: 21%;
+    right: 15px;
     top: 50%;
     transform: translateY(-50%);
     color: #6c757d;
