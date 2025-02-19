@@ -82,7 +82,6 @@ async function callSources(value) {
     displayPapers();
 }
 
-
 async function fetchArxivPapers(topic) {
     try {
         const response = await fetch(

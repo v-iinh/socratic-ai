@@ -6,7 +6,7 @@ AOS.init({
 function checkSession() {
     const currSession = sessionStorage.getItem('username');
     if (currSession === null) {
-        window.location = "https://socratic.help/";
+        window.location = "../index.html";
     }
 }
 

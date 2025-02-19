@@ -52,7 +52,7 @@ function registerUser() {
                     staff: false
                 });
                 sessionStorage.setItem('username', usernameInput);
-                window.location = "https://socratic.help/redirects/dashboard/pending";
+                window.location = "../../redirects/dashboard/pending.html";
             } else {
                 authText(signUpSubmit, "Register");
             }
@@ -72,12 +72,12 @@ function loginUser() {
                     sessionStorage.setItem('username', usernameInput);
                     if (userData.admin === false) {
                         if (userData.staff === false) {
-                            window.location = "https://socratic.help/redirects/dashboard/pending";
+                            window.location = "../../redirects/dashboard/pending.html";
                         } else {
-                            window.location = "https://socratic.help/redirects/dashboard/staff";
+                            window.location = "../../redirects/dashboard/staff.html";
                         }
                     } else {
-                        window.location = "https://socratic.help/redirects/dashboard/admin";
+                        window.location = "../../redirects/dashboard/admin.html";
                     }
                 } else {
                     authText(signInSubmit, "Enter");

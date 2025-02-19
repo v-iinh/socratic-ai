@@ -38,7 +38,7 @@ function connectionAccepted(){
     icon.classList.remove('fa-spinner');
     icon.classList.add('fa-check');
     setTimeout(() => {
-        window.location = 'https://socratic.help/redirects/dashboard/chatroom.html';
+        window.location = '../../redirects/dashboard/chatroom.html';
     }, 1000);
 }
 

@@ -37,6 +37,6 @@ function connectionAccepted(sessionData){
     icon.classList.add('fa-check');
     sessionStorage.setItem('position', sessionData)
     setTimeout(() => {
-        window.location = 'https://socratic.help/redirects/dashboard/chatroom.html'
+        window.location = '../../redirects/dashboard/chatroom.html'
     }, 1000);
 }
