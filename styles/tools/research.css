@@ -54,10 +54,21 @@
 	height: calc(100vh - 100.8px - 180px - 50px);
 	border-radius: 8px;
 	background-color: #f7f8fc;
-	display: flex;
+	display: none;
 	justify-content: start;
 	flex-direction: column;
 	overflow-y: auto;
+}
+
+#loadContainer {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 100px;
+    padding-bottom: 25px;
+    color: #bcc0c6;
 }
 
 .label {
@@ -97,6 +108,10 @@ hr {
     animation: fadeIn 0.5s ease-in-out forwards;
 }
 
+.source:first-child{
+    margin-top: -12px;
+}
+
 .source_info {
     padding: 25px; 
     border-radius: 6px; 
@@ -105,6 +120,7 @@ hr {
     padding-top: 15px; 
     padding-bottom: 10px; 
     background-color: white;
+    width: 100%;
 }
 
 a {

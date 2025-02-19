@@ -1,11 +1,16 @@
 const box = document.querySelector('.box');
 const filler = document.querySelector('.filler')
 const papers_container = document.querySelector('.papers_container');
+const loadContainer = document.getElementById('loadContainer')
 const input = document.getElementById('input');
 
 const curPage = document.getElementById('curPage')
 const left = document.querySelector('.left');
 const right = document.querySelector('.right');
+
+let papersList = [];
+let displayedTitles = new Set();
+let curIndex = 0;
 
 let arxivPage = 0; 
 let corePage = 0;
@@ -14,6 +19,14 @@ let openAIREPage = 1;
 
 document.addEventListener('keydown', (event) => {
     if (event.key === 'Enter' && input.value !== '') {
+        loadContainer.style.display = 'flex'
+        papers_container.style.display = 'none'
+        curPage.innerText = 1
+
+        papersList = [];
+        displayedTitles.clear();
+        curIndex = 0;
+
         arxivPage = 0; 
         corePage = 0;
         doajPage = 1;  
@@ -27,48 +40,48 @@ document.addEventListener('keydown', (event) => {
 });
 
 left.addEventListener('click', function() {
+    loadContainer.style.display = 'flex'
+    papers_container.style.display = 'none'
+
     let currentPage = parseInt(curPage.innerText); 
     currentPage = Math.max(1, currentPage - 1);
     curPage.innerText = currentPage;
+    curIndex = (currentPage - 1) * 10;
 
-    if (arxivPage > 0) arxivPage -= 10; 
-    if (corePage > 0) corePage -= 10; 
-    if (doajPage > 1) doajPage -= 1;
-    if (openAIREPage > 1) openAIREPage -= 1;
-
-    if(arxivPage != 0 || doajPage != 1 || openAIREPage != 1){
-        papers_container.innerHTML = ``;
-        
-        callSources(input.value);
-    }
+    displayPapers();
 });
 
 right.addEventListener('click', function() {
+    loadContainer.style.display = 'flex'
+    papers_container.style.display = 'none'
+
     let currentPage = parseInt(curPage.innerText);
     currentPage = currentPage + 1;
     curPage.innerText = currentPage;
+    curIndex = (currentPage - 1) * 10;
 
-    arxivPage += 10; 
-    corePage += 10;
-    doajPage += 1;  
-    openAIREPage += 1
-
-    papers_container.innerHTML = ``;
-
-    callSources(input.value);
+    if(curIndex >= papersList.length){
+        arxivPage += 10; 
+        corePage += 10;
+        doajPage += 1;  
+        openAIREPage += 1
+        
+        callSources(input.value)
+    } else {
+        displayPapers();
+    }
 });
 
-function callSources(value){
-    fetchOpenAIREPapers(value);
-    fetchArxivPapers(value);
-    fetchDOAJPapers(value);
-    fetchCorePapers(value);
+async function callSources(value) {
+    await Promise.all([
+        fetchOpenAIREPapers(value),
+        fetchArxivPapers(value),
+        fetchDOAJPapers(value),
+        fetchCorePapers(value)
+    ]);
+    displayPapers();
 }
 
-function displaySources() {
-    box.style.display = 'none';
-    filler.style.display = 'flex';
-}
 
 async function fetchArxivPapers(topic) {
     try {
@@ -79,7 +92,6 @@ async function fetchArxivPapers(topic) {
         const parser = new DOMParser();
         const xmlDoc = parser.parseFromString(data, "application/xml");
         const entries = xmlDoc.getElementsByTagName("entry");
-        const papers = [];
     
         Array.from(entries).forEach(entry => {
             const doi = entry.getElementsByTagName("id")[0].textContent.split('/').pop();
@@ -93,10 +105,8 @@ async function fetchArxivPapers(topic) {
             
             const link = doi.includes("/") ? `https://doi.org/${doi}` : `https://arxiv.org/abs/${doi}`;
     
-            papers.push({ title, authors, doi, year, summary, link });
+            papersList.push({ title, authors, doi, year, summary, link });
         });
-
-        displayPapers(papers)
     } catch (error) {
         console.log(error);
     }
@@ -109,14 +119,15 @@ async function fetchDOAJPapers(topic) {
     try {
         const response = await fetch(`${baseURL}${topic}?api_key=${apiKey}&pageSize=10&page=${doajPage}`);
         const data = await response.json();
-        const papers = data.results.map(result => ({
-            title: result.bibjson.title,
-            authors: result.bibjson.author.map(element => element.name).join(", "),
-            link: result.bibjson.link[0].url,
-            year: result.bibjson.year,
-            summary: result.bibjson.abstract || "No Description Available",
-        }));
-        displayPapers(papers);
+        data.results.forEach(result => {
+            papersList.push({
+                title: result.bibjson.title,
+                authors: result.bibjson.author.map(element => element.name).join(", "),
+                link: result.bibjson.link[0].url,
+                year: result.bibjson.year,
+                summary: result.bibjson.abstract || "No Description Available",
+            });
+        });        
     } catch (error) {
         console.log(error);
     }
@@ -128,19 +139,12 @@ async function fetchOpenAIREPapers(topic) {
         const response = await fetch(`${baseURL}?title=${topic}&format=json&page=${openAIREPage}`);
         const data = await response.json();
         const results = data.response?.results?.result;
-
-        if (!results) {
-            console.log("No results found.");
-            return;
-        }
-
-        const papers = [];
         const resultsArray = Array.isArray(results) ? results : [results];
 
         resultsArray.forEach((result) => {
             const info = result.metadata?.["oaf:entity"]?.["oaf:result"];
             const creators = Array.isArray(info.creator) ? info.creator : [info.creator];
-            papers.push({
+            papersList.push({
                 title: info.title.$ || info.title[0].$,
                 authors: creators.map(element => element["$"]).join(", "),
                 link: info.children?.instance?.[1]?.webresource?.url.$,
@@ -148,7 +152,6 @@ async function fetchOpenAIREPapers(topic) {
                 summary: info.description?.$ || "No Description Available",
             });    
         });
-        displayPapers(papers);
     } catch (error) {
         console.log(error);
     }
@@ -157,13 +160,11 @@ async function fetchOpenAIREPapers(topic) {
 async function fetchCorePapers(topic) {
     const url = 'https://api.core.ac.uk/v3/search/works/';
     const apiKey = `${settings.core.apiKey}`;
-
+    const params = new URLSearchParams({ q: topic, corePage });
     const headers = {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json'
     };
-
-    const params = new URLSearchParams({ q: topic, corePage });
 
     try {
         const response = await fetch(`${url}?${params.toString()}`, { headers });
@@ -178,10 +179,9 @@ async function fetchCorePapers(topic) {
         return { error: error.message };
     }
 
-    const papers = [];
     results.forEach((result) => {
         const authors = result.authors.map(author => author.name.replace(/,/g, '')).join(", ");
-        papers.push({
+        papersList.push({
             title: result.title,
             authors: authors,
             link: result.links[1],
@@ -189,12 +189,20 @@ async function fetchCorePapers(topic) {
             summary: result.abstract || "No Description Available"
         });
     });    
-
-    displayPapers(papers)
 }
 
-function displayPapers(papers) {
-    papers.forEach(paper => {
+function displaySources() {
+    box.style.display = 'none';
+    filler.style.display = 'flex';
+}
+
+function displayPapers() {
+    loadContainer.style.display = 'none'
+    papers_container.style.display = 'flex'
+    papers_container.innerHTML = "";
+    const displayedPapers = papersList.slice(curIndex, curIndex + 10); 
+
+    displayedPapers.forEach(paper => {
         const source = document.createElement("div");
         source.classList.add("source");
         source.innerHTML = `
@@ -219,11 +227,6 @@ function displayPapers(papers) {
                 </div>
             </div>
         `;
-
-        source.style.opacity = "0";
         papers_container.appendChild(source);
-        setTimeout(() => {
-            source.style.opacity = "1";
-        }, 500);
     });
 }
