@@ -203,6 +203,10 @@ header nav ul li a {
 }
 
 @media (max-width: 900px) {
+	body {
+		overflow: hidden;
+	}
+
     body > *:not(#disclaimer) {
         display: none;
     }
