@@ -86,6 +86,8 @@ function addMessage(text, role) {
     }
 
     messageLog.push({ text, role });
+    console.log(messageLog);
+
     messages.appendChild(message);
     messages.scrollTop = messages.scrollHeight;
 
