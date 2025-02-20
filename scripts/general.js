@@ -25,3 +25,4 @@ firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 const users = database.ref('users');
 const sessions = database.ref('sessions');
+const archive = database.ref('archive');

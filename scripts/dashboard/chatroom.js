@@ -98,7 +98,12 @@ function sessionEnd() {
     userSession.once('value').then(snapshot => {
         const sessionData = snapshot.val();
         if (!sessionData.active) {
-            userSession.onDisconnect().remove();
+            userSession.onDisconnect().remove().then(() => {
+                archive.push({ 
+                    messages: messageLog,
+                    weight: 0
+                });
+            });
             redirectUsers();
         }
     })
