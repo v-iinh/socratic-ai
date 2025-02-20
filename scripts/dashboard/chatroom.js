@@ -1,11 +1,12 @@
 const userSession = database.ref(sessionStorage.getItem('position'));
-const text = document.getElementsByTagName('h2')[0];
-const subText = document.getElementsByTagName('p')[0];
+const text = document.getElementsByTagName('h2')[1];
+const subText = document.getElementsByTagName('p')[1];
 const icon = document.getElementsByClassName('fa-hands-clapping')[0];
 const filler = document.getElementsByClassName('filler_content')[0];
 const messages = document.getElementsByClassName('messages')[0];
 const input = document.getElementById('input')
 const is_tutor = sessionStorage.getItem('username') !== null;
+const messageLog = [];
 
 document.addEventListener('DOMContentLoaded', function(){
     userSession.once('value', (snapshot) => {
@@ -23,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function(){
 })
 
 input.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter' && !event.shiftKey && input.value !== '') {
+    if (event.key === 'Enter' && !event.shiftKey && input.value.trim()) {
         event.preventDefault();
         
         input.style.height = '49.6px';
@@ -32,7 +33,7 @@ input.addEventListener('keydown', (event) => {
             top: inputPosition.bottom + window.scrollY - window.innerHeight + 60
         });
 
-        sendMessage();
+        sendMessage();     
     }
 })
 
@@ -84,8 +85,9 @@ function addMessage(text, role) {
         message.classList.add('message', 'them'); 
     }
 
+    messageLog.push({ text, role });
     messages.appendChild(message);
-    messages.scrollTop = messages.scrollHeight
+    messages.scrollTop = messages.scrollHeight;
 
     input.value = ''
 }

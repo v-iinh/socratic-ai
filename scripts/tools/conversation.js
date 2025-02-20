@@ -158,9 +158,11 @@ function enterPrompt() {
     if (recognition) {
         recognition.stop();
         recognition.onend = () => {
-            addMessage(recordedMessage, 'user');
-            callLlama(recordedMessage.trim());
-            hideFiller();
+            if (recordedMessage.trim()) {
+                addMessage(recordedMessage, 'user');
+                callLlama(recordedMessage.trim());
+                hideFiller();
+            }
         };
     }
 
