@@ -22,6 +22,33 @@ body {
 	line-height: 1.6;
 }
 
+#disclaimer {
+	display: none;
+	height: 100vh;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+#disclaimer h2 {
+	padding: 0px 0px 15px 0px;
+}
+
+#disclaimer img {
+	width: 70%;
+	height: auto;
+	max-width: 350px;
+}
+
+#disclaimer p {
+	font-size: 1rem;
+    color: #6c757d;
+	text-align: center;
+	padding: 25px 50px 0px 50px;
+	max-width: 500px;
+}
+
 .page_section {
 	display: flex;
 	justify-content: space-evenly;
@@ -176,7 +203,11 @@ header nav ul li a {
 }
 
 @media (max-width: 900px) {
-	body {
-		display: none;
-	}
+    body > *:not(#disclaimer) {
+        display: none;
+    }
+
+    #disclaimer {
+        display: flex;
+    }
 }
