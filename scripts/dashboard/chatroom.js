@@ -99,14 +99,24 @@ function sessionEnd() {
         const sessionData = snapshot.val();
         if (!sessionData.active) {
             userSession.onDisconnect().remove().then(() => {
-                archive.push({ 
-                    messages: messageLog,
-                    weight: 0
+
+                const sessionId = sessionStorage.getItem('position');
+                const tutorName = sessionStorage.getItem('username');
+
+                archive.orderByChild("id").equalTo(sessionId).once("value", snapshot => {
+                    if (!snapshot.exists()) {
+                        archive.push({
+                            id: sessionId,
+                            weight: 0, 
+                            tutor: tutorName,
+                            messages: messageLog
+                        });
+                    }
                 });
             });
             redirectUsers();
         }
-    })
+    });
 }
 
 function redirectUsers(){
