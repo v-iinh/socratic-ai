@@ -1,5 +1,3 @@
-const box = document.querySelector('.box');
-const filler = document.querySelector('.filler')
 const papers_container = document.querySelector('.papers_container');
 const loadContainer = document.getElementById('loadContainer')
 const input = document.getElementById('input');
@@ -191,6 +189,9 @@ async function fetchCorePapers(topic) {
 }
 
 function displaySources() {
+    const box = document.querySelector('.box');
+    const filler = document.querySelector('.filler')
+
     box.style.display = 'none';
     filler.style.display = 'flex';
 }

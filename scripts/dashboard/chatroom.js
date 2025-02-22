@@ -1,26 +1,26 @@
 const userSession = database.ref(sessionStorage.getItem('position'));
-const text = document.getElementsByTagName('h2')[1];
-const subText = document.getElementsByTagName('p')[1];
-const icon = document.getElementsByClassName('fa-hands-clapping')[0];
+
 const filler = document.getElementsByClassName('filler_content')[0];
 const messages = document.getElementsByClassName('messages')[0];
 const input = document.getElementById('input')
-const is_tutor = sessionStorage.getItem('username') !== null;
-const messageLog = [];
+
+const username = sessionStorage.getItem('username')
+const isTutor = username !== null;
 
 document.addEventListener('DOMContentLoaded', function(){
     userSession.once('value', (snapshot) => {
-        if (!snapshot.exists()) {
+        if (!snapshot.exists() && isTutor) {
             userSession.set({
                 active: true,
+                tutor: username
             });
         }
     });
     userSession.onDisconnect().update({
         active: false
+    }).then(() => {
+        sessionEnd();
     })
-
-    setInterval(sessionEnd, 1000)
 })
 
 input.addEventListener('keydown', (event) => {
@@ -50,7 +50,7 @@ input.addEventListener('input', () => {
 });
 
 userSession.on('child_added', (snapshot) => {
-    if (snapshot.key === "active") {
+    if (snapshot.key === "active" || snapshot.key === "tutor") {
         return;
     }
 
@@ -63,11 +63,19 @@ userSession.on('child_added', (snapshot) => {
     }
 });
 
+userSession.on('child_removed', (snapshot) => {
+    const data = snapshot.val();
+    if (!data || data.active === false) {
+        redirectUsers();
+    }
+});
+
 function sendMessage(){
     const message = input.value;
-    let role = is_tutor ? "tutor" : "student";
+    const messageCount = document.getElementsByClassName('message').length + 1;
+    let role = isTutor ? "tutor" : "student";
 
-    userSession.push({
+    userSession.child(messageCount).set({
         role: role,
         message: message
     })
@@ -77,49 +85,71 @@ function addMessage(text, role) {
     const message = document.createElement('div');
     message.textContent = text;
 
-    if (is_tutor && role === "tutor") {
+    if (isTutor && role === "tutor") {
         message.classList.add('message', 'you'); 
-    } else if (!is_tutor && role === "student") {
+    } else if (!isTutor && role === "student") {
         message.classList.add('message', 'you'); 
     } else {
         message.classList.add('message', 'them'); 
     }
 
-    messageLog.push({ text, role });
-    console.log(messageLog);
-
     messages.appendChild(message);
     messages.scrollTop = messages.scrollHeight;
 
-    input.value = ''
+    input.value = '';
+
+    const messageCount = document.getElementsByClassName('message').length;
+    archiveMessage(text, role, messageCount);
+}
+
+function archiveMessage(text, role, messageCount) {
+    const sessionId = sessionStorage.getItem('position');
+    const sessionRef = archive.child(sessionId);
+    const messagesRef = sessionRef.child("messages");
+
+    userSession.once("value").then(snapshot => {
+        const sessionData = snapshot.val();
+        const tutorName = sessionData.tutor;
+        sessionRef.once("value").then(sessionSnapshot => {
+            if (!sessionSnapshot.exists()) {
+                sessionRef.set({
+                    weight: 0,
+                    tutor: tutorName
+                }).then(() => {
+                    messagesRef.child(messageCount).set({
+                        text: text,
+                        role: role
+                    });
+                });
+            } else {
+                messagesRef.child(messageCount).once("value").then(msgSnapshot => {
+                    if (!msgSnapshot.exists()) {
+                        messagesRef.child(messageCount).set({
+                            text: text,
+                            role: role
+                        });
+                    }
+                });
+            }
+        });
+    });
 }
 
 function sessionEnd() {
     userSession.once('value').then(snapshot => {
         const sessionData = snapshot.val();
         if (!sessionData.active) {
-            userSession.onDisconnect().remove().then(() => {
-
-                const sessionId = sessionStorage.getItem('position');
-                const tutorName = sessionStorage.getItem('username');
-
-                archive.orderByChild("id").equalTo(sessionId).once("value", snapshot => {
-                    if (!snapshot.exists()) {
-                        archive.push({
-                            id: sessionId,
-                            weight: 0, 
-                            tutor: tutorName,
-                            messages: messageLog
-                        });
-                    }
-                });
-            });
+            userSession.remove();
             redirectUsers();
         }
     });
 }
 
 function redirectUsers(){
+    const text = document.getElementsByTagName('h2')[1];
+    const subText = document.getElementsByTagName('p')[1];
+    const icon = document.getElementsByClassName('fa-hands-clapping')[0];
+
     text.innerHTML= 'Session Has Ended'
     subText.innerHTML = 'Thank you for using Socratic! You will be redirected momentarily.'
     icon.classList.remove('fa-hands-clapping');

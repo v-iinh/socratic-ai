@@ -1,5 +1,3 @@
-const icon = document.getElementsByClassName('fa-spinner')[0]
-
 document.addEventListener('DOMContentLoaded', function(){
     checkSession();
     setInterval(staffWaiting, 1000);
@@ -33,8 +31,11 @@ function checkConnection() {
 }
 
 function connectionAccepted(sessionData){
+    const icon = document.getElementsByClassName('fa-spinner')[0]
+
     icon.classList.remove('fa-spinner');
     icon.classList.add('fa-check');
+    
     sessionStorage.setItem('position', sessionData)
     setTimeout(() => {
         window.location = '../../redirects/dashboard/chatroom.html'

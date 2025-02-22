@@ -1,5 +1,3 @@
-const icon = document.getElementsByClassName('fa-spinner')[0]
-
 document.addEventListener("DOMContentLoaded", function() {
     studentWaiting();
     setInterval(checkConnection, 1000);
@@ -35,8 +33,11 @@ function checkConnection() {
 }
 
 function connectionAccepted(){
+    const icon = document.getElementsByClassName('fa-spinner')[0]
+
     icon.classList.remove('fa-spinner');
     icon.classList.add('fa-check');
+    
     setTimeout(() => {
         window.location = '../../redirects/dashboard/chatroom.html';
     }, 1000);

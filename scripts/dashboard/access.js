@@ -42,7 +42,7 @@ function registerUser() {
             authText(signUpSubmit, "Register");
         } else {
             if (authRegister(ageInput, usernameInput, emailInput, passwordInput)) {
-                users.push({
+                users.child(usernameInput).set({
                     username: usernameInput,
                     email: emailInput,
                     password: passwordInput,
