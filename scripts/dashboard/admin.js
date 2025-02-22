@@ -152,12 +152,12 @@ function generateStaffMembers() {
 
 function generateArchives() {
     archive.on('value', (snapshot) => {
-        Array.from(board.querySelectorAll('.archival')).forEach(child => child.remove());
+        Array.from(archival.querySelectorAll('.log')).forEach(child => child.remove());
 
         snapshot.forEach((childSnapshot) => {
             const data = childSnapshot.val();
 
-            if (data) {
+            if (!data.active) {
                 const log = document.createElement('div');
                 log.classList.add('log');
                 log.innerHTML = `
@@ -171,7 +171,7 @@ function generateArchives() {
                     </div><hr>
                     <div class="row judge">
                         <div class="label view">
-                            <i class="fa-solid fa-eye"></i>
+                            <i class="fa-regular fa-eye"></i>
                         </div>
                     </div>`;
 

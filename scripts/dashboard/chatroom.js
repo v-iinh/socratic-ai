@@ -1,4 +1,6 @@
-const userSession = database.ref(sessionStorage.getItem('position'));
+const sessionId = sessionStorage.getItem('position');
+const userSession = database.ref(sessionId);
+const archiveSession = archive.child(sessionId);
 
 const filler = document.getElementsByClassName('filler_content')[0];
 const messages = document.getElementsByClassName('messages')[0];
@@ -66,11 +68,27 @@ userSession.on('child_added', (snapshot) => {
 userSession.on('child_removed', (snapshot) => {
     const data = snapshot.val();
     if (!data || data.active === false) {
-        redirectUsers();
+        archiveSession.update({
+            active: false
+        }).then(() => {
+            redirectUsers();
+        })
     }
 });
 
 function sendMessage(){
+    userSession.once('value').then(snapshot => {
+        const sessionData = snapshot.val();
+        if (!sessionData || sessionData.active === false) {
+            archiveSession.update({
+                active: false
+            }).then(() => {
+                redirectUsers();
+            });
+            return;
+        }
+    })
+
     const message = input.value;
     const messageCount = document.getElementsByClassName('message').length;
     let role = isTutor ? "tutor" : "student";
@@ -103,18 +121,17 @@ function addMessage(text, role) {
 }
 
 function archiveMessage(text, role, messageCount) {
-    const sessionId = sessionStorage.getItem('position');
-    const sessionRef = archive.child(sessionId);
-    const messagesRef = sessionRef.child("messages");
+    const messagesRef = archiveSession.child("messages");
 
     userSession.once("value").then(snapshot => {
         const sessionData = snapshot.val();
         const tutorName = sessionData.tutor;
-        sessionRef.once("value").then(sessionSnapshot => {
+        archiveSession.once("value").then(sessionSnapshot => {
             if (!sessionSnapshot.exists()) {
-                sessionRef.set({
+                archiveSession.set({
                     weight: 0,
-                    tutor: tutorName
+                    tutor: tutorName,
+                    active: true
                 }).then(() => {
                     messagesRef.child(messageCount).set({
                         text: text,
