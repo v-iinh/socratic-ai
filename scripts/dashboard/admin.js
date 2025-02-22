@@ -3,15 +3,14 @@ const fillers = document.querySelectorAll(".adminFiller");
 
 const pending = document.querySelector(".pending");
 const board = document.querySelector(".board");
-
-const all_set = document.getElementById('all_set')
-const none_yet = document.getElementById('none_yet')
+const archival = document.querySelector(".archival")
 
 document.addEventListener('DOMContentLoaded', function() {
     checkSession();
     checkFiller();
     generateApplicants();
     generateStaffMembers();
+    generateArchives();
 
     menuItems.forEach((item, index) => {
         item.addEventListener("click", function () {
@@ -23,7 +22,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
-
 
 function generateApplicants() {
     users.on('value', (snapshot) => {
@@ -152,19 +150,70 @@ function generateStaffMembers() {
     });
 }
 
+function generateArchives() {
+    archive.on('value', (snapshot) => {
+        Array.from(board.querySelectorAll('.archival')).forEach(child => child.remove());
+
+        snapshot.forEach((childSnapshot) => {
+            const data = childSnapshot.val();
+
+            if (data) {
+                const log = document.createElement('div');
+                log.classList.add('log');
+                log.innerHTML = `
+                    <div class="row">
+                        <div class="label">Name:</div>
+                        <div class="text">${data.tutor}</div>
+                    </div><hr>
+                    <div class="row">
+                        <div class="label">Duration:</div>
+                        <div class="text">${data.messages.length} Messages</div>
+                    </div><hr>
+                    <div class="row judge">
+                        <div class="label view">
+                            <i class="fa-solid fa-eye"></i>
+                        </div>
+                    </div>`;
+
+                archival.appendChild(log);
+                checkFiller();
+
+                const view = log.querySelector(".fa-eye");
+
+                view.addEventListener('click', function () {
+                    console.log("View button clicked for session:");
+                });
+            }
+        });
+
+        checkFiller();
+    });
+}
+
 function checkFiller() {
+    const loader1 = document.getElementsByClassName('filler_content')[0]
+    const loader2 = document.getElementsByClassName('filler_content')[1]
+    const loader3 = document.getElementsByClassName('filler_content')[2]
+
     const requests = document.querySelectorAll('.request');
     const staffMembers = document.querySelectorAll('.staff_member');
+    const logs = document.querySelectorAll('.log');
 
     if (requests.length > 0) {
-        all_set.style.display = 'none'; 
+        loader1.style.display = 'none'; 
     } else {
-        all_set.style.display = 'flex'; 
+        loader1.style.display = 'flex'; 
     }
 
     if (staffMembers.length > 0) {
-        none_yet.style.display = 'none';
+        loader2.style.display = 'none';
     } else {
-        none_yet.style.display = 'flex';
+        loader2.style.display = 'flex';
+    }
+
+    if (logs.length > 0) {
+        loader3.style.display = 'none';
+    } else {
+        loader3.style.display = 'flex';
     }
 }

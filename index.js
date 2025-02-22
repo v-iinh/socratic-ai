@@ -5,14 +5,11 @@ document.addEventListener('DOMContentLoaded', function(){
 
 function clearFirebase() {
     const ref = database.ref(); 
-
     ref.once('value', (snapshot) => {
         snapshot.forEach((childSnapshot) => {
             const childKey = childSnapshot.key;
-
             childSnapshot.forEach((subChildSnapshot) => {
                 if (subChildSnapshot.key === 'active' && subChildSnapshot.val() === false) {
-
                     ref.child(childKey).remove();
                 }
             });

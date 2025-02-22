@@ -68,6 +68,11 @@
     align-items: flex-start;
     margin-bottom: 10px;
 }
+
+.row:first-child .text {
+    text-transform: capitalize;
+}
+
 .judge {
     padding-top: 10px; 
     font-size: 25px;
@@ -81,7 +86,7 @@
     flex: 2;
     word-wrap: break-word;
 }
-.approve, .reject, .kick {
+.approve, .reject, .kick, .view {
     text-align: center;
     flex: 1;
 }
@@ -92,7 +97,7 @@ hr {
     margin: 10px 0;
 }
 
-.request, .staff_member {
+.request, .staff_member, .log {
     padding: 25px; 
     border-radius: 6px; 
     color: #b1b6bc; 
@@ -102,10 +107,10 @@ hr {
     background-color: white;
 }
 
-.fa-thumbs-up, .fa-thumbs-down, .fa-ban {
+.fa-thumbs-up, .fa-thumbs-down, .fa-ban, .fa-eye {
     cursor: pointer;
 }
 
-.fa-thumbs-up:hover, .fa-thumbs-down:hover, .fa-ban:hover {
+.fa-thumbs-up:hover, .fa-thumbs-down:hover, .fa-ban:hover, .fa-eye:hover {
     color: #c6b6fc;
 }
