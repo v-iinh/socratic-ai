@@ -72,7 +72,7 @@ userSession.on('child_removed', (snapshot) => {
 
 function sendMessage(){
     const message = input.value;
-    const messageCount = document.getElementsByClassName('message').length + 1;
+    const messageCount = document.getElementsByClassName('message').length;
     let role = isTutor ? "tutor" : "student";
 
     userSession.child(messageCount).set({
@@ -98,7 +98,7 @@ function addMessage(text, role) {
 
     input.value = '';
 
-    const messageCount = document.getElementsByClassName('message').length;
+    const messageCount = document.getElementsByClassName('message').length - 1;
     archiveMessage(text, role, messageCount);
 }
 
