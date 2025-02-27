@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Socratic</title>
+		<link rel="stylesheet" href="../../styles/general.css">
+		<link rel="stylesheet" href="../../styles/dashboard/messaging.css">
+		<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+		<link rel="icon" href="../../assets/favicon.png">
+	</head>
+	<body>
+		<div id="disclaimer">
+			<h2 data-aos="fade-down">Oops, Sorry!</h2>
+			<img src="../../assets/disclaimer.png" data-aos="zoom-in">
+			<p data-aos="fade-up">We apologize for the inconvenience. Socratic is currently not supported on this device. Please check back for updates or access it from a desktop.</p>
+		</div>
+		<header data-aos="fade-down">
+			<div class="nav_container">
+				<a href="../../index.html">
+					<div class="logo">
+						<img src="../../assets/logo.png">
+					</div>
+				</a>
+			</div>
+		</header>
+		<section class="page_section">
+			<div class="message_container">
+				<div class="filler_content" style="min-height: calc(100vh - 330px);" data-aos="fade-in">
+					<div class="grid-item tool" style="display: flex; justify-content: center; align-items: center; flex-direction: column; width: 25%; text-align: center;">
+						<div class="icon" style="display: flex; justify-content: center; align-items: center; border-radius: 8px; width: 50px; height: 50px; margin-bottom: 20px; pointer-events: none; background-color: #c6b6fc; color: white;">
+							<div class="icon_img">
+								<i class="fa-solid fa-hands-clapping"></i>
+							</div>
+						</div>
+						<h2 style="margin-bottom: 15px;">You are Connected</h2>
+						<p>Introduce yourselves and begin the conversation! Remember that all sessions are moderated.</p>
+					</div>
+				</div>
+				<div class="messages" style="display: none;"></div>
+				<div class="input-container" data-aos="fade-up" style="margin-top: 60px;">
+					<textarea type="text" placeholder="Send Message" id="input"></textarea>
+					<i class="fa-solid fa-paper-plane"></i>
+				</div>				
+			</div>
+		</section>
+		<footer class="site-footer" data-aos="fade-up">
+			<div class="footer-container">
+			<div class="footer-row" style="width: 50%;">
+				<div class="footer-column">
+				<h6>About</h6>
+				<p class="text-justify">Socratic AI is an open-source tool designed to enhance student learning. With the belief that quality education should be accessible to everyone, Socratic AI aims to bridge individual gaps by offering a free and reliable tutoring resource for students.</p>
+				</div>
+			</div>
+			<div class="footer-bottom">
+				<p class="copyright-text" style="padding-left: 10px;">Copyright &copy; 2024 All Rights Reserved by Vinh Tran
+				</p>
+				<ul class="social-icons">
+					<li><a href="https://www.instagram.com/v_iinh/" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
+					<li><a href="https://www.linkedin.com/in/viinh/" target="_blank"><i class="fa-brands fa-linkedin"></i></a></li>
+					<li><a href="https://vtran.org/" target="_blank"><i class="fa-solid fa-code"></i></a></li>
+				</ul>
+			</div>
+			</div>
+		</footer>
+		<script src="../../scripts/config.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>	
+		<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+		<script src="../../scripts/general.js"></script>
+		<script src="../../scripts/dashboard/moderation.js"></script>
+	</body>
+</html>
