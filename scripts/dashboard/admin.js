@@ -188,8 +188,10 @@ function generateArchives() {
                 const view = log.querySelector(".fa-eye");
 
                 view.addEventListener('click', function () {
-                    // Session Storage for Childsnapshot.key
-                });
+                    let sessionKey = childSnapshot.key;
+                    sessionStorage.setItem('selected', sessionKey);
+                    window.location = '../../redirects/dashboard/moderation.html'
+                });            
             }
         });
 
@@ -217,7 +219,7 @@ function generateCurrents() {
                         <div class="text">${data.messages.length} Messages</div>
                     </div><hr>
                     <div class="row">
-                        <div class="label">Name:</div>
+                        <div class="label">Session ID:</div>
                         <div class="text">${childSnapshot.key}</div>
                     </div><hr>
                     <div class="row judge">
@@ -232,7 +234,9 @@ function generateCurrents() {
                 const view = entry.querySelector(".fa-eye");
 
                 view.addEventListener('click', function () {
-                    // Session Storage for childSnapshot.key
+                    let sessionKey = childSnapshot.key;
+                    sessionStorage.setItem('selected', sessionKey);
+                    window.location = '../../redirects/dashboard/moderation.html'
                 });
             }
         });
