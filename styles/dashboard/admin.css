@@ -97,7 +97,7 @@ hr {
     margin: 10px 0;
 }
 
-.request, .staff_member, .log {
+.request, .staff_member, .log, .entry {
     padding: 25px; 
     border-radius: 6px; 
     color: #b1b6bc; 

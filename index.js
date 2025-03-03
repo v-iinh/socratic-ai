@@ -10,7 +10,9 @@ function clearFirebase() {
             const childKey = childSnapshot.key;
             childSnapshot.forEach((subChildSnapshot) => {
                 if (subChildSnapshot.key === 'active' && subChildSnapshot.val() === false) {
-                    ref.child(childKey).remove();
+                    ref.child(childKey).remove().then({
+                        // Archive set to false. 
+                    });
                 }
             });
         });
