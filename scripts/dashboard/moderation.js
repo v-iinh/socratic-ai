@@ -13,25 +13,17 @@
 // Idea: Lower the temperature the more similar a question is to another
 
 const messages = document.getElementsByClassName('messages')[0];
-document.addEventListener('DOMContentLoaded', function(){
-    console.log("test")
-    const sessionId = sessionStorage.getItem('selected');
-    const archiveSession = archive.child(sessionId);
+const sessionId = sessionStorage.getItem('selected');
+const archiveSession = archive.child(sessionId);
 
-    archiveSession.on('value', (snapshot) => {
-        const data = snapshot.val();
-        if (data && data.messages) {
-            data.messages.forEach(element => {
-                console.log(element)
-                const text = element.text; 
-                console.log(element.text)
-                addMessage(text);
-            });
-        } else {
-            console.log('No messages found.');
-        }
+archiveSession.on('value', (snapshot) => {
+    Array.from(messages.querySelectorAll('.message')).forEach(child => child.remove());
+    const data = snapshot.val();
+    data.messages.forEach(element => {
+        const text = element.text;
+        addMessage(text);
     });
-})
+});
 
 function addMessage(text) {
     const message = document.createElement('div');
