@@ -18,7 +18,7 @@
     height: calc(100vh - 330px);
 }
 
-textarea, .message {
+textarea, .message, .controls {
     border: none;
     padding: 12px 15px;
     width: 100%;
@@ -28,7 +28,7 @@ textarea, .message {
     font-size: 1rem;
 }
 
-textarea {
+textarea, .controls {
     font-family: 'Poppins', sans-serif;
     padding: 12px 15px;
     padding-right: 36px;
@@ -88,12 +88,29 @@ textarea {
     display: flex;
 }
 
-.input-container i {
+.input-container .fa-paper-plane {
     position: absolute;
     bottom: 15px;
     right: 15px;
     color: #6c757d;
     pointer-events: none;
+}
+
+.controls .fa-solid {
+    font-size: 1.5rem;
+    color: #6c757d;
+}
+
+.controls .fa-solid:hover {
+    cursor: pointer;
+    transition: .5s ease-in-out;
+    color: #c6b6fc;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .input-container textarea:focus {

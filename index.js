@@ -4,20 +4,42 @@ document.addEventListener('DOMContentLoaded', function(){
 })
 
 function clearFirebase() {
-    const ref = database.ref(); 
+    const ref = database.ref();
     ref.once('value', (snapshot) => {
         snapshot.forEach((childSnapshot) => {
             const childKey = childSnapshot.key;
+            let shouldRemove = false;
+
             childSnapshot.forEach((subChildSnapshot) => {
                 if (subChildSnapshot.key === 'active' && subChildSnapshot.val() === false) {
-                    ref.child(childKey).remove().then({
-                        // Archive set to false. 
+                    shouldRemove = true;
+                }
+            });
+
+            if (shouldRemove) {
+                ref.child(childKey).remove().then(() => {
+                    archive.child(childKey).update({
+                        active: false
+                    });
+                });
+            }
+        });
+    });
+
+    archive.once('value', (archiveSnapshot) => {
+        archiveSnapshot.forEach((archiveChild) => {
+            const archiveKey = archiveChild.key;
+            ref.child(archiveKey).once('value', (dbSnapshot) => {
+                if (!dbSnapshot.exists()) {
+                    archive.child(archiveKey).update({
+                        active: false
                     });
                 }
             });
         });
     });
 }
+
 
 function scrollToBottom() {
     const aiContainer = document.querySelector('.chat_history');
