@@ -26,7 +26,7 @@ async function callLlama(subject, quantity) {
     const completion = await groq.chat.completions.create({
         messages: [
             {
-                role: "user",
+                role: "system",
                 content: `Create ${quantity} questions in a strict JSON array format, e.g. the array is enclosed in brackets [] and each object is enclosed in curly brackets {}. 
                 The JSON object should have five properties:
                     1. "question": The question, create a question based on "${subject}".

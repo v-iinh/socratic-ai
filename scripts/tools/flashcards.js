@@ -14,7 +14,7 @@ async function callLlama(quantity, subject) {
     const completion = await groq.chat.completions.create({
         messages: [
             {
-                role: "user",
+                role: "system",
                 content: `Create ${quantity} flashcard/s in a strict JSON array format, e.g the array is enclosed in brackets [] and each flashcard object is enclosed in curly brackets {}. 
                 The JSON object should have two properties:
                     1. "front": The text for the front of the flashcard, create a question or vocabulary word based on "${subject}".
