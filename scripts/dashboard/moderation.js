@@ -1,8 +1,3 @@
-// TODO // 
-
-// In admin panel, create an Ongoing Sessions tab. 
-// For sessions tabs in admin panel, have the buttons save the ID to session storage and redirect to moderation.html
-// In moderation.html, read the session storage and save the ID
 // Check whether the session is active or inactive
 
 // If active, show the close option
@@ -21,16 +16,20 @@ archiveSession.on('value', (snapshot) => {
     const data = snapshot.val();
     data.messages.forEach(element => {
         const text = element.text;
-        addMessage(text);
+        const role = element.role;
+        addMessage(text, role);
     });
 });
 
-function addMessage(text) {
+function addMessage(text, role) {
     const message = document.createElement('div');
-    console.log(text)
     message.textContent = text;
 
-    message.classList.add('message', 'you'); 
+    if(role === "tutor"){
+        message.classList.add('message', 'you'); 
+    } else {
+        message.classList.add('message', 'them'); 
+    }
 
     messages.appendChild(message);
     messages.scrollTop = messages.scrollHeight;
