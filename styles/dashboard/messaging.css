@@ -108,9 +108,10 @@ textarea, .controls {
 }
 
 .controls {
-    display: flex;
+    display: none;
     justify-content: space-evenly;
     align-items: center;
+    background-color: transparent;
 }
 
 .input-container textarea:focus {
