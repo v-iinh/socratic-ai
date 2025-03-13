@@ -1,13 +1,14 @@
-// Finetuning algorithm 
-// Idea: More prompting?
-// Idea: Lower the temperature the more similar a question is to another
-
 const messages = document.getElementsByClassName('messages')[0];
 const sessionId = sessionStorage.getItem('selected');
 const archiveSession = archive.child(sessionId);
 
 const finetuneControls = document.getElementById('finetune-controls');
 const endControls = document.getElementById('end-controls');
+
+const minus = document.getElementById('minus');
+const trash = document.getElementById('trash');
+const plus = document.getElementById('plus');
+const ban = document.getElementById('ban');
 
 archiveSession.on('value', (snapshot) => {
     Array.from(messages.querySelectorAll('.message')).forEach(child => child.remove());
@@ -41,3 +42,15 @@ function addMessage(text, role) {
     messages.appendChild(message);
     messages.scrollTop = messages.scrollHeight;
 }
+
+trash.addEventListener('click', function(){
+    archiveSession.remove().then(() => {
+        window.location = '../../redirects/dashboard/admin.html'
+    })
+})
+
+ban.addEventListener('click', function(){
+    database.ref(sessionId).update({
+        active: false
+    })
+})
