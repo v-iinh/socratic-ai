@@ -54,3 +54,15 @@ ban.addEventListener('click', function(){
         active: false
     })
 })
+
+minus.addEventListener('click', function(){
+    archiveSession.on('value', (snapshot) => {
+        const weight = snapshot.val().weight
+    })
+})
+
+plus.addEventListener('click', function(){
+    archiveSession.on('value', (snapshot) => {
+        const weight = snapshot.val().weight
+    })
+})
