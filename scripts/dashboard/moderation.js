@@ -56,13 +56,13 @@ ban.addEventListener('click', function(){
 })
 
 minus.addEventListener('click', function(){
-    archiveSession.on('value', (snapshot) => {
-        const weight = snapshot.val().weight
+    archiveSession.update({
+        weight: -1
     })
 })
 
 plus.addEventListener('click', function(){
-    archiveSession.on('value', (snapshot) => {
-        const weight = snapshot.val().weight
+    archiveSession.update({
+        weight: 1
     })
 })

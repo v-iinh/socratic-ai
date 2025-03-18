@@ -22,6 +22,16 @@ function openSignUp() {
     active = "register";
 }
 
+document.addEventListener('keypress', function(event){
+    if(event.key === 'Enter'){
+        if(active === 'login'){
+            loginUser();
+        } else {
+            registerUser();
+        }
+    }
+})
+
 signUpSubmit.addEventListener('click', function () {
     registerUser();
 });
