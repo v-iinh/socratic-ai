@@ -44,7 +44,7 @@ document.addEventListener('keypress', function (e) {
         const quantity = quantityInput.value;
         const subject = subjectInput.value;
 
-        if ((quantity !== "" && (quantity >= 1 && quantity <= 5)) && subject !== "") {
+        if ((quantity !== "" && (quantity >= 1 && quantity <= 10)) && subject !== "") {
             callLlama(quantity, subject);
         }
 

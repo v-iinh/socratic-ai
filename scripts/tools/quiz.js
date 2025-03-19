@@ -16,7 +16,7 @@ const questionText = document.getElementById('question_text');
 let questionQueue = 0;
 
 document.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter' && input.value !== '' && number.value !== '' && number.value !== null && number.value <= 5) {
+    if (event.key === 'Enter' && input.value !== '' && number.value !== '' && number.value !== null && number.value <= 10) {
         questionQueue = 0;
         transitionGrid();
     }
