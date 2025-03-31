@@ -58,11 +58,15 @@ ban.addEventListener('click', function(){
 minus.addEventListener('click', function(){
     archiveSession.update({
         weight: -1
+    }).then(() => {
+        window.location = 'admin.html'
     })
 })
 
 plus.addEventListener('click', function(){
     archiveSession.update({
         weight: 1
+    }).then(() => {
+        window.location = 'admin.html'
     })
 })

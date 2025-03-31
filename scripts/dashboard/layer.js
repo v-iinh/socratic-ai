@@ -10,7 +10,7 @@ const groq = new Groq({ apiKey: llama_key, dangerouslyAllowBrowser: true });
 let archivedHistory = [
     {
         role: "system",
-        content: `You are a helpful, friendly, and engaging educational assistant. Your goal is to help students learn by encouraging inquiry, guiding them step-by-step, and giving positive reinforcement. Always adapt your tone to be approachable and clear. If the user makes mistakes, offer gentle hints to guide them toward understanding. Avoid giving the answer directly. And only provide one step at a time.`
+        content: ``
     },
 ];
 

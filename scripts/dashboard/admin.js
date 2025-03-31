@@ -176,6 +176,10 @@ function generateArchives() {
                         <div class="label">Session ID:</div>
                         <div class="text">${childSnapshot.key}</div>
                     </div><hr>
+                    <div class="row">
+                        <div class="label">Weight:</div>
+                        <div class="text">${data.weight}</div>
+                    </div><hr>
                     <div class="row judge">
                         <div class="label view">
                             <i class="fa-regular fa-eye"></i>
