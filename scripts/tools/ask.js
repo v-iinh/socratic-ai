@@ -7,6 +7,8 @@ const filler = document.getElementsByClassName('filler_content')[0];
 const messages = document.getElementsByClassName('messages')[0];
 const input = document.getElementById('input');
 
+let initializedWeights = false;
+
 let conversationHistory = [
     {
         role: "system",
@@ -42,17 +44,22 @@ input.addEventListener('input', () => {
 });
 
 async function callLlama(text) {
+    if(!initializedWeights){
+        fetchWeights();
+        initializedWeights = true;
+    }
+
     conversationHistory.push({
         role: "user",
         content: text,
     });
 
-    const completion = await groq.chat.completions.create({
-        messages: conversationHistory,
+    const layerRef = await groq.chat.completions.create({
+        messages: weightsdb,
         model: "llama-3.3-70b-versatile",
     });
 
-    let response = completion.choices[0].message.content;
+    let response = layerRef.choices[0].message.content;
 
     conversationHistory.push({
         role: "assistant",
