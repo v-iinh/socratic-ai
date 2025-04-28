@@ -45,7 +45,7 @@ function addMessage(text, role) {
 
 trash.addEventListener('click', function(){
     archiveSession.remove().then(() => {
-        window.location = '../../redirects/dashboard/admin.html'
+        window.location = 'admin.html'
     })
 })
 

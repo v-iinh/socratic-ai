@@ -39,17 +39,22 @@ function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-document.addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-        const quantity = quantityInput.value;
-        const subject = subjectInput.value;
+document.addEventListener('keydown', (event) => {
+    const quantity = quantityInput.value;
+    const subject = subjectInput.value;
 
-        if ((quantity !== "" && (quantity >= 1 && quantity <= 10)) && subject !== "") {
+    if (event.key === 'Enter' && quantity !== "" && subject !== "") {
+        if (quantity >= 1 && quantity <= 10) {
+            quantityInput.value = ""; 
+            subjectInput.value = "";
             callLlama(quantity, subject);
         }
+    }
+});
 
-        quantityInput.value = "";
-        subjectInput.value = "";
+quantityInput.addEventListener('input', () => {
+    if (parseInt(quantityInput.value) > 10) {
+        quantityInput.value = 10; 
     }
 });
 

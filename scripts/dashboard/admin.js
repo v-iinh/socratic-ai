@@ -250,37 +250,20 @@ function generateCurrents() {
 }
 
 function checkFiller() {
-    const loader1 = document.getElementsByClassName('filler_content')[0]
-    const loader2 = document.getElementsByClassName('filler_content')[1]
-    const loader3 = document.getElementsByClassName('filler_content')[2]
-    const loader4 = document.getElementsByClassName('filler_content')[3]
+    const loaders = document.getElementsByClassName('filler_content');
+    const targets = [
+        '.request',
+        '.staff_member',
+        '.log',
+        '.entry'
+    ];
 
-    const requests = document.querySelectorAll('.request');
-    const staffMembers = document.querySelectorAll('.staff_member');
-    const logs = document.querySelectorAll('.log');
-    const entry = document.querySelectorAll('.entry');
-
-    if (requests.length > 0) {
-        loader1.style.display = 'none'; 
-    } else {
-        loader1.style.display = 'flex'; 
-    }
-
-    if (staffMembers.length > 0) {
-        loader2.style.display = 'none';
-    } else {
-        loader2.style.display = 'flex';
-    }
-
-    if (logs.length > 0) {
-        loader3.style.display = 'none';
-    } else {
-        loader3.style.display = 'flex';
-    }
-
-    if (entry.length > 0) {
-        loader4.style.display = 'none';
-    } else {
-        loader4.style.display = 'flex';
+    for (let i = 0; i < targets.length; i++) {
+        const elements = document.querySelectorAll(targets[i]);
+        if (elements.length > 0) {
+            loaders[i].style.display = 'none';
+        } else {
+            loaders[i].style.display = 'flex';
+        }
     }
 }
